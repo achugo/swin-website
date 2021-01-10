@@ -1,0 +1,5 @@
+<svg id="history-clock-button" xmlns="http://www.w3.org/2000/svg" width="25" height="23.75" viewBox="0 0 25 23.75">
+  <g id="history" transform="translate(0 0)">
+    <path id="Path_384" data-name="Path 384" d="M13.125,12.75a11.674,11.674,0,0,0-10.25,6L0,15.875V24H8.125l-3.5-3.5a9.406,9.406,0,1,1,8.5,13.5A9.489,9.489,0,0,1,4.25,27.75H1.625a11.894,11.894,0,1,0,11.5-15ZM11.25,19v6.375l5.875,3.5,1-1.625-5-3V19Z" transform="translate(0 -12.75)" fill="#334a90" opacity="0.9"/>
+  </g>
+</svg>

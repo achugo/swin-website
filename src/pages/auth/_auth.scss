@@ -1,0 +1,23 @@
+.auth__wrapper {
+  display: flex;
+  overflow-y: hidden;
+  max-height: 100vh;
+
+  .banner__section {
+    flex: 2;
+    min-height: 100%;
+    background: transparent
+      linear-gradient(216deg, #74e0ff 0%, #334a90 44%, #071950 100%) 0% 0%
+      no-repeat padding-box;
+    background-blend-mode: overlay;
+    background-size: cover;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: hidden;
+    background-repeat: no-repeat;
+    padding: 5em 3em;
+  }
+  .form__section {
+    flex: 3;
+  }
+}

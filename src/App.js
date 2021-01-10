@@ -1,24 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./scss/style.css";
+import "./App.css";
+import Layout from "./components/layout/Layout";
+
+import { BrowserRouter, Route, Router } from "react-router-dom";
+import Sidebar from "./components/sidebar/Sidebar";
+import history from "./history";
+import Login from "./pages/auth/login/Login";
+import LandingPage from "./pages/landing-page/LandingPage";
+import Register from "./pages/auth/register/register";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/dashboard" component={Layout} />
+      <Route path="/register" component={Register} />
+      <Route path="/login" component={Login} />
+
+      {/* <Route
+          path="/login"
+          render={() => (secureStorage.getItem("token") ? <Home /> : <Login />)}
+        />
+
+        <Route
+          path="/register"
+          render={() =>
+            secureStorage.getItem("token") ? <Home /> : <Register />
+          }
+        /> */}
+    </Router>
   );
 }
 
