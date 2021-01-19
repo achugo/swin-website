@@ -9,6 +9,7 @@ import { ReactComponent as Notification } from "../../img-assets/notification.sv
 import { Route, Switch } from "react-router-dom";
 import Main from "../main/Main";
 import Software from "../softwares/Software";
+import Singleproduct from "../singleproduct/Singleproduct";
 
 const Sidebar = () => {
   return (
@@ -30,7 +31,7 @@ const Sidebar = () => {
         <div className="sidebar__menu">
           <div className="sidebar__link active_menu_link">
             <SoftwareIcon />
-            <span>Dashboard</span>
+            <span>Software</span>
           </div>
           <div className="sidebar__link">
             <Mysoftwares />
@@ -55,8 +56,8 @@ const Sidebar = () => {
       </div>
 
       <Switch>
-        <Route exact path="/dashboard" component={Software} />
-        <Route exact path="/dashboard/:id" component={Software} />
+        <Route exact path="/dashboard" component={Singleproduct} />
+        <Route path="/dashboard/:id" component={Software} />
       </Switch>
     </>
   );

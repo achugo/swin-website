@@ -63,6 +63,7 @@ const ProductImage = styled.img`
 
 const ProductDescription = styled.div`
   position: relative;
+  padding: 0.5em;
 `;
 
 const Rating = styled.div`
@@ -179,6 +180,7 @@ const DashboardResult = () => {
                 </ProductDescription>
               </SearchItem>
             </FlexItem>
+
             <FlexItem flex={1}>
               <SearchItem>
                 <ProductImage src={product_image} alt="product image" />
@@ -298,7 +300,7 @@ const DashboardResult = () => {
           </FlexWrap>
         </StyledResults>
         <HeaderSection>
-          <Heading>New in your field</Heading>
+          <Heading>New in your field22</Heading>
           <MoreResult>See More</MoreResult>
         </HeaderSection>
         <StyledResults>
