@@ -19,6 +19,7 @@
     "react-datepicker": "^3.3.0",
     "react-dom": "^17.0.1",
     "react-dropdown-select": "^4.7.1",
+    "react-multi-carousel": "^2.6.1",
     "react-multistep": "^5.1.0",
     "react-responsive-carousel": "^3.2.11",
     "react-responsive-modal": "^6.0.0",
@@ -28,6 +29,8 @@
     "react-switch": "^5.0.1",
     "react-tabs": "^3.1.2",
     "recharts": "^1.8.5",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.2",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },

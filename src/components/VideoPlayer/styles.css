@@ -1,0 +1,14 @@
+
+.watch {
+    color: white;
+    letter-spacing: .2rem;
+    font-size: 1.5rem;
+}
+
+.play {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 4rem;
+    opacity: 0.7;
+}

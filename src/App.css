@@ -305,3 +305,9 @@ main {
   border-radius: 25px !important;
   overflow: hidden;
 }
+
+.card-content{
+  display: flex;
+  justify-content: space-around;
+}
+
