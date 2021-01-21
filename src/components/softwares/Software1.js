@@ -3,13 +3,12 @@ import VideoCarousel from "../carousel/Carousel";
 import Main from "../main/Main";
 import DashboardResult from "../search-results/DashboardResults";
 
-const Software = () => {
+const Softwar1 = () => {
   return (
     <Main>
-      <VideoCarousel />
       <DashboardResult />
     </Main>
   );
 };
 
-export default Software;
+export default Softwar1;
