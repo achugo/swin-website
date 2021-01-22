@@ -24,13 +24,18 @@
 }
 
 @font-face {
-  font-family: "SF Pro Light";
-  src: url("../fonts/SFProDisplay-Light.ttf");
+  font-family: "Poppins Italics";
+  src: url("../fonts/Poppins-Italic.ttf");
 }
 
 .containar {
   max-width: 900px;
   margin: 0 auto;
+}
+
+.react-responsive-modal-modal {
+  min-width: 500px !important;
+  min-height: 60vh;
 }
 
 .auth__wrapper {

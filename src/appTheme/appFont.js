@@ -3,4 +3,5 @@ export const appFont = {
   BOLD: "Poppins Bold",
   MEDIUM: "Poppins Medium",
   REGULAR: "SF Pro Regular",
+  ITALICS: "Poppins Italics",
 };

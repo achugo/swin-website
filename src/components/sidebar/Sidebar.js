@@ -9,6 +9,11 @@ import { ReactComponent as Notification } from "../../img-assets/notification.sv
 import { Route, Switch } from "react-router-dom";
 import Main from "../main/Main";
 import Software from "../softwares/Software";
+import Analyze from "../../pages/Analyze/Analyze";
+import AddAnalysis from "../../pages/Analyze/AddAnalysis";
+import AllAnalysis from "../../pages/Analyze/AllAnalysis";
+import EvaluationSummary from "../../pages/Analyze/EvaluationSummary";
+import Notifications from "../../pages/notifications/Notifications";
 import Singleproduct from "../singleproduct/Singleproduct";
 
 const Sidebar = () => {
@@ -56,8 +61,16 @@ const Sidebar = () => {
       </div>
 
       <Switch>
-        <Route exact path="/dashboard" component={Singleproduct} />
-        <Route path="/dashboard/:id" component={Software} />
+        <Route exact path="/dashboard" component={Software} />
+        <Route path="/dashboard/analyze" component={Analyze} />
+        <Route path="/dashboard/add-analysis" component={AddAnalysis} />
+        <Route path="/dashboard/all-analysis" component={AllAnalysis} />
+        <Route path="/dashboard/notifications" component={Notifications} />
+        <Route
+          path="/dashboard/evaluation-summary"
+          component={EvaluationSummary}
+        />
+
       </Switch>
     </>
   );
