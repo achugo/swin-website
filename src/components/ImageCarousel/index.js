@@ -3,7 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import testingImg from '../../img-assets/system.svg'
 
-let dummyImages = [testingImg, testingImg, testingImg, testingImg, testingImg];
+let dummyImages = [{src: testingImg}, {src: testingImg}, {src: testingImg}, {src: testingImg}];
 
 const responsive = {
     superLargeDesktop: {
@@ -24,7 +24,7 @@ const responsive = {
         items: 1
     }
 };
-const ImageCarousel = ({images = dummyImages}) => {
+const ImageCarousel = ({images = dummyImages, name=false}) => {
     return (
 
 
@@ -76,7 +76,10 @@ const ImageCarousel = ({images = dummyImages}) => {
         >
             {
                 images.map((image) => (
-                    <img src={image} width={220}/>
+                    <section>
+                        <img src={image.src} width={220}/>
+                        <h5 style={{textAlign: 'center'}}>{name && image.name}</h5>
+                    </section>
                 ))
             }
         </Carousel>
