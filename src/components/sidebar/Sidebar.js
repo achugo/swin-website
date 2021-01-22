@@ -14,6 +14,7 @@ import AddAnalysis from "../../pages/Analyze/AddAnalysis";
 import AllAnalysis from "../../pages/Analyze/AllAnalysis";
 import EvaluationSummary from "../../pages/Analyze/EvaluationSummary";
 import Notifications from "../../pages/notifications/Notifications";
+import Singleproduct from "../singleproduct/Singleproduct";
 
 const Sidebar = () => {
   return (
@@ -35,7 +36,7 @@ const Sidebar = () => {
         <div className="sidebar__menu">
           <div className="sidebar__link active_menu_link">
             <SoftwareIcon />
-            <span>Dashboard</span>
+            <span>Software</span>
           </div>
           <div className="sidebar__link">
             <Mysoftwares />
@@ -69,6 +70,7 @@ const Sidebar = () => {
           path="/dashboard/evaluation-summary"
           component={EvaluationSummary}
         />
+
       </Switch>
     </>
   );
