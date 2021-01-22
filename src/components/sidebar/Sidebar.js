@@ -10,6 +10,12 @@ import {Route, Switch} from "react-router-dom";
 import Main from "../main/Main";
 import Software from "../softwares/Software";
 import SoftwareDetails from '../../pages/screen5-software-details'
+import Analyze from "../../pages/Analyze/Analyze";
+import AddAnalysis from "../../pages/Analyze/AddAnalysis";
+import AllAnalysis from "../../pages/Analyze/AllAnalysis";
+import EvaluationSummary from "../../pages/Analyze/EvaluationSummary";
+import Notifications from "../../pages/notifications/Notifications";
+import Singleproduct from "../singleproduct/Singleproduct";
 
 const Sidebar = () => {
     return (
@@ -28,15 +34,17 @@ const Sidebar = () => {
                     />
                 </div>
 
-                <div className="sidebar__menu">
-                    <div className="sidebar__link active_menu_link">
-                        <SoftwareIcon/>
-                        <span>Dashboard</span>
-                    </div>
-                    <div className="sidebar__link">
-                        <Mysoftwares/>
-                        <span>My softwares</span>
-                    </div>
+
+        <div className="sidebar__menu">
+          <div className="sidebar__link active_menu_link">
+            <SoftwareIcon />
+            <span>Software</span>
+          </div>
+          <div className="sidebar__link">
+            <Mysoftwares />
+            <span>My softwares</span>
+          </div>
+
 
                     <div className="sidebar__link ">
                         <Notification/>
@@ -54,13 +62,22 @@ const Sidebar = () => {
                     </div>
                 </div>
             </div>
-
             <Switch>
                 <Route exact path="/dashboard" component={Software}/>
                 <Route path="/dashboard/software" component={SoftwareDetails}/>
-            </Switch>
-        </>
-    );
+
+        <Route path="/dashboard/analyze" component={Analyze} />
+        <Route path="/dashboard/add-analysis" component={AddAnalysis} />
+        <Route path="/dashboard/all-analysis" component={AllAnalysis} />
+        <Route path="/dashboard/notifications" component={Notifications} />
+        <Route
+          path="/dashboard/evaluation-summary"
+          component={EvaluationSummary}
+        />
+
+      </Switch>
+    </>
+  );
 };
 
 export default Sidebar;
