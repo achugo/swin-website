@@ -10,6 +10,7 @@ import {Route, Switch} from "react-router-dom";
 import Main from "../main/Main";
 import Software from "../softwares/Software";
 import SoftwareDetails from '../../pages/screen5-software-details'
+import SoftwareBlog from '../../pages/screen25-blog'
 
 const Sidebar = () => {
     return (
@@ -58,6 +59,7 @@ const Sidebar = () => {
             <Switch>
                 <Route exact path="/dashboard" component={Software}/>
                 <Route path="/dashboard/software" component={SoftwareDetails}/>
+                <Route path="/dashboard/blog" component={SoftwareBlog}/>
             </Switch>
         </>
     );

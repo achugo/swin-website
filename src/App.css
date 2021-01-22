@@ -306,8 +306,9 @@ main {
   overflow: hidden;
 }
 
-.card-content{
+.card__content{
   display: flex;
-  justify-content: space-around;
 }
-
+.card__content img{
+  margin-right: 1rem;
+}

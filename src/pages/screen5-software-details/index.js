@@ -11,16 +11,8 @@ import VideoPlayer from "../../components/VideoPlayer";
 import SoftwareOptions from "../../components/SoftwareOptions"
 import ReviewMainContainer from "../../components/ReviewMainContainer";
 import AboutSoftware from "../../components/AboutSoftware";
-
-const MainDashboardContainer = styled.div`
- background-color: white;
- padding: 1.5rem;
- box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-`;
-
-const Gutter = styled.div`
-margin: 40px 0
-`;
+import MainDashboardContainer from "../../components/StyledComponents/MainDashBoardContainer";
+import Gutter from "../../components/StyledComponents/Gutter";
 
 const SoftwareDetailsScreen = () => {
     return (

@@ -1,14 +1,10 @@
 import React from 'react';
 import testingImage from '../../img-assets/product-image.png'
 import {Button, Rating} from "semantic-ui-react";
-import styled from "styled-components";
+import Description from "../StyledComponents/DescriptionParagraph";
 
 const AboutSoftware = () => {
-    const Description = styled.p`
-    line-height: 1.5rem;
-    font-size: 1rem
 
-    `;
     return (
         <section className={'ui grid'}>
             <div className="two wide column">
