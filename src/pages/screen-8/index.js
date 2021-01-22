@@ -34,9 +34,6 @@ const SoftwareDetailsScreen = () => {
                 <Gutter>
                     <SoftwareOptions/>
                 </Gutter>
-                <Gutter>
-                    <ReviewMainContainer/>
-                </Gutter>
             </MainDashboardContainer>
         </Main>
     )

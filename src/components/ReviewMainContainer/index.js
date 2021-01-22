@@ -4,41 +4,47 @@ import './style.css'
 import ReviewCard from "../ReviewCard";
 import AppCards from "../AppsCard";
 import styled from "styled-components";
+import Gutter from "../StyledComponents/Gutter";
 
 let dummyData = [1, 2, 3];
 
-const Gutter = styled.div`
-margin: 20px 0
-`;
+const ButtonReview = () => {
+    return (
+        <>
+            <Button content={'Leave a review'} primary className={'button-size'}/>
+            <Button basic color='blue' content='Rate' className={'button-size'}/>
+        </>
 
-const ReviewMainContainer = () => {
+    )
+};
+
+
+const ReviewMainContainer = ({data = dummyData, mainHeader = 'Reviews', sideHeader = "  Other Related apps", content, width, button=<ButtonReview />}) => {
     return (
         <section>
             <section>
-                <Button content={'Leave a review'} primary className={'button-size'}/>
-                <Button basic color='blue' content='Rate' className={'button-size'}/>
+                {button}
             </section>
             <section className={"ui grid"} style={{marginTop: '20px'}}>
                 <div className="ten wide column">
-                    <h4>Reviews</h4>
+                    <h4>{mainHeader}</h4>
                 </div>
                 <div className="six wide column">
                     <h4>
-                        Other Related apps
+                        {sideHeader}
                     </h4>
                 </div>
                 <div className="ten wide column">
-                    {dummyData.map((i) => (
-                        <Gutter>
+                    {data.map((i) => (
+                        <Gutter top={20} bottom={20}>
                             <ReviewCard/>
                         </Gutter>
-
                     ))}
                 </div>
                 <div className="six wide column">
                     {dummyData.map((i) => (
                         <Gutter>
-                            <AppCards/>
+                            <AppCards content={content} width={width}/>
                         </Gutter>
 
                     ))}
