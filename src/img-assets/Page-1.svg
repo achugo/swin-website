@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="96.22" height="96.22" viewBox="0 0 96.22 96.22">
+  <g id="Page-1" transform="translate(0 0)">
+    <g id="_090---Listen-To-Podcast" data-name="090---Listen-To-Podcast" transform="translate(0 0)">
+      <path id="Shape" d="M96.22,7V84.971a6.636,6.636,0,0,1-6.636,6.636H6.636A6.636,6.636,0,0,1,0,84.971V7Z" transform="translate(0 4.613)" fill="#e3f9ff"/>
+      <path id="Shape-2" data-name="Shape" d="M96.22,6.636v6.636H0V6.636A6.636,6.636,0,0,1,6.636,0H89.584A6.636,6.636,0,0,1,96.22,6.636Z" fill="#334a90"/>
+      <circle id="Oval" cx="1.5" cy="1.5" r="1.5" transform="translate(5.08 4.853)" fill="#41a0ff"/>
+      <circle id="Oval-2" data-name="Oval" cx="1.5" cy="1.5" r="1.5" transform="translate(12.08 4.853)" fill="#fff"/>
+      <circle id="Oval-3" data-name="Oval" cx="1.5" cy="1.5" r="1.5" transform="translate(19.08 4.853)" fill="#fff"/>
+      <path id="Shape-3" data-name="Shape" d="M65.2,6.318H38.659a1.659,1.659,0,0,1,0-3.318H65.2a1.659,1.659,0,1,1,0,3.318Z" transform="translate(24.382 1.977)" fill="#fcfcfc"/>
+      <g id="Group_3197" data-name="Group 3197" transform="translate(28.251 18.238)">
+        <path id="Shape-4" data-name="Shape" d="M48.5,46.689a1.665,1.665,0,0,1-1.062-2.936,16.59,16.59,0,1,0-21,0,1.659,1.659,0,0,1-2.107,2.555,19.908,19.908,0,1,1,25.216,0A1.559,1.559,0,0,1,48.5,46.689Z" transform="translate(-17.029 -10.993)" fill="#00bbd5"/>
+        <path id="Shape-5" data-name="Shape" d="M44.756,34.908a1.559,1.559,0,0,1-.713-.166,1.659,1.659,0,0,1-.78-2.206,9.954,9.954,0,1,0-17.983,0,1.659,1.659,0,0,1-2.986,1.427A12.89,12.89,0,0,1,21,28.272a13.272,13.272,0,0,1,26.543,0,12.89,12.89,0,0,1-1.294,5.69A1.659,1.659,0,0,1,44.756,34.908Z" transform="translate(-14.413 -8.353)" fill="#00bbd5"/>
+        <ellipse id="Oval-4" data-name="Oval" cx="5.5" cy="4.5" rx="5.5" ry="4.5" transform="translate(14.829 15.615)" fill="#00bbd5"/>
+        <rect id="Rectangle-path" width="11" height="14" rx="3" transform="translate(14.829 24.615)" fill="#00bbd5"/>
+      </g>
+      <path id="Shape-6" data-name="Shape" d="M78.7,42.318H15.659a1.659,1.659,0,0,1,0-3.318H78.7a1.659,1.659,0,0,1,0,3.318Z" transform="translate(9.225 25.7)" fill="#fff"/>
+      <path id="Shape-7" data-name="Shape" d="M15.613,42.318H5.659a1.659,1.659,0,0,1,0-3.318h9.954a1.659,1.659,0,0,1,0,3.318Z" transform="translate(2.636 25.7)" fill="#ededed"/>
+      <ellipse id="Oval-5" data-name="Oval" cx="3" cy="3.5" rx="3" ry="3.5" transform="translate(19.08 62.853)" fill="#35eee3"/>
+      <path id="Shape-8" data-name="Shape" d="M26,48.091v5.773a2.09,2.09,0,0,0,3.019,1.875l5.773-2.887a2.09,2.09,0,0,0,0-3.749l-5.773-2.887A2.09,2.09,0,0,0,26,48.091Z" transform="translate(17.133 30.311)" fill="#41a0ff"/>
+      <path id="Shape-9" data-name="Shape" d="M20.981,55.956a1.659,1.659,0,0,1-1.178-.481l-3.318-3.318a1.659,1.659,0,0,1,0-2.356L19.8,46.484a1.666,1.666,0,0,1,2.356,2.356L20,50.98l2.157,2.14a1.659,1.659,0,0,1-1.178,2.837Z" transform="translate(10.54 30.31)" fill="#41a0ff"/>
+      <path id="Shape-10" data-name="Shape" d="M39.663,55.956a1.659,1.659,0,0,1-1.178-2.837l2.157-2.14-2.157-2.14a1.666,1.666,0,0,1,2.356-2.356L44.159,49.8a1.659,1.659,0,0,1,0,2.356l-3.318,3.318A1.659,1.659,0,0,1,39.663,55.956Z" transform="translate(25.037 30.31)" fill="#41a0ff"/>
+      <path id="Shape-11" data-name="Shape" d="M55.295,49.318H48.659a1.659,1.659,0,0,1,0-3.318h6.636a1.659,1.659,0,0,1,0,3.318Z" transform="translate(30.971 30.312)" fill="#74e0ff"/>
+      <path id="Shape-12" data-name="Shape" d="M55.295,53.318H48.659a1.659,1.659,0,0,1,0-3.318h6.636a1.659,1.659,0,0,1,0,3.318Z" transform="translate(30.971 32.948)" fill="#74e0ff"/>
+    </g>
+  </g>
+</svg>

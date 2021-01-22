@@ -11,6 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Software = () => {
+
   return (
     <Main>
       <VideoCarousel />
@@ -19,4 +20,4 @@ const Software = () => {
   );
 };
 
-export default Software;
+export default Software

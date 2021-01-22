@@ -304,3 +304,9 @@ main {
   max-width: 100%;
   overflow: hidden;
 }
+
+.card-content{
+  display: flex;
+  justify-content: space-around;
+}
+

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import bg_image from "../../img-assets/slick-bg.png";
 
+
 const Wrapper = styled.main`
   background-image: url(${bg_image});
   background-repeat: no-repeat;
