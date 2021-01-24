@@ -19,6 +19,11 @@ import EvaluationSummary from "../../pages/Analyze/EvaluationSummary";
 import Notifications from "../../pages/notifications/Notifications";
 import Singleproduct from "../singleproduct/Singleproduct";
 import SoftwareDetails3 from "../../pages/software-details-3";
+import AddSoftware from "../../pages/add-software";
+import SoftwareArticleLink from "../../pages/software-article-link";
+import EditSoftware from "../../pages/edit-software";
+import EditUserProfile from "../../pages/EditUserProfile";
+import EditSoftware2 from "../../pages/edit-software-2";
 
 const Sidebar = () => {
     return (
@@ -79,6 +84,11 @@ const Sidebar = () => {
                     component={EvaluationSummary}
                 />
                 <Route path="/dashboard/software/details-3" component={SoftwareDetails3}/>
+                <Route path="/dashboard/software/add" component={AddSoftware}/>
+                <Route path="/dashboard/software/article/link" component={SoftwareArticleLink}/>
+                <Route path="/dashboard/software/edit" component={EditSoftware}/>
+                <Route path="/dashboard/user/edit" component={EditUserProfile}/>
+                <Route path="/dashboard/software/edit-2" component={EditSoftware2}/>
             </Switch>
         </>
     );
