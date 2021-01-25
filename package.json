@@ -12,6 +12,7 @@
     "multiselect-react-dropdown": "^1.6.3",
     "qrcode.react": "^1.0.0",
     "react": "^17.0.1",
+    "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-awesome-slider": "^4.1.0",
     "react-bootstrap": "^1.4.0",
     "react-chartjs": "^1.2.0",
@@ -32,7 +33,6 @@
     "react-tabs": "^3.1.2",
     "recharts": "^1.8.5",
     "semantic-ui-css": "^2.4.1",
-
     "semantic-ui-react": "^2.0.2",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
