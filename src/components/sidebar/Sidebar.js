@@ -9,15 +9,16 @@ import {ReactComponent as Notification} from "../../img-assets/notification.svg"
 import {Route, Switch} from "react-router-dom";
 import Main from "../main/Main";
 import Software from "../softwares/Software";
-import SoftwareBlog from '../../pages/screen25-blog';
-import Screen8 from '../../pages/screen-8';
-import SoftwareDetails from '../../pages/screen5-software-details'
+import SoftwareBlog from '../../pages/software-blog';
+import SoftwareDetails2 from '../../pages/software-details-2';
+import SoftwareDetails1 from '../../pages/software-details-1'
 import Analyze from "../../pages/Analyze/Analyze";
 import AddAnalysis from "../../pages/Analyze/AddAnalysis";
 import AllAnalysis from "../../pages/Analyze/AllAnalysis";
 import EvaluationSummary from "../../pages/Analyze/EvaluationSummary";
 import Notifications from "../../pages/notifications/Notifications";
 import Singleproduct from "../singleproduct/Singleproduct";
+import SoftwareDetails3 from "../../pages/software-details-3";
 
 const Sidebar = () => {
     return (
@@ -66,9 +67,9 @@ const Sidebar = () => {
             </div>
             <Switch>
                 <Route exact path="/dashboard" component={Software}/>
-                <Route path="/dashboard/software" component={SoftwareDetails}/>
-                <Route path="/dashboard/blog" component={SoftwareBlog}/>
-                <Route path="/dashboard/8" component={Screen8}/>
+                <Route path="/dashboard/software/details-1" component={SoftwareDetails1}/>
+                <Route path="/dashboard/software/blog" component={SoftwareBlog}/>
+                <Route path="/dashboard/software/details-2" component={SoftwareDetails2}/>
                 <Route path="/dashboard/analyze" component={Analyze}/>
                 <Route path="/dashboard/add-analysis" component={AddAnalysis}/>
                 <Route path="/dashboard/all-analysis" component={AllAnalysis}/>
@@ -77,6 +78,7 @@ const Sidebar = () => {
                     path="/dashboard/evaluation-summary"
                     component={EvaluationSummary}
                 />
+                <Route path="/dashboard/software/details-3" component={SoftwareDetails3}/>
             </Switch>
         </>
     );
