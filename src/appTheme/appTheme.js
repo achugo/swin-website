@@ -7,4 +7,5 @@ export const appColors = {
   DARKHEADER: "#061f54",
   HEADERBLUE: "#334A90",
   LIGHTBLUE: "rgba(0, 117, 255, 1)",
+  LIGHTERBLUE: "#e8f4f8"
 };
