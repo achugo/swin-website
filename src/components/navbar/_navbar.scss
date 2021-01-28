@@ -24,9 +24,12 @@
 
 .navbar__right {
   display: inline-block;
+  position: relative;
 
   svg {
     max-width: 30px;
+    cursor: pointer;
+    z-index: 9999;
   }
 }
 

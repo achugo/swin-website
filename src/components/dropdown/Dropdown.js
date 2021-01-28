@@ -10,8 +10,13 @@ const Wrapper = styled.div`
     padding: 1.5em 2.1em 1.5em 1em !important;
     border: none !important;
 
+    .menu {
+      background: #f5f5f5;
+      border: none;
+    }
+
     input {
-        line-height: ine-height: 2.214286em !important;
+      line-height: 2.214286em !important;
     }
   }
 `;

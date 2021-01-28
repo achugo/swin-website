@@ -1,21 +1,27 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { appFont } from "../../../../appTheme/appFont";
-import StepOne from "./StepOne";
-import StepThree from "./StepThree";
-import StepTwo from "./StepTwo";
-import { ReactComponent as arrowIcon } from "../../../../img-assets/icon-signin.svg";
-import { ReactComponent as BackArrow } from "../../../../img-assets/back-arrow.svg";
-import FlexWrap from "../../../../components/flex/FlexWrap";
-import MobileFlex from "../../../../components/flex/MobileFlex";
-import FlexItem from "../../../../components/flex/FlexItem";
+import Loader from "react-loader-spinner";
+import { ReactComponent as Mail } from "../../../../img-assets/email.svg";
+import { ReactComponent as Padlock } from "../../../../img-assets/padlock.svg";
+import { ReactComponent as SignInIcon } from "../../../../img-assets/sign-in-icon.svg";
 import { appColors } from "../../../../appTheme/appTheme";
+import { NavigationSection } from "./RegisterForm";
+import api from "../../../../api/api";
+import { withRouter } from "react-router-dom";
 
 const FormWrapper = styled.div`
   max-width: 500px;
   min-width: 30vw;
   margin: 0px auto;
   text-align: left;
+
+  .heading {
+    svg {
+      max-width: 35px;
+      margin-right: 15px;
+    }
+  }
 `;
 
 const Header = styled.h3`
@@ -30,6 +36,17 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
+export const WrapInput = styled.div`
+  position: relative;
+
+  svg {
+    position: absolute;
+    right: 10px;
+    top: 13px;
+    max-width: 17px;
+  }
+`;
+
 const InputField = styled.input`
   display: block;
   background: rgba(245, 245, 245, 1) 0% 0% no-repeat padding-box;
@@ -39,8 +56,11 @@ const InputField = styled.input`
   width: 100%;
   padding: 1.3em 4em 1.3em 1em;
   margin: 1.5em 0;
+  font-size: 15px;
+  font-family: ${appFont.LIGHTPOPPING};
   outline: none;
   border: none;
+  position: relative;
 
   &::focus {
     outline: none;
@@ -50,6 +70,11 @@ const InputField = styled.input`
     color: rgba(67, 67, 67, 1);
     font-family: ${appFont.LIGHTPOPPING};
   }
+`;
+
+export const LoaderWrapper = styled.div`
+  width: 100%;
+  text-align: center;
 `;
 
 const NextButton = styled.button`
@@ -74,19 +99,82 @@ const NextButton = styled.button`
     border: none;
   }
 `;
-const LoginForm = () => {
+const LoginForm = (props) => {
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const submitLogin = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    const payload = {
+      email,
+      password,
+    };
+    const status = await api.create("login", payload);
+    if (status.status) {
+      setLoading(false);
+      localStorage.setItem("token", status.token);
+      props.history.push("/dashboard");
+    } else {
+      alert("something went wrong");
+    }
+  };
   return (
     <FormWrapper>
-      <div>
-        <arrowIcon /> <Header>Sign In</Header>
+      <div className="heading">
+        <SignInIcon /> <Header>Sign In</Header>
       </div>
 
-      <Wrapper>
-        <InputField placeholder="Email" type="email" />
-        <InputField placeholder="Password" type="password" />
-      </Wrapper>
+      <form onSubmit={submitLogin}>
+        <Wrapper>
+          <WrapInput>
+            <InputField
+              onChange={handleEmailChange}
+              value={email}
+              placeholder="Email"
+              type="email"
+            />
+            <Mail />
+          </WrapInput>
+
+          <WrapInput>
+            <InputField
+              onChange={handlePasswordChange}
+              value={password}
+              placeholder="Password"
+              type="password"
+            />
+            <Padlock />
+          </WrapInput>
+        </Wrapper>
+
+        <NavigationSection>
+          <NextButton type="submit">Submit</NextButton>
+        </NavigationSection>
+      </form>
+
+      {loading && (
+        <LoaderWrapper>
+          <Loader
+            type="TailSpin"
+            color="#74E0FF"
+            height={50}
+            width={50}
+            timeout={30000} //3 secs
+          />
+        </LoaderWrapper>
+      )}
     </FormWrapper>
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

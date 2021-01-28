@@ -58,7 +58,7 @@ const Navigation = (props) => {
   }, []);
 
   useEffect(() => {
-    if (match.path === "/") {
+    if (match.path === "/softwares") {
       listener = document.addEventListener("scroll", (e) => {
         var scrolled = document.scrollingElement.scrollTop;
         if (scrolled >= 100) {
