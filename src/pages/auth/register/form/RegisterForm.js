@@ -68,10 +68,17 @@ const Span = styled.span`
   font-size: 16px;
 `;
 
+const Error = styled.span`
+  font-family: ${appFont.LIGHTPOPPING};
+  color: red;
+  font-size: 16px;
+`;
+
 const RegisterForm = () => {
   const [current_step, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const go_to_next = () => {
     let payload = JSON.parse(localStorage.getItem("reg_payload"));
@@ -115,7 +122,8 @@ const RegisterForm = () => {
       // localStorage.setItem("token", status.token);
       // props.history.push("/dashboard");
     } else {
-      alert("something went wrong");
+      setLoading(false);
+      setError(status.message);
     }
   };
 
@@ -155,6 +163,7 @@ const RegisterForm = () => {
           Registration successful, <Link to="/">Login</Link> to continue
         </Span>
       )}
+      {error && <Error>{error}</Error>}
       {loading && (
         <LoaderWrapper>
           <Loader

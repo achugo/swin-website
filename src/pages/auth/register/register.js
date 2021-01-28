@@ -27,7 +27,7 @@ export const BackgorundWrapper = styled.div`
   background-size: cover;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  padding-top: 25vh;
 `;
 
 export const FormContainer = styled.div`
