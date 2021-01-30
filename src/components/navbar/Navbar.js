@@ -110,11 +110,11 @@ const Navbar = (props) => {
                       <Profile />
                       <span>Profile</span>
                     </ProfileItem>
-                    <ProfileItem>
+                    <ProfileItem onClick={() => goTo("users")}>
                       <Users />
                       <span>Users</span>
                     </ProfileItem>
-                    <ProfileItem>
+                    <ProfileItem onClick={() => goTo("company")}>
                       <Company />
                       <span>Company</span>
                     </ProfileItem>

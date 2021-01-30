@@ -1,5 +1,11 @@
 import axios from "axios";
 
+const token = localStorage.getItem("token");
+
+axios.defaults.headers.common = {
+  Authorization: `Bearer ${(token && token) || ""}`,
+};
+
 const base_url =
   "https://fierce-shore-33740.herokuapp.com/https://swin-api.azurewebsites.net/api/";
 

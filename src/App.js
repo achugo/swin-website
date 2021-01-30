@@ -15,7 +15,13 @@ import CorporateWebsite from "./pages/corporate-website/CorporateWebsite";
 function App() {
   return (
     <Router history={history}>
-      <Route exact path="/" component={CorporateWebsite} />
+      <Route
+        exact
+        path="/"
+        render={() =>
+          localStorage.getItem("token") ? <Layout /> : <CorporateWebsite />
+        }
+      />
       <Route path="/softwares" component={LandingPage} />
       <Route
         path="/dashboard"

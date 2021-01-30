@@ -4,6 +4,8 @@ import Main from "../main/Main";
 import SubNav from "../navbar/SubNav";
 import DashboardResult from "../search-results/DashboardResults";
 import styled from "styled-components";
+import VedeoCarousel from "../video-carousel/VideoCarousel";
+import { Redirect } from "react-router-dom";
 
 const Wrapper = styled.div`
   position: relative;
@@ -11,13 +13,16 @@ const Wrapper = styled.div`
 `;
 
 const Software = () => {
-
   return (
-    <Main>
-      <VideoCarousel />
-      <DashboardResult />
-    </Main>
+    <>
+      <Redirect to="/dashboard" />
+
+      <Main>
+        <VedeoCarousel />
+        <DashboardResult />
+      </Main>
+    </>
   );
 };
 
-export default Software
+export default Software;
