@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import MainDashboardContainer from "../../components/StyledComponents/MainDashBoardContainer";
 import Gutter from "../../components/StyledComponents/Gutter";
 import { Button, Icon } from "semantic-ui-react";
@@ -13,9 +13,29 @@ import SoftwareOptions from "../../components/SoftwareOptions";
 import api from "../../api/api";
 
 const AddSoftware = () => {
+  useEffect(() => {
+    upload_profile_image();
+  }, []);
+
   const profile_img_ref = useRef();
 
-  const upload_profile_image = async () => {};
+  const upload_profile_image = async () => {
+    let payload = {
+      name: "Swin",
+      logo: "https://web.whatsapp.com/",
+      description: "captayobami-9@gmail.co",
+      tech_description: "08166219698",
+      category: "Ayobami",
+      sub_category: "Ayeni",
+      url: "https://web.whatsapp.com/",
+      is_trial: 1,
+    };
+
+    const fileResponse = await api.create("products", payload);
+    if (fileResponse) {
+      console.log(fileResponse);
+    }
+  };
 
   //   const uploadProfile = async (e) => {
   //     setUploading(true);
@@ -39,6 +59,7 @@ const AddSoftware = () => {
     const newFile = e.target.files[0];
     let fileObj = new FormData();
     fileObj.append("file", newFile);
+    fileObj.append("folder", newFile.type);
 
     const fileResponse = await api.create("files/upload");
     if (fileResponse) {

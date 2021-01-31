@@ -1,6 +1,7 @@
 {
   "name": "swin-webapp",
   "version": "0.1.0",
+  "proxy": "https://localhost:4001",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
@@ -41,7 +42,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=4001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

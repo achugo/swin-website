@@ -19,7 +19,11 @@ function App() {
         exact
         path="/"
         render={() =>
-          localStorage.getItem("token") ? <Layout /> : <CorporateWebsite />
+          localStorage.getItem("token") ? (
+            <Redirect to="/dashboard" />
+          ) : (
+            <CorporateWebsite />
+          )
         }
       />
       <Route path="/softwares" component={LandingPage} />
