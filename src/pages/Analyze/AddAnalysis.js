@@ -10,6 +10,7 @@ import AddUser from "../../components/modals/AddUser";
 import SelectedUsers from "../../components/dropdown/SelectedUsers";
 import FlexWrap from "../../components/flex/FlexWrap";
 import MobileFlex from "../../components/flex/MobileFlex";
+import { ReactComponent as Arrow } from "../../img-assets/arrow.svg";
 import FlexItem from "../../components/flex/FlexItem";
 
 const Wrapper = styled.div`
@@ -31,7 +32,20 @@ const LabelHeading = styled.h3`
 `;
 
 const Section = styled.section`
-  margin: 2em 0 4em 0;
+  margin: 2em 4em 0;
+`;
+const AnalyzeSection = styled.section`
+  margin: 0em 4em 0em 4em;
+  position: relative;
+  padding: 3em;
+  border-left: 1px dashed #00bbd5;
+
+  svg {
+    position: absolute;
+    max-width: 40px;
+    bottom: 11vh;
+    left: 0px;
+  }
 `;
 
 const SubHeading = styled.h4`
@@ -97,9 +111,10 @@ const AddAnalysis = () => {
             <Heading>3 Stages Review</Heading>
           </Section>
 
-          <Section>
+          <AnalyzeSection>
             <SubHeading>Stage 1</SubHeading>
             <Select holder="Department" />
+            <Arrow />
             <FlexWrap>
               <FlexItem flex="1">
                 <Adduser onClick={onOpenModal}>Add User</Adduser>
@@ -108,11 +123,12 @@ const AddAnalysis = () => {
                 <SelectedUsers />
               </FlexItem>
             </FlexWrap>
-          </Section>
+          </AnalyzeSection>
 
-          <Section>
-            <SubHeading>Stage 2</SubHeading>
+          <AnalyzeSection>
+            <SubHeading>Stage 1</SubHeading>
             <Select holder="Department" />
+            <Arrow />
             <FlexWrap>
               <FlexItem flex="1">
                 <Adduser onClick={onOpenModal}>Add User</Adduser>
@@ -121,11 +137,12 @@ const AddAnalysis = () => {
                 <SelectedUsers />
               </FlexItem>
             </FlexWrap>
-          </Section>
+          </AnalyzeSection>
 
-          <Section>
-            <SubHeading>Stage 3</SubHeading>
+          <AnalyzeSection>
+            <SubHeading>Stage 1</SubHeading>
             <Select holder="Department" />
+            <Arrow />
             <FlexWrap>
               <FlexItem flex="1">
                 <Adduser onClick={onOpenModal}>Add User</Adduser>
@@ -133,11 +150,8 @@ const AddAnalysis = () => {
               <FlexItem flex="6">
                 <SelectedUsers />
               </FlexItem>
-              <FlexItem flex="1">
-                <Start>Start</Start>
-              </FlexItem>
             </FlexWrap>
-          </Section>
+          </AnalyzeSection>
         </Wrapper>
       </Main>
     </>

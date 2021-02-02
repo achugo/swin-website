@@ -82,7 +82,11 @@ const Navigation = (props) => {
     <>
       <div className={`nav ${scrollState}`}>
         <div className="nav__content">
-          <span className="logo">
+          <span
+            className="logo"
+            onClick={() => props.history.push("/")}
+            style={{ cursor: "pointer" }}
+          >
             <Logo />
           </span>
           <div className="user f-left">

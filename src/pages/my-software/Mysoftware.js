@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { appFont } from "../../appTheme/appFont";
@@ -9,6 +9,9 @@ import { ReactComponent as DeleteIcon } from "../../img-assets/delete-icon.svg";
 import { ReactComponent as EditIcon } from "../../img-assets/edit-icon.svg";
 import product_url from "../../img-assets/dummy-img.png";
 import { appColors } from "../../appTheme/appTheme";
+import { ToastContainer, toast } from "react-toastify";
+import api from "../../api/api";
+import { LoaderSpinner } from "../auth/register/form/LoginForm";
 
 const Wrapper = styled.div`
   text-align: center;
@@ -98,8 +101,30 @@ const AddButton = styled.button`
 `;
 
 const MySoftware = (props) => {
+  const [software_list, setSoftwareList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    get_products();
+  }, []);
+
+  const get_products = async () => {
+    setLoading(true);
+    const status = await api.get("products");
+    if (status.status) {
+      setSoftwareList(status.data);
+      setLoading(false);
+    } else {
+      if (status) {
+        setLoading(false);
+        toast.error(status.message);
+      }
+    }
+  };
+
   return (
     <Main>
+      <ToastContainer />
       <Wrapper>
         <>
           <Section>
@@ -110,31 +135,48 @@ const MySoftware = (props) => {
                 Add Product
               </AddButton>
             </Heading>
-            <>
-              <Product>
-                <FlexWrap>
-                  <FlexItem flex={1}>
-                    <IconWrapper>
-                      <img src={product_url} alt="product" />
-                    </IconWrapper>
-                  </FlexItem>
-                  <FlexItem flex={5}>
-                    <NotifyContent>
-                      <h4>Sikomo</h4>
-                      <span>Marketing analytics And consulting solutions</span>
-                    </NotifyContent>
-                  </FlexItem>
-                  <FlexItem flex={2}>
-                    <ButtonContainer>
-                      <IconWrapper>
-                        <EditIcon />
-                        <DeleteIcon />
-                      </IconWrapper>
-                    </ButtonContainer>
-                  </FlexItem>
-                </FlexWrap>
-              </Product>
-            </>
+            {!loading && (
+              <>
+                {software_list.length > 0 ? (
+                  software_list.map((data) => {
+                    return (
+                      <Product
+                        onClick={() =>
+                          props.history.push(`/dashboard/product/${data.id}`)
+                        }
+                      >
+                        <FlexWrap>
+                          <FlexItem flex={1}>
+                            <IconWrapper>
+                              <img src={data.logo} alt="product" />
+                            </IconWrapper>
+                          </FlexItem>
+                          <FlexItem flex={5}>
+                            <NotifyContent>
+                              <h4>{data.name}</h4>
+                              <span>{data.description}</span>
+                            </NotifyContent>
+                          </FlexItem>
+                          <FlexItem flex={2}>
+                            <ButtonContainer>
+                              <IconWrapper>
+                                <EditIcon />
+                                <DeleteIcon />
+                              </IconWrapper>
+                            </ButtonContainer>
+                          </FlexItem>
+                        </FlexWrap>
+                      </Product>
+                    );
+                  })
+                ) : (
+                  <Product>
+                    <h4>You do not hava any software</h4>
+                  </Product>
+                )}
+              </>
+            )}
+            {loading && <LoaderSpinner />}
           </Section>
         </>
       </Wrapper>

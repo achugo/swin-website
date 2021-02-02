@@ -27,12 +27,6 @@ const CustomDropdown = (props) => {
     props.getCode(data.value);
   };
 
-  const options = [
-    { text: "1", value: "kannada" },
-    { text: "2", value: "english" },
-    { text: "3", value: "hindhi" },
-  ];
-
   return (
     <Wrapper>
       <Dropdown
@@ -42,8 +36,8 @@ const CustomDropdown = (props) => {
         selection
         search
         required
-        // onChange={handleOnChange}
-        options={options}
+        onChange={handleOnChange}
+        options={props.options}
       />
     </Wrapper>
   );

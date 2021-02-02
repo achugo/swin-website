@@ -13,13 +13,11 @@ const Wrapper = styled.div`
 `;
 
 const Select = (props) => {
-  const options = ["admin", "sales", "finance"];
-  const defaultOption = options[0];
   return (
     <Wrapper>
       <Dropdown
-        options={options}
-        //   onChange={this._onSelect}
+        options={props.options}
+        onChange={props.getValue}
         // value={defaultOption}
         placeholder={props.holder}
       />

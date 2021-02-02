@@ -4,10 +4,11 @@ const token = localStorage.getItem("token");
 
 axios.defaults.headers.common = {
   Authorization: `Bearer ${(token && token) || ""}`,
+  "Content-Type": "application/json",
+  Accept: "application/json",
 };
 
-const base_url =
-  "https://fierce-shore-33740.herokuapp.com/https://swin-api.azurewebsites.net/api/";
+const base_url = "https://swin-api.azurewebsites.net/api/";
 
 const create = (url, newObject) => {
   return axios

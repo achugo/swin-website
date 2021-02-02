@@ -33,7 +33,7 @@ export const BackgorundWrapper = styled.div`
 
 export const FormContainer = styled.div`
   height: fit-content;
-  padding-top: 15vh;
+  padding-top: 25vh;
 `;
 
 const BackgroundContent = styled.div`

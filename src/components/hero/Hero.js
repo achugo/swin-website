@@ -4,6 +4,7 @@ import { appFont } from "../../appTheme/appFont";
 import { appColors } from "../../appTheme/appTheme";
 import FlexItem from "../flex/FlexItem";
 import FlexWrap from "../flex/FlexWrap";
+import bgimage from "../../img-assets/video_background.svg";
 import RateTabs from "../tabs/RateTab";
 import bg_image from "../../img-assets/hero-bg.png";
 import HomeSearch from "../search/HomeSearch";
@@ -12,12 +13,12 @@ const Herowrapper = styled.div`
   padding: 5vh 10vw;
   min-height: 35vh;
   height: 45vh;
-  background-image: url(${bg_image});
+  background-image: url(${bgimage});
   background-repeat: no-repeat;
   background-size: cover;
-  background: transparent
+  /* background: transparent
     linear-gradient(252deg, #74e0ff 0%, #334a90 44%, #071950 100%) 0% 0%
-    no-repeat padding-box;
+    no-repeat padding-box; */
 `;
 
 const Hero = () => {

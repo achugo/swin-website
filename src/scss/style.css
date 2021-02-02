@@ -39,6 +39,14 @@
   padding: 2em !important;
 }
 
+.visible {
+  display: block;
+}
+
+.invisible {
+  display: none !important;
+}
+
 .corporate__nav {
   height: 100px;
   padding-top: 1.5em;

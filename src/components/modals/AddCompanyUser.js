@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { appFont } from "../../appTheme/appFont";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { appColors } from "../../appTheme/appTheme";
 import CustomDropdown from "../dropdown/Dropdown";
 import { ReactComponent as ProfileIcon } from "../../img-assets/avatar-profile.svg";
@@ -80,32 +82,58 @@ const AddButton = styled.button`
   }
 `;
 
-const AddCompanyUser = () => {
+export const BtnAdd = styled.button`
+  background: transparent linear-gradient(107deg, #74e0ff 0%, #41a0ff 100%) 0%
+    0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #41a0ff83;
+  padding: 0.8em 2em;
+  border-radius: 5px;
+  outline: none;
+  color: white;
+  border: none;
+  float: right;
+
+  &::focus {
+    outline: none;
+    border: none;
+  }
+`;
+
+const AddCompanyUser = ({ triggerClose }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [user_role, setUserRole] = useState(null);
+
+  const roles = ["admin", "sales", "finance"];
 
   const update_profile = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const payload = {
-      email: "admin@example.com",
-      first_name: "Vanguard",
-      last_name: null,
-      phone_number: null,
-      address: "",
-      avatar: null,
-    };
-    const status = await api.create("profile", payload);
+    const payload = [
+      {
+        email: email,
+        roles: [user_role.value],
+      },
+    ];
+    const status = await api.create("users", payload);
     if (status.status) {
       setLoading(false);
+      toast.success("Invite sent out to new user");
+      triggerClose();
     } else {
       setLoading(false);
-      setError(status.message);
+      toast.error(status.message);
     }
+  };
+
+  const fetchSelectValue = (data) => {
+    setUserRole(data);
   };
 
   return (
     <Wrapper>
+      <ToastContainer />
       <Heading>
         <span>Add User</span>
         <IconEdit />
@@ -113,11 +141,19 @@ const AddCompanyUser = () => {
 
       <form onSubmit={update_profile}>
         <WrapInput>
-          <Select />
+          <Select
+            holder="Select Role"
+            options={roles}
+            getValue={fetchSelectValue}
+          />
         </WrapInput>
 
         <WrapInput>
-          <InputField placeholder="Email addresss" />
+          <InputField
+            required
+            placeholder="Email addresss"
+            onChange={(e) => setEmail(e.target.value)}
+          />
           <MailIcon />
         </WrapInput>
         <AddButton>Enter</AddButton>

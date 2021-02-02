@@ -100,6 +100,18 @@ const NextButton = styled.button`
   }
 `;
 
+export const LoaderSpinner = () => {
+  return (
+    <Loader
+      type="TailSpin"
+      color="#74E0FF"
+      height={50}
+      width={50}
+      timeout={30000} //3 secs
+    />
+  );
+};
+
 const Error = styled.span`
   font-family: ${appFont.LIGHTPOPPING};
   color: red;
@@ -175,13 +187,7 @@ const LoginForm = (props) => {
 
       {loading && (
         <LoaderWrapper>
-          <Loader
-            type="TailSpin"
-            color="#74E0FF"
-            height={50}
-            width={50}
-            timeout={30000} //3 secs
-          />
+          <LoaderSpinner />
         </LoaderWrapper>
       )}
     </FormWrapper>

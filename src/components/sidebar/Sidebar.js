@@ -41,7 +41,7 @@ const Sidebar = (props) => {
     { name: "Software", url: "" },
     { name: "My software", url: "mysoftware" },
     { name: "Analyze", url: "analyze" },
-    { name: "Nofitication", url: "notification" },
+    { name: "Nofitication", url: "notifications" },
     { name: "Swin", url: "swin" },
   ];
 
@@ -114,17 +114,14 @@ const Sidebar = (props) => {
       </div>
       <Switch>
         <Route exact path="/dashboard" component={Software} />
-        <Route
-          path="/dashboard/software/details-1"
-          component={SoftwareDetails1}
-        />
+        <Route path="/dashboard/product/:id" component={SoftwareDetails1} />
         <Route path="/dashboard/software/blog" component={SoftwareBlog} />
         <Route
           path="/dashboard/software/details-2"
           component={SoftwareDetails2}
         />
         <Route path="/dashboard/analyze" component={Analyze} />
-        <Route path="/dashboard/add-analysis" component={AddAnalysis} />
+        <Route path="/dashboard/analyze-product" component={AddAnalysis} />
         <Route path="/dashboard/all-analysis" component={AllAnalysis} />
         <Route path="/dashboard/notifications" component={Notifications} />
         <Route

@@ -52,7 +52,7 @@ const EditUserProfile = () => {
   return (
     <>
       <Modal open={open} onClose={onCloseModal} center>
-        <EditModal />
+        <EditModal triggerClose={onCloseModal} />
       </Modal>
       <Main>
         <section
