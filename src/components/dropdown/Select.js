@@ -7,19 +7,17 @@ const Wrapper = styled.div`
     background: #f5f5f5 0% 0% no-repeat padding-box !important;
     box-shadow: 0px 3px 6px #0000001d !important;
     border-radius: 5px !important;
-    padding: 1.5em 2.1em 1.5em 1em !important;
+    padding: 1em 2.1em 1.5em 1em !important;
     border: none !important;
   }
 `;
 
 const Select = (props) => {
-  const options = ["one", "two", "three"];
-  const defaultOption = options[0];
   return (
     <Wrapper>
       <Dropdown
-        options={options}
-        //   onChange={this._onSelect}
+        options={props.options}
+        onChange={props.getValue}
         // value={defaultOption}
         placeholder={props.holder}
       />

@@ -73,7 +73,9 @@ const CorporateNav = (props) => {
       <div className={`nav corporate__nav`}>
         <div className="nav__content">
           <DashboardSearch />
-          <SoftwareButton>Softwares</SoftwareButton>
+          <SoftwareButton onClick={() => props.history.push("/softwares")}>
+            Softwares
+          </SoftwareButton>
           <div
             id="nav-icon1"
             onClick={() => setshow_nav(!show_nav)}

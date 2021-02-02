@@ -91,8 +91,8 @@ const SearchResult = () => {
           <Count>53 Softwares</Count>
         </HeaderSection>
         <StyledResults>
-          <FlexWrap>
-            <FlexItem flex={1}>
+          <div class="ui grid five column grid">
+            <div className="column">
               <SearchItem>
                 <ProductImage src={product_image} alt="product image" />
                 <ProductDescription>
@@ -109,8 +109,8 @@ const SearchResult = () => {
                   </Category>
                 </ProductDescription>
               </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
+            </div>
+            <div className="column">
               <SearchItem>
                 <ProductImage src={product_image} alt="product image" />
                 <ProductDescription>
@@ -127,8 +127,8 @@ const SearchResult = () => {
                   </Category>
                 </ProductDescription>
               </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
+            </div>
+            <div className="column">
               <SearchItem>
                 <ProductImage src={product_image} alt="product image" />
                 <ProductDescription>
@@ -145,8 +145,8 @@ const SearchResult = () => {
                   </Category>
                 </ProductDescription>
               </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
+            </div>
+            <div className="column">
               <SearchItem>
                 <ProductImage src={product_image} alt="product image" />
                 <ProductDescription>
@@ -163,8 +163,8 @@ const SearchResult = () => {
                   </Category>
                 </ProductDescription>
               </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
+            </div>
+            <div className="column">
               <SearchItem>
                 <ProductImage src={product_image} alt="product image" />
                 <ProductDescription>
@@ -181,8 +181,8 @@ const SearchResult = () => {
                   </Category>
                 </ProductDescription>
               </SearchItem>
-            </FlexItem>
-          </FlexWrap>
+            </div>
+          </div>
         </StyledResults>
       </Wrapper>
     </Container>
@@ -190,3 +190,98 @@ const SearchResult = () => {
 };
 
 export default SearchResult;
+
+{
+  /* <FlexWrap>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+          </FlexWrap> */
+}

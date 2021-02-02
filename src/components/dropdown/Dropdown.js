@@ -10,8 +10,13 @@ const Wrapper = styled.div`
     padding: 1.5em 2.1em 1.5em 1em !important;
     border: none !important;
 
+    .menu {
+      background: #f5f5f5;
+      border: none;
+    }
+
     input {
-        line-height: ine-height: 2.214286em !important;
+      line-height: 2.214286em !important;
     }
   }
 `;
@@ -22,12 +27,6 @@ const CustomDropdown = (props) => {
     props.getCode(data.value);
   };
 
-  const options = [
-    { text: "1", value: "kannada" },
-    { text: "2", value: "english" },
-    { text: "3", value: "hindhi" },
-  ];
-
   return (
     <Wrapper>
       <Dropdown
@@ -37,8 +36,8 @@ const CustomDropdown = (props) => {
         selection
         search
         required
-        // onChange={handleOnChange}
-        options={options}
+        onChange={handleOnChange}
+        options={props.options}
       />
     </Wrapper>
   );

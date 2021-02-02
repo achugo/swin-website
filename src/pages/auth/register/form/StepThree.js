@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { appFont } from "../../../../appTheme/appFont";
+import CustomDropdown from "../../../../components/dropdown/Dropdown";
+import { WrapInput } from "./LoginForm";
 
 const Wrapper = styled.div`
   position: relative;
@@ -28,12 +30,66 @@ const InputField = styled.input`
 `;
 
 const StepThree = () => {
+  const [phone_number, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirm_password, setConfirmPassword] = useState("");
+
+  const handlePhoneNumberChange = (e) => {
+    setPhoneNumber(e.target.value);
+    let payload = JSON.parse(localStorage.getItem("reg_payload"));
+    payload.phone_number = e.target.value;
+    localStorage.setItem("reg_payload", JSON.stringify(payload));
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    let payload = JSON.parse(localStorage.getItem("reg_payload"));
+    payload.password = e.target.value;
+    localStorage.setItem("reg_payload", JSON.stringify(payload));
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    let payload = JSON.parse(localStorage.getItem("reg_payload"));
+    payload.confirm_password = e.target.value;
+    localStorage.setItem("reg_payload", JSON.stringify(payload));
+  };
+
   return (
     <Wrapper>
-      <InputField placeholder="Phone" type="phone" />
-      <InputField placeholder="Email" type="email" />
-      <InputField placeholder="Create Password" type="password" />
-      <InputField placeholder="Confirm Password" type="password" />
+      <WrapInput>
+        <CustomDropdown holder="Select Industry" />
+      </WrapInput>
+
+      <WrapInput>
+        <InputField
+          placeholder="Phone"
+          type="tel"
+          required
+          value={phone_number}
+          onChange={handlePhoneNumberChange}
+        />
+      </WrapInput>
+
+      <WrapInput>
+        <InputField
+          placeholder="Create Password"
+          type="password"
+          required
+          value={password}
+          onChange={handlePasswordChange}
+        />
+      </WrapInput>
+
+      <WrapInput>
+        <InputField
+          placeholder="Confirm Password"
+          type="password"
+          required
+          value={confirm_password}
+          onChange={handleConfirmPasswordChange}
+        />
+      </WrapInput>
     </Wrapper>
   );
 };

@@ -58,7 +58,7 @@ const Navigation = (props) => {
   }, []);
 
   useEffect(() => {
-    if (match.path === "/") {
+    if (match.path === "/softwares") {
       listener = document.addEventListener("scroll", (e) => {
         var scrolled = document.scrollingElement.scrollTop;
         if (scrolled >= 100) {
@@ -82,7 +82,11 @@ const Navigation = (props) => {
     <>
       <div className={`nav ${scrollState}`}>
         <div className="nav__content">
-          <span className="logo">
+          <span
+            className="logo"
+            onClick={() => props.history.push("/")}
+            style={{ cursor: "pointer" }}
+          >
             <Logo />
           </span>
           <div className="user f-left">

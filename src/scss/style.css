@@ -29,13 +29,22 @@
 }
 
 .containar {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 .react-responsive-modal-modal {
   min-width: 500px !important;
-  min-height: 60vh;
+  min-height: 40vh;
+  padding: 2em !important;
+}
+
+.visible {
+  display: block;
+}
+
+.invisible {
+  display: none !important;
 }
 
 .corporate__nav {
@@ -64,7 +73,7 @@
   line-height: 2.5;
   position: relative;
   background-color: white;
-  bottom: 0.8vh;
+  bottom: 2.8vh;
 }
 
 .corporate__nav .navigation__links a {
@@ -143,10 +152,13 @@
 
 .navbar__right {
   display: inline-block;
+  position: relative;
 }
 
 .navbar__right svg {
   max-width: 30px;
+  cursor: pointer;
+  z-index: 9999;
 }
 
 .navbar__right > a {
@@ -320,7 +332,7 @@
 .home__search {
   text-align: center;
   width: 70vw;
-  margin: 20vh auto;
+  margin: 15vh auto;
 }
 
 .home__search .wrap__search {
@@ -330,7 +342,7 @@
 
 .home__search .wrap__search input {
   width: 85%;
-  padding: 2em 1.5em;
+  padding: 1.5em 1.5em;
   border: none;
   border-radius: 10px 0px 0px 10px;
   outline: none;
@@ -342,7 +354,7 @@
   padding: 1.25em 0.5em;
   outline: none;
   border: none;
-  height: 75px;
+  height: 58px;
   background: transparent linear-gradient(108deg, #74e0ff 0%, #41a0ff 100%) 0% 0% no-repeat padding-box;
   font-family: "Poppins SemiBold";
   border-radius: 0px 10px 10px 0px;
@@ -357,8 +369,9 @@
 
 .home__search .wrap__search button svg {
   max-width: 40px;
+  max-height: 20px;
   position: absolute;
-  top: 30px;
+  top: 20px;
   left: 17px;
 }
 
@@ -691,7 +704,7 @@ button:disabled {
 
 .nav {
   width: 100%;
-  height: 90px;
+  height: 75px;
   line-height: 75px;
   background-color: transparent;
   position: fixed;
@@ -721,6 +734,12 @@ button:disabled {
   height: 44px;
   margin-right: 40px;
   max-width: 180px;
+}
+
+.nav .logo svg {
+  max-width: 140px;
+  bottom: 10px;
+  position: relative;
 }
 
 .nav .f-right .pad__right0 {
@@ -1156,5 +1175,22 @@ button:disabled {
     display: block;
     margin: 20px auto 35px;
   }
+}
+
+.white .sign-in {
+  -webkit-box-shadow: 0px 3px 6px #52b4ff30;
+          box-shadow: 0px 3px 6px #52b4ff30;
+  border: 1px solid #52b4ff !important;
+  border-radius: 50px;
+  background-color: transparent;
+  padding: 0.5em 1em;
+  outline: none;
+  border: none;
+}
+
+.white .sign-in span {
+  color: #52b4ff !important;
+  position: relative;
+  bottom: 4px;
 }
 /*# sourceMappingURL=style.css.map */

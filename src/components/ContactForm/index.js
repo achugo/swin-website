@@ -1,60 +1,77 @@
 import React from "react";
 import Gutter from "../StyledComponents/Gutter";
-import {Button, Icon} from "semantic-ui-react";
-import CustomDropdown from "../dropdown/Dropdown";
 import FlexWrap from "../flex/FlexWrap";
+import styled from "styled-components";
+import { appFont } from "../../appTheme/appFont";
+import FlexItem from "../flex/FlexItem";
+import { ReactComponent as Address } from "../../img-assets/office-building.svg";
+import { ReactComponent as Website } from "../../img-assets/globe-icon.svg";
+import { ReactComponent as MailIcon } from "../../img-assets/email.svg";
 
-const ContactForm = ()=>{
-    return(
-        <>
-            <Gutter>
-                <h3>
-                    Contact Details
-                </h3>
-                <div className="ui grid">
-                    <div className="eight wide column">
-                        <section>
-                            <Gutter top={0} bottom={10}>
-                                <Icon name={'phone'} style={{marginRight: '0.5rem'}}/>
-                                Phone Number
-                            </Gutter>
-                            <CustomDropdown/>
-                        </section>
-                        <section>
-                            <Gutter top={20} bottom={10}>
-                                <Icon name={'address book'} style={{marginRight: '0.5rem'}}/>
-                                Phone Number
-                            </Gutter>
-                            <CustomDropdown/>
-                        </section>
+const Heading = styled.h3`
+  font-family: ${appFont.REGULAR};
+  margin-bottom: 2em;
+`;
 
+const Title = styled.div`
+  svg {
+    max-width: 25px;
+  }
+  span {
+    color: #434343;
+    padding-left: 15px;
+    position: relative;
+    bottom: 4px;
+    font-family: ${appFont.MEDIUM};
+  }
 
-                    </div>
-                    <div className="eight wide column">
-                        <Gutter bottom={15}>
-                            <FlexWrap>
-                                <Icon name={'circle'}/>
-                                <section style={{marginLeft: '0.5rem'}}>
-                                    <h4 className={'clear-spacing'}>Website</h4>
-                                    <a href="#" className={'clear-spacing'}>www.inc.com</a>
-                                </section>
-                            </FlexWrap>
-                        </Gutter>
-                        <Gutter bottom={0} top={0}>
-                            <FlexWrap>
-                                <Icon name={'mail'}/>
-                                <section style={{marginLeft: '0.5rem'}}>
-                                    <h4 className={'clear-spacing'}>Email</h4>
-                                    <a href="#" className={'clear-spacing'}>inc@gmail.com</a>
-                                </section>
-                            </FlexWrap>
-                        </Gutter>
+  h5 {
+    font-family: ${appFont.LIGHTPOPPING};
+    color: #434343;
+    margin-top: 5px;
+  }
+`;
 
-                    </div>
-                </div>
-            </Gutter>
-        </>
-    )
+const ContactForm = () => {
+  return (
+    <>
+      <Gutter>
+        <Heading>Contact Details</Heading>
+
+        <FlexWrap>
+          <FlexItem flex={1}>
+            <Title>
+              <div>
+                <Address />
+                <span>Address</span>
+              </div>
+              <h5>Emmanegger@Swin.com</h5>
+            </Title>
+          </FlexItem>
+
+          <FlexItem flex={1}>
+            <Title>
+              <div>
+                <Website />
+                <span>Website</span>
+              </div>
+              <h5>www.ind.com</h5>
+            </Title>
+          </FlexItem>
+
+          <FlexItem flex={1}>
+            <Title>
+              <div>
+                <MailIcon />
+                <span>Address</span>
+              </div>
+              <h5>Emmanegger@Swin.com</h5>
+            </Title>
+          </FlexItem>
+        </FlexWrap>
+      </Gutter>
+    </>
+  );
 };
 
-export default ContactForm
+export default ContactForm;

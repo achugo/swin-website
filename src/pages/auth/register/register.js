@@ -20,17 +20,19 @@ export const AuthContainer = styled.div`
 `;
 
 export const BackgorundWrapper = styled.div`
-  background-image: url(${bg_image});
+  /* background-image: url(${bg_image}); */
+  background: transparent linear-gradient(182deg, #74e0ff 0%, #7de2fe 100%) 0%
+    0% no-repeat padding-box;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  padding-top: 25vh;
 `;
 
 export const FormContainer = styled.div`
   height: fit-content;
-  padding-top: 15vh;
+  padding-top: 21vh;
 `;
 
 const BackgroundContent = styled.div`
