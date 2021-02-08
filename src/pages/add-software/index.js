@@ -173,6 +173,8 @@ const AddSoftware = (props) => {
       if (status) {
         setLoadingAddProduct(false);
         toast.error(status.message);
+      } else {
+        toast.error(status.message);
       }
     }
   };
@@ -261,7 +263,7 @@ const AddSoftware = (props) => {
 
     const status = await api.create("assets", payload);
     if (status.status) {
-      alert("product asset uploaded");
+      toast("product asset uploaded");
       setLoadingImg(false);
     } else {
       if (status) {

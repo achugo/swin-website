@@ -14,7 +14,7 @@ import Main from "../main/Main";
 import Software from "../softwares/Software";
 import SoftwareBlog from "../../pages/software-blog";
 import SoftwareDetails2 from "../../pages/software-details-2";
-import SoftwareDetails1 from "../../pages/software-details-1";
+import SoftwareDetails1 from "../../pages/product-details";
 import Analyze from "../../pages/Analyze/Analyze";
 import AddAnalysis from "../../pages/Analyze/AddAnalysis";
 import AllAnalysis from "../../pages/Analyze/AllAnalysis";

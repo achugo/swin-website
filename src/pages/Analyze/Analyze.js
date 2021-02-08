@@ -48,7 +48,7 @@ const Button = styled.button`
   }
 `;
 
-const Analyze = () => {
+const Analyze = (props) => {
   return (
     <Main>
       <Wrapper>
@@ -59,7 +59,11 @@ const Analyze = () => {
           </SubHeading>
           <NoAnalysis />
           <Section>
-            <Button>Analyze Product</Button>
+            <Button
+              onClick={() => props.history.push("/dashboard/analyze-product")}
+            >
+              Analyze Product
+            </Button>
           </Section>
         </>
       </Wrapper>

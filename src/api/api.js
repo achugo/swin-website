@@ -8,7 +8,7 @@ axios.defaults.headers.common = {
   Accept: "application/json",
 };
 
-const base_url = "https://swin-api.azurewebsites.net/api/";
+const base_url = "http://api.swinhub.com/api/";
 
 const create = (url, newObject) => {
   return axios
