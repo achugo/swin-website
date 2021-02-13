@@ -113,9 +113,9 @@ const AddSoftware = (props) => {
   }, []);
 
   const categories = [
-    { text: "Category1", value: "category1" },
-    { text: "Category2", value: "category2" },
-    { text: "Category3", value: "category3" },
+    { text: "Marketing", value: "Marketing" },
+    { text: "Finance", value: "Finance" },
+    { text: "Advertising", value: "Advertising" },
   ];
 
   const [digital_collateral, setCollateral] = useState([]);

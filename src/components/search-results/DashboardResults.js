@@ -54,19 +54,22 @@ const StyledResults = styled.div`
 const SearchItem = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 10px;
+  box-shadow: 0px 3px 6px #00000029;
   overflow: hidden;
-  max-width: 230px;
-  margin: 7px;
+  /* margin: 7px; */
   cursor: pointer;
 `;
 
 const ProductImage = styled.img`
-  max-width: 100%;
+  /* max-width: 100%; */
+  height: 170px;
   display: block;
+  width: 100%;
 `;
 
 const ProductDescription = styled.div`
   position: relative;
+  padding: 0.7em 1.5em;
 `;
 
 const Rating = styled.div`
@@ -77,9 +80,11 @@ const Rating = styled.div`
   }
 `;
 
-const ProductName = styled.h4`
-  color: #334a90;
-  font-family: ${appFont.MEDIUM};
+const ProductName = styled.h3`
+  color: black;
+  font-family: ${appFont.BOLD};
+  margin-bottom: 5px;
+  margin-top: 15px;
 `;
 
 const Category = styled.span`
@@ -150,7 +155,7 @@ const DashboardResults = (props) => {
                           <InActiveStar />
                         </Rating>
                         <ProductName>{item.name}</ProductName>
-                        <Category>{item.tech_description}</Category>
+                        <Category>{item.category}</Category>
                       </ProductDescription>
                     </SearchItem>
                   </div>

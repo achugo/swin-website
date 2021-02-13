@@ -5,6 +5,7 @@ import presentation from "../../img-assets/presentations.svg";
 import webinars from "../../img-assets/webinar.svg";
 import podcast from "../../img-assets/podcast-collateral.svg";
 import tutorials from "../../img-assets/tutorials.svg";
+import brochure from "../../img-assets/brochure.svg";
 import "./style.css";
 import styled from "styled-components";
 import { useRouteMatch, withRouter } from "react-router-dom";
@@ -26,10 +27,10 @@ const DigitalCollateral = ({ collateral, id, history }) => {
     if (data === "Blog") {
       return blog;
     }
-    if (data === "Presentation") {
+    if (data === "Presentations") {
       return presentation;
     }
-    if (data === "Tutorial") {
+    if (data === "Tutorials") {
       return tutorials;
     }
     if (data === "Podcast") {
@@ -37,6 +38,9 @@ const DigitalCollateral = ({ collateral, id, history }) => {
     }
     if (data === "Webinars") {
       return webinars;
+    }
+    if (data === "Banners/Fliers") {
+      return brochure;
     }
   };
 

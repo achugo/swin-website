@@ -268,9 +268,20 @@ const CollateralContent = (props) => {
                             {/* <IconWrapper style={{ backgroundColor: "#31C7BE" }}>
                             <Lock />
                           </IconWrapper> */}
-                            <IconWrapper style={{ backgroundColor: "#00BBD5" }}>
-                              <Video />
-                            </IconWrapper>
+                            {item.access === "open" && (
+                              <IconWrapper
+                                style={{ backgroundColor: "#00BBD5" }}
+                              >
+                                <Video />
+                              </IconWrapper>
+                            )}
+                            {item.access === "restricted" && (
+                              <IconWrapper
+                                style={{ backgroundColor: "#D3D3D3" }}
+                              >
+                                <Lock />
+                              </IconWrapper>
+                            )}
                           </FlexItem>
                           <FlexItem flex={5}>
                             <NotifyContent>

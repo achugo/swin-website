@@ -61,8 +61,9 @@ const SearchItem = styled.div`
 `;
 
 const ProductImage = styled.img`
-  max-width: 100%;
+  /* height: 170px; */
   display: block;
+  width: 100%;
 `;
 
 const ProductDescription = styled.div`
@@ -161,7 +162,7 @@ const SearchResult = (props) => {
                     <div className="column">
                       <SearchItem
                         onClick={() =>
-                          props.history.push(`/products/${item.id}`)
+                          props.history.push(`/softwares/${item.id}`)
                         }
                       >
                         <ProductImage src={product_image} alt="product image" />
@@ -174,7 +175,7 @@ const SearchResult = (props) => {
                             <InActiveStar />
                           </Rating>
                           <ProductName>{item.name}</ProductName>
-                          <Category>{item.tech_description}</Category>
+                          <Category>{item.category}</Category>
                         </ProductDescription>
                       </SearchItem>
                     </div>
@@ -197,7 +198,7 @@ const SearchResult = (props) => {
                     <div className="column">
                       <SearchItem
                         onClick={() =>
-                          props.history.push(`/products/${item.id}`)
+                          props.history.push(`/softwares/${item.id}`)
                         }
                       >
                         <ProductImage src={product_image} alt="product image" />

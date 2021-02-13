@@ -157,7 +157,8 @@ const AddDigitalCollateral = (props) => {
   const [selected_category, setCaterogy] = useState({});
   const [file_url, SetFileUrl] = useState("");
   const [file_type, setFileType] = useState("");
-  const [access_type, SetAccessType] = useState("");
+  const [access_type, SetAccessType] = useState("restricted");
+
   const [error, setError] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

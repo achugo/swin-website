@@ -226,7 +226,7 @@ const Evaluation = ({ triggerClose }) => {
             <WrapInput>
               <TextField
                 required
-                placeholder="Write a review"
+                placeholder="Leave comment"
                 onChange={(e) => handleReviewChange(e)}
               />
             </WrapInput>
