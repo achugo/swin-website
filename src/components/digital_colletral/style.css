@@ -1,7 +1,11 @@
-.card-content{
-    display: flex;
-    justify-content: space-around;
+.card-content {
+  display: block;
+  justify-content: space-around;
 }
 
-
-
+.card-content h5 {
+  display: inline-block;
+  position: relative;
+  bottom: 25px;
+  padding-left: 65px;
+}

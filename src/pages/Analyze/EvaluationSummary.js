@@ -1,5 +1,5 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useRouteMatch, withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { appFont } from "../../appTheme/appFont";
 import FlexItem from "../../components/flex/FlexItem";
@@ -8,6 +8,9 @@ import Main from "../../components/main/Main";
 import { ReactComponent as Plus } from "../../img-assets/plus.svg";
 import product_url from "../../img-assets/dummy-img.png";
 import { appColors } from "../../appTheme/appTheme";
+import { toast } from "react-toastify";
+import api from "../../api/api";
+import { LoaderSpinner } from "../auth/register/form/LoginForm";
 
 const Wrapper = styled.div`
   text-align: center;
@@ -115,82 +118,110 @@ const Status = styled.div`
 `;
 
 const EvaluationSummary = () => {
+  const match = useRouteMatch();
+  const [loading, setLoading] = useState(false);
+  const [review_details, setReviewDetails] = useState({});
+
+  useEffect(() => {
+    fetch_review_details();
+  }, []);
+
+  const fetch_review_details = async () => {
+    setLoading(true);
+
+    const status = await api.get(`reviews/${match.params.id}`);
+    if (status.status) {
+      setLoading(false);
+      setReviewDetails(status.data);
+    } else {
+      if (status) {
+        setLoading(false);
+        console.log(status);
+        toast.error(status.message);
+      }
+    }
+  };
+
+  console.log("deets", review_details);
   return (
     <Main>
       <Wrapper>
         <>
           <Section>
             <Heading>Evaluation Summary</Heading>
-            <ProductContainer>
-              <FlexWrap>
-                <FlexItem flex={1}>
-                  <Name>
-                    <Img src={product_url} alt="product img" />
-                  </Name>
-                </FlexItem>
-                <FlexItem flex={2}>
-                  <Stages>
-                    <h2>Olifax</h2>
-                    <span>Marketing analytics And consulting solutions </span>
-                    <h6>Ongoing</h6>
-                  </Stages>
-                </FlexItem>
-                <FlexItem flex={4}>
-                  <Status>
-                    <h1>11</h1>
-                    <span>stages</span>
-                  </Status>
-                </FlexItem>
-              </FlexWrap>
-            </ProductContainer>
-            <div class="ui active progress" data-percent="74">
-              <div class="bar">
-                <div class="progress"></div>
-              </div>
-              <div class="label">Uploading Files</div>
-            </div>
+            {loading && <LoaderSpinner />}
+            {!loading && review_details && (
+              <>
+                <ProductContainer>
+                  <FlexWrap>
+                    <FlexItem flex={1}>
+                      <Name>
+                        <Img src={product_url} alt="product img" />
+                      </Name>
+                    </FlexItem>
+                    <FlexItem flex={2}>
+                      <Stages>
+                        <h2>{review_details.name}</h2>
+                        {/* <span>
+                          Marketing analytics And consulting solutions{" "}
+                        </span>
+                        <h6>Ongoing</h6> */}
+                      </Stages>
+                    </FlexItem>
+                    <FlexItem flex={4}>
+                      <Status>
+                        <h1>{review_details.stages}</h1>
+                        <span>stages</span>
+                      </Status>
+                    </FlexItem>
+                  </FlexWrap>
+                </ProductContainer>
+                <div class="ui active progress" data-percent="74">
+                  <div class="bar">
+                    <div class="progress"></div>
+                  </div>
+                  {/* <div class="label">Uploading Files</div> */}
+                </div>
+              </>
+            )}
           </Section>
-          <Section>
+          {!loading && review_details.review_stages && (
             <>
-              <SubHeading>Stage 1 - Marketing</SubHeading>
-              <ProductContainer>
-                <FlexWrap>
-                  <FlexItem flex={4}>Name</FlexItem>
-                  <FlexItem flex={2}>Role</FlexItem>
-                  <FlexItem flex={2}>Status</FlexItem>
-                  <FlexItem flex={2}>Date Completed</FlexItem>
-                  <FlexItem flex={2}>Weighting</FlexItem>
-                </FlexWrap>
-              </ProductContainer>
-              <Product>
-                <FlexWrap>
-                  <FlexItem flex={4}>Name</FlexItem>
-                  <FlexItem flex={2}>Role</FlexItem>
-                  <FlexItem flex={2}>Status</FlexItem>
-                  <FlexItem flex={2}>Date Completed</FlexItem>
-                  <FlexItem flex={2}>Weighting</FlexItem>
-                </FlexWrap>
-              </Product>
-              <Product>
-                <FlexWrap>
-                  <FlexItem flex={4}>Name</FlexItem>
-                  <FlexItem flex={2}>Role</FlexItem>
-                  <FlexItem flex={2}>Status</FlexItem>
-                  <FlexItem flex={2}>Date Completed</FlexItem>
-                  <FlexItem flex={2}>Weighting</FlexItem>
-                </FlexWrap>
-              </Product>
-              <Product>
-                <FlexWrap>
-                  <FlexItem flex={4}>Name</FlexItem>
-                  <FlexItem flex={2}>Role</FlexItem>
-                  <FlexItem flex={2}>Status</FlexItem>
-                  <FlexItem flex={2}>Date Completed</FlexItem>
-                  <FlexItem flex={2}>Weighting</FlexItem>
-                </FlexWrap>
-              </Product>
+              {review_details.review_stages.map((item, index) => (
+                <Section>
+                  <>
+                    <SubHeading>
+                      Stage {index + 1} - {item.name}
+                    </SubHeading>
+                    <ProductContainer>
+                      <FlexWrap>
+                        <FlexItem flex={4}>Name</FlexItem>
+                        <FlexItem flex={2}>Role</FlexItem>
+                        <FlexItem flex={2}>Status</FlexItem>
+                        <FlexItem flex={2}>Date Completed</FlexItem>
+                        <FlexItem flex={2}>Weighting</FlexItem>
+                      </FlexWrap>
+                    </ProductContainer>
+                    {item.reviewers.map((data) => (
+                      <Product>
+                        <FlexWrap>
+                          <FlexItem flex={4}>Name</FlexItem>
+                          <FlexItem flex={2}>Role</FlexItem>
+                          <FlexItem flex={2}>Status</FlexItem>
+                          <FlexItem flex={2}>Date Completed</FlexItem>
+                          <FlexItem flex={2}>
+                            {data.ratings === null
+                              ? "0%"
+                              : Number(data.ratings)}
+                          </FlexItem>
+                        </FlexWrap>
+                      </Product>
+                    ))}
+                  </>
+                </Section>
+              ))}
             </>
-          </Section>
+          )}
         </>
       </Wrapper>
     </Main>

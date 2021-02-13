@@ -8,11 +8,46 @@ axios.defaults.headers.common = {
   Accept: "application/json",
 };
 
-const base_url = "http://api.swinhub.com/api/";
+const base_url =
+  "https://fierce-shore-33740.herokuapp.com/http://swinserver-001-site1.ctempurl.com/api/";
+
+export const url_base = "http://swinserver-001-site1.ctempurl.com/";
 
 const create = (url, newObject) => {
   return axios
     .post(base_url + url, newObject)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      if (err.response) {
+        return err.response.data;
+      } else {
+        alert(err.message);
+      }
+      //throw new Error(err.response.data.message);
+    });
+};
+
+const patch = (url, newObject) => {
+  return axios
+    .patch(base_url + url, newObject)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((err) => {
+      if (err.response) {
+        return err.response.data;
+      } else {
+        alert(err.message);
+      }
+      //throw new Error(err.response.data.message);
+    });
+};
+
+const upload = (url, newObject) => {
+  return axios
+    .post("http://api.swinhub.com/api/" + url, newObject)
     .then((response) => {
       return response.data;
     })
@@ -42,4 +77,4 @@ const get = (url, newObject) => {
     });
 };
 
-export default { create, get };
+export default { create, get, upload, patch };

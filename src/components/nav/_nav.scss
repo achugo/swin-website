@@ -324,8 +324,8 @@ $primary-color: #1187b3;
   }
 }
 
-.white {
-  background-color: white !important;
+.dark-blue {
+  background-color: #182b64 !important;
 
   a {
     color: blue;
@@ -756,6 +756,31 @@ $primary-color: #1187b3;
         width: 120px;
         display: block;
         margin: 20px auto 35px;
+      }
+    }
+  }
+}
+
+.user {
+  .dashboard__search {
+    width: 68vw !important;
+  }
+  .wrap__search {
+    float: left !important;
+    display: inline-block;
+    width: 70% !important;
+    bottom: 0 !important;
+
+    input {
+      padding: 1.2em 1.5em;
+    }
+
+    button {
+      top: 7px;
+      position: relative;
+
+      span {
+        padding-left: 20px;
       }
     }
   }

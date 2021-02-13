@@ -28,21 +28,24 @@ import EditSoftware2 from "../../pages/edit-software-2";
 import CompanyPage from "../../pages/company";
 import Mysoftware from "../../pages/my-software/Mysoftware";
 import CompanyUsers from "../../pages/company-users/Companyusers";
+import EvaluateProduct from "../../pages/product-details/EvaluateProduct";
+import CollateralContent from "../../pages/product-details/CollateralContent";
+import CorporateWebsite from "../../pages/corporate-website/CorporateWebsite";
 
 const Sidebar = (props) => {
   const [active_link, setActiveLink] = useState(0);
 
   const navigate = (route, index) => {
-    props.history.push(`/dashboard/${route}`);
+    props.history.push(`${route}`);
     setActiveLink(index);
   };
 
   const sidebar_links = [
     { name: "Software", url: "" },
-    { name: "My software", url: "mysoftware" },
-    { name: "Analyze", url: "analyze" },
-    { name: "Nofitication", url: "notifications" },
-    { name: "Swin", url: "swin" },
+    { name: "My software", url: "/dashboard/mysoftware" },
+    { name: "Analyze", url: "/dashboard/analyze" },
+    { name: "Nofitication", url: "/dashboard/notifications" },
+    { name: "Swin", url: "/about" },
   ];
 
   return (
@@ -114,7 +117,20 @@ const Sidebar = (props) => {
       </div>
       <Switch>
         <Route exact path="/dashboard" component={Software} />
-        <Route path="/dashboard/product/:id" component={SoftwareDetails1} />
+
+        <Route
+          exact
+          path="/dashboard/product/:id"
+          component={SoftwareDetails1}
+        />
+        <Route
+          path="/dashboard/product/:id/:collateral"
+          component={CollateralContent}
+        />
+        <Route
+          path="/dashboard/product-evaluation/:id"
+          component={EvaluateProduct}
+        />
         <Route path="/dashboard/software/blog" component={SoftwareBlog} />
         <Route
           path="/dashboard/software/details-2"
@@ -125,7 +141,7 @@ const Sidebar = (props) => {
         <Route path="/dashboard/all-analysis" component={AllAnalysis} />
         <Route path="/dashboard/notifications" component={Notifications} />
         <Route
-          path="/dashboard/evaluation-summary"
+          path="/dashboard/evaluation-summary/:id"
           component={EvaluationSummary}
         />
         <Route

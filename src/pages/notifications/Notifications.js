@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
 import { appFont } from "../../appTheme/appFont";
@@ -10,6 +10,8 @@ import { ReactComponent as Analytics } from "../../img-assets/analytics.svg";
 import { ReactComponent as Tick } from "../../img-assets/correct-mark.svg";
 import product_url from "../../img-assets/dummy-img.png";
 import { appColors } from "../../appTheme/appTheme";
+import api from "../../api/api";
+import { LoaderSpinner } from "../auth/register/form/LoginForm";
 
 const Wrapper = styled.div`
   text-align: center;
@@ -58,7 +60,7 @@ const NotifyContent = styled.div`
   top: 20px;
   & h4 {
     color: ${appColors.BLACK};
-    font-family: ${appFont.MEDIUM};
+    font-family: ${appFont.REGULAR};
   }
 
   & span {
@@ -92,6 +94,14 @@ const AcessButton = styled.button`
   }
 `;
 
+const Date = styled.span`
+  font-family: ${appFont.LIGHTPOPPING};
+  display: block;
+  padding-right: 10px;
+  text-align: right;
+  color: #777777;
+`;
+
 const RejectButton = styled.button`
   outline: none;
   border: 1px solid #334a90;
@@ -107,40 +117,97 @@ const RejectButton = styled.button`
   }
 `;
 
-const Notifications = () => {
+const Center = styled.div`
+  display: flex;
+  height: 20vh;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Notifications = (props) => {
+  const [notification_list, setNotificationList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    get_notifications();
+  }, []);
+
+  const get_notifications = async () => {
+    setLoading(true);
+    const status = await api.get("notifications");
+    if (status.status) {
+      setNotificationList(status.data);
+      setLoading(false);
+    } else {
+      if (status) {
+        setLoading(false);
+        // toast.error(status.message);
+      }
+    }
+  };
+
+  const goTo = (data) => {
+    console.log("data", data);
+    props.history.push(`/dashboard/product-evaluation/${data}`);
+  };
+
+  console.log("notifications", notification_list);
   return (
     <Main>
-      <Wrapper>
-        <>
-          <Section>
-            <Heading>15 New notifications</Heading>
-            <>
-              <Product>
-                <FlexWrap>
-                  <FlexItem flex={1}>
-                    <IconWrapper style={{ backgroundColor: "#31C7BE" }}>
-                      <Lock />
-                    </IconWrapper>
-                  </FlexItem>
-                  <FlexItem flex={5}>
-                    <NotifyContent>
-                      <h4>Access Request</h4>
-                      <span>
-                        Swin Solutions is requesting access to view your IND
-                        presentations
-                      </span>
-                    </NotifyContent>
-                  </FlexItem>
-                  <FlexItem flex={2}>
-                    <ButtonContainer>
-                      <AcessButton>Give access</AcessButton>
-                      <RejectButton>Don't give</RejectButton>
-                    </ButtonContainer>
-                  </FlexItem>
-                </FlexWrap>
-              </Product>
+      {loading && (
+        <Center>
+          <LoaderSpinner />
+        </Center>
+      )}
+      {!loading && notification_list.length > 0 && (
+        <Wrapper>
+          <>
+            <Section>
+              <Heading>{notification_list.length} New notifications</Heading>
+              {notification_list.map((notification) => (
+                <>
+                  <Product
+                    onClick={() =>
+                      goTo(
+                        JSON.parse(notification.data)[0].details.link.substring(
+                          JSON.parse(notification.data)[0].details.link.length -
+                            36
+                        )
+                      )
+                    }
+                  >
+                    <FlexWrap>
+                      <FlexItem flex={1}>
+                        <IconWrapper style={{ backgroundColor: "#31C7BE" }}>
+                          <Lock />
+                        </IconWrapper>
+                      </FlexItem>
+                      <FlexItem flex={5}>
+                        <NotifyContent>
+                          <h4>{notification.type.substr(18)}</h4>
+                          <span>
+                            Swin Solutions is requesting access to view your IND
+                            presentations
+                          </span>
+                        </NotifyContent>
+                      </FlexItem>
+                      <FlexItem flex={2}>
+                        <Date>99/90/23</Date>
+                        <ButtonContainer>
+                          <AcessButton>Give access</AcessButton>
+                          <RejectButton>Don't give</RejectButton>
+                        </ButtonContainer>
+                      </FlexItem>
+                    </FlexWrap>
+                  </Product>
+                </>
+              ))}
+            </Section>
+          </>
+        </Wrapper>
+      )}
 
-              <Product>
+      {/* <Product>
                 <FlexWrap>
                   <FlexItem flex={1}>
                     <IconWrapper style={{ backgroundColor: "#00BBD5" }}>
@@ -157,10 +224,7 @@ const Notifications = () => {
                     </NotifyContent>
                   </FlexItem>
                   <FlexItem flex={2}>
-                    {/* <ButtonContainer>
-                      <AcessButton>Give access</AcessButton>
-                      <RejectButton>Don't give</RejectButton>
-                    </ButtonContainer> */}
+                  
                   </FlexItem>
                 </FlexWrap>
               </Product>
@@ -181,17 +245,10 @@ const Notifications = () => {
                     </NotifyContent>
                   </FlexItem>
                   <FlexItem flex={2}>
-                    {/* <ButtonContainer>
-                      <AcessButton>Give access</AcessButton>
-                      <RejectButton>Don't give</RejectButton>
-                    </ButtonContainer> */}
+                  
                   </FlexItem>
                 </FlexWrap>
-              </Product>
-            </>
-          </Section>
-        </>
-      </Wrapper>
+              </Product> */}
     </Main>
   );
 };

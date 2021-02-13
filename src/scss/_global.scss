@@ -16,3 +16,13 @@
 .invisible {
   display: none !important;
 }
+
+.ui.checkbox input:checked ~ label:after {
+  color: white !important;
+  // color: #41a0ff !important;
+}
+
+.ui.checkbox input:checked ~ label:before {
+  background: #41a0ff !important;
+  border: none;
+}

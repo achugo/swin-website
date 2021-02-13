@@ -29,34 +29,44 @@ const MultipleSelect = (props) => {
     if (status.status) {
       let format = status.data.map((item) => {
         return {
-          id: item.id,
           name: `${item.first_name} ${item.last_name}`,
+          id: item.id,
         };
       });
+
       setUsers(format);
     } else {
       toast.error(status.message);
     }
   };
 
-  console.log("users, ", users);
-
-  const onSelect = (selectedList, selectedItem) => {
-    localStorage.setItem("select", JSON.stringify(getValues()));
-  };
-
-  const onRemove = (selectedList, removedItem) => {
-    localStorage.setItem("select", JSON.stringify(getValues()));
-  };
-
-  const getValues = () => {
-    // console.log(multiselectRef.current.getSelectedItems());
+  const onSelect = (selectedList, selectedItem, key) => {
+    //console.log("selectd", multiselectRef.current.getSelectedItems());
+    // console.log("selectd", multiselectRef.current.getSelectedItems());
+    // // console.log("selectd", multiselectRef.current.getSelectedItems());
     props.group_selection(
       props.index,
       multiselectRef.current.getSelectedItems()
     );
-    return multiselectRef.current.getSelectedItems();
   };
+
+  const onRemove = (selectedList, removedItem) => {
+    //console.log("selectd", multiselectRef.current.getSelectedItems());
+    props.group_selection(
+      props.index,
+      multiselectRef.current.getSelectedItems()
+    );
+  };
+
+  const getValues = () => {
+    console.log("selectd", multiselectRef.current.getSelectedItems());
+    props.group_selection(
+      props.index,
+      multiselectRef.current.getSelectedItems()
+    );
+  };
+
+  console.log("users", users);
 
   return (
     <Wrapper>

@@ -18,6 +18,7 @@ import CustomInput from "../../components/CustomInput";
 import { toast, ToastContainer } from "react-toastify";
 import api from "../../api/api";
 import BtnAdd from "../../components/button/BtnAdd";
+import { withRouter } from "react-router-dom";
 
 const Wrapper = styled.div`
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -154,7 +155,7 @@ const NotifyContent = styled.div`
   }
 `;
 
-const AddAnalysis = () => {
+const AddAnalysis = (props) => {
   const [open, setOpen] = useState(false);
   const [total_stages, setTotalStages] = useState([]);
   const onOpenModal = () => setOpen(true);
@@ -163,7 +164,11 @@ const AddAnalysis = () => {
   const [final_payload, setUpdatePayload] = useState({});
   const [search_result, setSearchResult] = useState(null);
   const [product_id, setProductId] = useState("");
+  const [review_id, setReviewId] = useState("");
+  const [all_data, setAllData] = useState({});
   const [show_stages, setShowStages] = useState(false);
+  const [all_stages, setAllStages] = useState({});
+  const [show_start, setShowStart] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const stages = [
@@ -187,30 +192,73 @@ const AddAnalysis = () => {
 
   const search_product = async (e) => {
     setInput(e.target.value);
-    setSearchResult([1, 3, 4, 5]);
-    // let payload = {
-    //   name: e.target.value,
-    // };
-    // const status = await api.create("public/search", payload);
-    // if (status.status) {
-    //   console.log(status);
-    // } else {
-    //   if (status) {
-    //     console.log(status);
-    //     toast.error(status.message);
-    //   }
-    // }
-  };
 
-  const update_payload = (current) => {
-    let payload = final_payload;
-    if (current) {
-      setUpdatePayload(payload.concat(current));
+    let payload = {
+      name: e.target.value,
+    };
+    const status = await api.create("guest/search", payload);
+    if (status.status) {
+      setSearchResult(status.data);
+    } else {
+      if (status) {
+        console.log(status);
+        toast.error(status.message);
+      }
     }
   };
 
+  const update_payload = () => {
+    // console.log("all data", all_data);
+    // console.log("all stages", all_stages);
+    let data = [];
+    for (const key in all_stages) {
+      if (Object.hasOwnProperty.call(all_stages, key)) {
+        const element = all_stages[key];
+        // console.log("all data", all_data["0"]);
+        // console.log("all stages", all_stages["0"]);
+        // console.log("keyy_", key);
+        data.push({
+          name: element[0].value,
+          reviewers: all_data["0"][0],
+        });
+      }
+    }
+    //  all_stages.map((item, index) => {
+    //   return {
+    //     name: item.value,
+    //     reviewers: all_data[index][0],
+    //   };
+    // });
+    console.log("final daa", data);
+    return data;
+  };
+
   const fetchSelected = (index, data) => {
-    console.log("log", index, data);
+    let format_data = data.filter((item) => {
+      item.user_id = item.id;
+      item.is_final = total_stages.length === index + 1 ? true : false;
+      //delete item.id;
+      return true;
+    });
+
+    const new_data = {
+      ...all_data,
+      [index]: (all_data[index] && all_data[index].concat(format_data)) || [
+        format_data,
+      ],
+    };
+
+    setAllData(new_data);
+  };
+
+  const fetchDepartment = (index, data) => {
+    console.log(index, data);
+    const new_data = {
+      ...all_stages,
+      [index]: (all_stages[index] && all_stages[index].concat(data)) || [data],
+    };
+
+    setAllStages(new_data);
   };
 
   const select_product = (data) => {
@@ -221,16 +269,54 @@ const AddAnalysis = () => {
   const create_review = async () => {
     setLoading(true);
     let payload = {
-      product_id: product_id,
-      name: "Buy Slack",
+      product_id: product_id.id,
+      name: `${product_id.name} Review`,
       stages: total_stages.length,
     };
-    const status = await api.create("review", payload);
+    const status = await api.create("reviews", payload);
     if (status.status) {
-      alert("review created");
+      toast("review created");
       setShowStages(true);
+      setReviewId(status.data.id);
       console.log(status);
       setLoading(false);
+    } else {
+      if (status) {
+        setLoading(false);
+        console.log(status);
+        toast.error(status.message);
+      }
+    }
+  };
+
+  const create_stages = async () => {
+    setLoading(true);
+    let payload = {
+      review_id: review_id,
+      stages: update_payload(),
+    };
+    const status = await api.create("stages", payload);
+    if (status.status) {
+      toast("stages created");
+      setLoading(false);
+      setShowStart(true);
+    } else {
+      if (status) {
+        setLoading(false);
+        console.log(status);
+        toast.error(status.message);
+      }
+    }
+  };
+
+  const start_review = async () => {
+    setLoading(true);
+
+    const status = await api.get(`reviews/start/${review_id}`);
+    if (status.status) {
+      toast("review process initiated");
+      setLoading(false);
+      props.history.push("/dashboard/analyze");
     } else {
       if (status) {
         setLoading(false);
@@ -263,11 +349,7 @@ const AddAnalysis = () => {
             <WrapInput>
               {search_result &&
                 search_result.map((item) => (
-                  <Product
-                    onClick={() =>
-                      select_product("253c732c-d443-4e1f-9dd3-b22ffa42eca3")
-                    }
-                  >
+                  <Product onClick={() => select_product(item)}>
                     <FlexWrap>
                       <FlexItem flex={1}>
                         <IconWrapper>
@@ -276,7 +358,7 @@ const AddAnalysis = () => {
                       </FlexItem>
                       <FlexItem flex={5}>
                         <NotifyContent>
-                          <h4>Name</h4>
+                          <h4>{item.name}</h4>
                           <span>description</span>
                         </NotifyContent>
                       </FlexItem>
@@ -312,7 +394,11 @@ const AddAnalysis = () => {
                   return (
                     <AnalyzeSection>
                       <SubHeading>Stage 1</SubHeading>
-                      <Select options={department} holder="Department" />
+                      <Select
+                        options={department}
+                        holder="Department"
+                        getValue={(data) => fetchDepartment(index, data)}
+                      />
                       <Arrow />
                       <FlexWrap>
                         <FlexItem flex="1">
@@ -328,6 +414,14 @@ const AddAnalysis = () => {
                     </AnalyzeSection>
                   );
                 })}
+              <div className="pad_top">
+                {!show_start && (
+                  <BtnAdd click={create_stages}>Add Stages</BtnAdd>
+                )}
+                {show_start && (
+                  <BtnAdd click={start_review}>Start Review</BtnAdd>
+                )}
+              </div>
             </>
           )}
         </Wrapper>
@@ -336,4 +430,4 @@ const AddAnalysis = () => {
   );
 };
 
-export default AddAnalysis;
+export default withRouter(AddAnalysis);

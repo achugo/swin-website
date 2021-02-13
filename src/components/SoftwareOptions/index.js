@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 let dummyData = [1, 2, 3, 4, 5, 6, 7, 8];
 const platforms = [
@@ -20,11 +20,15 @@ const training_options = [
 const support = ["Live chat", "Phone calls", "Email"];
 const pricing_model = ["Licensed based", "Free trial"];
 
-const SoftwareOptions = ({ data = dummyData }) => {
+const SoftwareOptions = ({ data = dummyData, getSpecs }) => {
   const [specifications, setSpecifications] = useState([]);
   const gutter = {
     margin: "20px 0",
   };
+
+  useEffect(() => {
+    getSpecs(specifications);
+  }, [specifications]);
 
   const onChangeCheck = (e) => {
     let current_spec = specifications;

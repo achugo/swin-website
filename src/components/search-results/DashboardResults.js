@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { appFont } from "../../appTheme/appFont";
 import FlexItem from "../flex/FlexItem";
@@ -7,8 +7,18 @@ import product_image from "../../img-assets/product-image.png";
 import { ReactComponent as ActiveStar } from "../../img-assets/star-active.svg";
 import { ReactComponent as InActiveStar } from "../../img-assets/inactive-star.svg";
 import { appColors } from "../../appTheme/appTheme";
+import bg_image from "../../img-assets/slick-bg.png";
+import Loader from "react-loader-spinner";
+import { LoaderSpinner } from "../../pages/auth/register/form/LoginForm";
+import api from "../../api/api";
+import { withRouter } from "react-router-dom";
 
-const Container = styled.div``;
+const Container = styled.div`
+  background-image: url(${bg_image});
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+`;
 
 const Wrapper = styled.div`
   max-width: 70vw;
@@ -57,7 +67,6 @@ const ProductImage = styled.img`
 
 const ProductDescription = styled.div`
   position: relative;
-  padding: 0.5em;
 `;
 
 const Rating = styled.div`
@@ -77,323 +86,176 @@ const Category = styled.span`
   position: relative;
 `;
 
-const MoreResult = styled.button`
-  background-color: #3f9aff;
-  color: white;
-  padding: 1em 2.5em;
-  outline: none;
-  border: none;
-  font-family: ${appFont.REGULAR};
-  border-radius: 10px;
-
-  &::focus {
-    outline: none;
-    border: none;
-  }
+const Center = styled.div`
+  display: flex;
+  height: 10vh;
+  justify-content: center;
+  align-items: center;
 `;
 
-const DashboardResult = () => {
+const DashboardResults = (props) => {
+  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState(null);
+  useEffect(() => {
+    fetch_public_products();
+  }, []);
+
+  const fetch_public_products = async () => {
+    setLoading(true);
+    const status = await api.get(`guest/products/`);
+    if (status.status) {
+      setLoading(false);
+      setProducts(status.data);
+    } else {
+      if (status) {
+        setLoading(false);
+        console.log(status);
+      }
+    }
+  };
+
+  console.log("prodd", products);
+
   return (
     <Container>
-      <Wrapper>
-        <HeaderSection>
-          <Heading>Suggested for you</Heading>
-          <MoreResult>See More</MoreResult>
-        </HeaderSection>
-        <StyledResults>
-          <FlexWrap>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-          </FlexWrap>
-        </StyledResults>
-        <HeaderSection>
-          <Heading>New in your field</Heading>
-          <MoreResult>See More</MoreResult>
-        </HeaderSection>
-        <StyledResults>
-          <FlexWrap>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-          </FlexWrap>
-        </StyledResults>
-        <HeaderSection>
-          <Heading>New in your field22</Heading>
-          <MoreResult>See More</MoreResult>
-        </HeaderSection>
-        <StyledResults>
-          <FlexWrap>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-            <FlexItem flex={1}>
-              <SearchItem>
-                <ProductImage src={product_image} alt="product image" />
-                <ProductDescription>
-                  <Rating>
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <ActiveStar />
-                    <InActiveStar />
-                  </Rating>
-                  <ProductName>AAA</ProductName>
-                  <Category>
-                    Marketing analytics And consulting solutions
-                  </Category>
-                </ProductDescription>
-              </SearchItem>
-            </FlexItem>
-          </FlexWrap>
-        </StyledResults>
-      </Wrapper>
+      {loading && (
+        <Center>
+          <LoaderSpinner />
+        </Center>
+      )}
+      {!loading && (
+        <Wrapper>
+          <HeaderSection>
+            <Heading>See Results for "Tech Solutions"</Heading>
+            <Count>53 Softwares</Count>
+          </HeaderSection>
+          <StyledResults>
+            <div class="ui grid five column grid">
+              {products &&
+                products.length > 0 &&
+                products.map((item) => (
+                  <div className="column">
+                    <SearchItem
+                      onClick={() =>
+                        props.history.push(`/dashboard/product/${item.id}`)
+                      }
+                    >
+                      <ProductImage src={item.logo} alt="product image" />
+                      <ProductDescription>
+                        <Rating>
+                          <ActiveStar />
+                          <ActiveStar />
+                          <ActiveStar />
+                          <ActiveStar />
+                          <InActiveStar />
+                        </Rating>
+                        <ProductName>{item.name}</ProductName>
+                        <Category>{item.tech_description}</Category>
+                      </ProductDescription>
+                    </SearchItem>
+                  </div>
+                ))}
+            </div>
+          </StyledResults>
+        </Wrapper>
+      )}
     </Container>
   );
 };
 
-export default DashboardResult;
+export default withRouter(DashboardResults);
+
+{
+  /* <FlexWrap>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+            <FlexItem flex={1}>
+              <SearchItem>
+                <ProductImage src={product_image} alt="product image" />
+                <ProductDescription>
+                  <Rating>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                  </Rating>
+                  <ProductName>AAA</ProductName>
+                  <Category>
+                    Marketing analytics And consulting solutions
+                  </Category>
+                </ProductDescription>
+              </SearchItem>
+            </FlexItem>
+          </FlexWrap> */
+}

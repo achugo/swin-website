@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 // import AnchorLink from "react-anchor-link-smooth-scroll";
 // import "./Nav.scss";
-import { ReactComponent as Logo } from "../../img-assets/logo-swin.svg";
+import { ReactComponent as Logo } from "../../img-assets/white-logo.svg";
 import { ReactComponent as SignInIcon } from "../../img-assets/nav-signin-icon.svg";
 import { ReactComponent as SignUpIcon } from "../../img-assets/nav-signup-icon.svg";
 import { withRouter, Link, useRouteMatch } from "react-router-dom";
+import DashboardSearch from "../search/DashboardSearch";
+import HomeSearch from "../search/HomeSearch";
 
 // import { userContext } from "../../store/UserContext";
 // import { appUrl } from "../../services/urls";
@@ -26,61 +28,15 @@ const Navigation = (props) => {
     }, 200);
   };
 
-  const toSubscription = () => {
-    props.history.push("/dashboard/subscribe");
-  };
-
-  const toHome = () => {
-    props.history.push("/");
-  };
-
-  const toAuth = (n) => {
-    n === 1 ? props.history.push("/login") : props.history.push("/signup");
-  };
-
-  const toProfile = () => {
-    props.history.push("/edit-profile");
-  };
-
   const goTo = (to) => {
     props.history.push(to);
     if (to === "logout") logout();
     setshow_nav(false);
   };
 
-  let listener = null;
-  const [scrollState, setScrollState] = useState("top");
-
-  useEffect(() => {
-    if (match.url != "/") {
-      setScrollState("white");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (match.path === "/softwares") {
-      listener = document.addEventListener("scroll", (e) => {
-        var scrolled = document.scrollingElement.scrollTop;
-        if (scrolled >= 100) {
-          if (scrollState !== "white") {
-            setScrollState("white");
-            console.log("scrolled!!");
-          }
-        } else {
-          if (scrollState !== "top") {
-            setScrollState("top");
-          }
-        }
-      });
-      return () => {
-        document.removeEventListener("scroll", listener);
-      };
-    }
-  }, [scrollState]);
-
   return (
     <>
-      <div className={`nav ${scrollState}`}>
+      <div className={`nav dark-blue`}>
         <div className="nav__content">
           <span
             className="logo"
@@ -90,41 +46,7 @@ const Navigation = (props) => {
             <Logo />
           </span>
           <div className="user f-left">
-            {/* <span>
-              <Link to="/buy" className="active___">
-                About
-              </Link>
-            </span>
-            <span>
-              {" "}
-              <Link to="/rent">Blog</Link>
-            </span>
-            <span>
-              {" "}
-              <Link to="/rent">FAQs</Link>
-            </span> */}
-            {/* <span>
-              <div className="dropdown-wrap">
-                <div>Services</div>
-                <div className="dropdown_">
-                  <ul>
-                    <li className="bb">
-                      {" "}
-                      <Link to="/property-management">Property Management</Link>
-                    </li>
-                    <li>
-                      <Link to="/design-and-development">
-                        Design and development
-                      </Link>
-                    </li>
-                    <li>
-                      {" "}
-                      <Link to="/mortgage-calculator">Mortgage</Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </span> */}
+            <HomeSearch />
           </div>
           <div className="user f-right">
             <span className="pad__right0">

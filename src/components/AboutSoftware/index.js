@@ -1,7 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import testingImage from "../../img-assets/product-image.png";
 import { Button, Rating } from "semantic-ui-react";
 import Description from "../StyledComponents/DescriptionParagraph";
+import { ReactComponent as InActiveStar } from "../../img-assets/inactive-star.svg";
+import { ReactComponent as ActiveStar } from "../../img-assets/star-active.svg";
+import { ReactComponent as CompanyProfile } from "../../img-assets/company-profile.svg";
+import { ReactComponent as Evaluate } from "../../img-assets/evaluate.svg";
+import styled from "styled-components";
+import { appFont } from "../../appTheme/appFont";
+import { useRouteMatch, withRouter } from "react-router-dom";
+import Modal from "react-responsive-modal";
+import Evaluation from "../modals/Evaluation";
+import { url_base } from "../../api/api";
+import SalesModal from "../modals/SalesModal";
+
+const Wrapper = styled.div`
+  h3.heading {
+    font-family: ${appFont.REGULAR};
+  }
+
+  p {
+    font-family: ${appFont.LIGHTPOPPING};
+    font-size: 16px;
+  }
+`;
+
+const Ratings = styled.div`
+  display: inline-block;
+  svg {
+    margin: 2px;
+  }
+  span {
+    position: relative;
+    bottom: 2px;
+  }
+`;
+
+const CompanyButton = styled.button`
+  background-color: transparent;
+  padding: 0.6em 0.8em;
+  border: 1px solid #334a90;
+  min-width: 160px;
+  border-radius: 5px;
+  span {
+    color: #334a90;
+    position: relative;
+    padding-right: 10px;
+    font-family: ${appFont.MEDIUM};
+    font-size: 13px;
+  }
+  svg {
+    max-width: 15px;
+    max-height: 25px;
+  }
+`;
+
+const EvaluateButton = styled.button`
+  margin-left: 20px;
+  min-width: 160px;
+  background-color: #3f9aff;
+  padding: 0.6em 0.8em;
+  border-radius: 5px;
+  span {
+    color: white;
+    position: relative;
+    bottom: 5px;
+    padding-right: 10px;
+    font-family: ${appFont.MEDIUM};
+    font-size: 13px;
+  }
+  svg {
+    max-width: 15px;
+    max-height: 23px;
+  }
+`;
 
 const CustomButton = () => {
   return (
@@ -23,8 +95,23 @@ const CustomButton = () => {
   );
 };
 const AboutSoftware = (props) => {
+  const match = useRouteMatch();
+  const [open, setOpen] = useState(false);
+  const [open_sales, setOpenSales] = useState(false);
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
+  const onOpenSalesModal = () => setOpenSales(true);
+  const onCloseSalesModal = () => setOpenSales(false);
+
   return (
-    <>
+    <Wrapper>
+      <Modal open={open} onClose={onCloseModal} center>
+        <Evaluation triggerClose={onCloseModal} />
+      </Modal>
+
+      <Modal open={open_sales} onClose={onCloseSalesModal} center>
+        <SalesModal triggerClose={onCloseSalesModal} />
+      </Modal>
       {props.data && (
         <section className={"ui grid"}>
           <div className="two wide column">
@@ -36,16 +123,22 @@ const AboutSoftware = (props) => {
           </div>
           <div className="fourteen wide column">
             <div className="ui grid">
-              <div className="ten wide column">
-                <h3>{props.data.name}</h3>
+              <div className="eight wide column">
+                <h3 className="heading">{props.data.name}</h3>
                 <div style={{ margin: "0.5rem 0" }}>
-                  <Rating icon="star" mini defaultRating={1} maxRating={5} />
-                  <span style={{ marginLeft: "0.3rem" }}>3.5</span>
+                  <Ratings>
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <ActiveStar />
+                    <InActiveStar />
+                    <span style={{ marginLeft: "0.5rem" }}>3.5</span>
+                  </Ratings>
                 </div>
 
                 <p>{props.data.description}</p>
               </div>
-              <div className="six wide column">
+              <div className="eight wide column">
                 <section></section>
                 <div
                   style={{
@@ -55,7 +148,16 @@ const AboutSoftware = (props) => {
                     marginTop: "0.3rem",
                   }}
                 >
-                  <a href="#">Company Info</a>
+                  <CompanyButton onClick={onOpenSalesModal}>
+                    <span>Sales Manager</span>
+                    {/* <CompanyProfile /> */}
+                  </CompanyButton>
+                  {match.path === "/dashboard/product-evaluation/:id" && (
+                    <EvaluateButton onClick={onOpenModal}>
+                      <span>Analyze</span>
+                      <Evaluate />
+                    </EvaluateButton>
+                  )}
                 </div>
               </div>
               <div className="thirteen wide column">
@@ -65,8 +167,8 @@ const AboutSoftware = (props) => {
           </div>
         </section>
       )}
-    </>
+    </Wrapper>
   );
 };
 
-export default AboutSoftware;
+export default withRouter(AboutSoftware);

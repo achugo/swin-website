@@ -14,8 +14,8 @@
 }
 
 @font-face {
-  font-family: "SF Pro Regular";
-  src: url("../fonts/SFProDisplay-Regular.ttf");
+  font-family: "Poppins Regular";
+  src: url("../fonts/Poppins-Regular.ttf");
 }
 
 @font-face {
@@ -45,6 +45,15 @@
 
 .invisible {
   display: none !important;
+}
+
+.ui.checkbox input:checked ~ label:after {
+  color: white !important;
+}
+
+.ui.checkbox input:checked ~ label:before {
+  background: #41a0ff !important;
+  border: none;
 }
 
 .corporate__nav {
@@ -694,11 +703,11 @@ button:disabled {
   background-color: white !important;
 }
 
-.white {
-  background-color: white !important;
+.dark-blue {
+  background-color: #182b64 !important;
 }
 
-.white a {
+.dark-blue a {
   color: blue;
 }
 
@@ -1175,6 +1184,30 @@ button:disabled {
     display: block;
     margin: 20px auto 35px;
   }
+}
+
+.user .dashboard__search {
+  width: 68vw !important;
+}
+
+.user .wrap__search {
+  float: left !important;
+  display: inline-block;
+  width: 70% !important;
+  bottom: 0 !important;
+}
+
+.user .wrap__search input {
+  padding: 1.2em 1.5em;
+}
+
+.user .wrap__search button {
+  top: 7px;
+  position: relative;
+}
+
+.user .wrap__search button span {
+  padding-left: 20px;
 }
 
 .white .sign-in {

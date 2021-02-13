@@ -7,7 +7,7 @@ import Multistep from "react-multistep";
 import { appFont } from "../../../appTheme/appFont";
 import FlexWrap from "../../../components/flex/FlexWrap";
 import FlexItem from "../../../components/flex/FlexItem";
-import bg_image from "../../../img-assets/auth-background.png";
+import bg_image from "../../../img-assets/auth__bg.png";
 import { ReactComponent as Logo } from "../../../img-assets/logo-swin.svg";
 import { ReactComponent as AuthIcon } from "../../../img-assets/sign-in.svg";
 import { Button } from "react-bootstrap";
@@ -21,9 +21,9 @@ export const AuthContainer = styled.div`
 `;
 
 export const BackgorundWrapper = styled.div`
-  /* background-image: url(${bg_image}); */
-  background: transparent linear-gradient(182deg, #74e0ff 0%, #7de2fe 100%) 0%
-    0% no-repeat padding-box;
+  background-image: url(${bg_image});
+  /* background: transparent linear-gradient(182deg, #74e0ff 0%, #7de2fe 100%) 0%
+    0% no-repeat padding-box; */
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;

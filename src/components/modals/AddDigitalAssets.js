@@ -11,7 +11,7 @@ import {
   LoaderSpinner,
   WrapInput,
 } from "../../pages/auth/register/form/LoginForm";
-import api from "../../api/api";
+import api, { url_base } from "../../api/api";
 import Select from "../dropdown/Select";
 import { TextArea } from "semantic-ui-react";
 import { toast, Toast, ToastContainer } from "react-toastify";
@@ -145,22 +145,35 @@ export const BtnAdd = styled.button`
   }
 `;
 
-const AddDigitalCollateral = () => {
+const Span = styled.span`
+  font-size: 15px;
+  font-family: ${appFont.LIGHTPOPPING};
+  padding-left: 5px;
+`;
+
+const AddDigitalCollateral = (props) => {
   const [loading, setLoading] = useState(false);
   const [loading_img, setLoadingImg] = useState("");
   const [selected_category, setCaterogy] = useState({});
   const [file_url, SetFileUrl] = useState("");
   const [file_type, setFileType] = useState("");
+  const [access_type, SetAccessType] = useState("");
   const [error, setError] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const file_ref = useRef();
 
+  const input_ref = useRef();
+
   const cats = [
+    { value: "Banners/Fliers", label: "Banners/Fliers" },
     { value: "Presentations", label: "Presentations" },
     { value: "Demo", label: "Demo" },
     { value: "Webinars", label: "Webinars" },
     { value: "Podcast", label: "Podcast" },
     { value: "Tutorials", label: "Tutorials" },
     { value: "Blog", label: "Tutorials" },
+    { value: "Whats' New", label: "What's New" },
   ];
 
   const add_collateral = async (e) => {
@@ -168,14 +181,18 @@ const AddDigitalCollateral = () => {
     setLoading(true);
     const payload = {
       product_id: localStorage.getItem("product_id"),
-      file: file_url,
+      file: url_base + file_url,
       category: selected_category.value,
       type: file_type,
+      title: title,
+      description: description,
+      access: access_type,
     };
     const status = await api.create("files", payload);
     if (status.status) {
       setLoading(false);
       toast("Digital Collateral added");
+      props.close(selected_category.value);
     } else {
       setLoading(false);
       setError(status.message);
@@ -191,7 +208,7 @@ const AddDigitalCollateral = () => {
     setFileType(newFile.type);
     fileObj.append("file", newFile);
     fileObj.append("folder", newFile.type);
-    const fileResponse = await api.create("files/upload", fileObj);
+    const fileResponse = await api.upload("files/upload/temp", fileObj);
     if (fileResponse.status) {
       setLoadingImg(false);
       SetFileUrl(fileResponse.url);
@@ -199,6 +216,15 @@ const AddDigitalCollateral = () => {
       if (fileResponse) {
         setLoadingImg(false);
       }
+    }
+  };
+
+  const toggle_access = (e) => {
+    console.log(e.target.checked);
+    if (e.target.checked) {
+      SetAccessType("open");
+    } else {
+      SetAccessType("restricted");
     }
   };
 
@@ -210,6 +236,13 @@ const AddDigitalCollateral = () => {
     file_ref.current.click();
   };
 
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setDescription(e.target.value);
+  };
   return (
     <Wrapper>
       <ToastContainer />
@@ -244,11 +277,18 @@ const AddDigitalCollateral = () => {
         </WrapInput>
 
         <WrapInput>
-          <InputField placeholder="Title" />
+          <InputField placeholder="Title" onChange={handleTitleChange} />
+          <div style={{ marginBottom: "1em" }}>
+            <input type="checkbox" ref={input_ref} onChange={toggle_access} />
+            <Span>Allow access</Span>
+          </div>
         </WrapInput>
 
         <WrapInput>
-          <textarea placeholder="Description" />
+          <textarea
+            placeholder="Description"
+            onChange={handleDescriptionChange}
+          />
         </WrapInput>
         {loading && <LoaderSpinner />}
 

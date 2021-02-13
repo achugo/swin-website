@@ -10,7 +10,10 @@ import history from "./history";
 import Login from "./pages/auth/login/Login";
 import LandingPage from "./pages/landing-page/LandingPage";
 import Register from "./pages/auth/register/register";
+import CompleteRegister from "./pages/auth/register/complete";
 import CorporateWebsite from "./pages/corporate-website/CorporateWebsite";
+import SoftwareDetails1 from "./pages/product-details";
+import ProductDetail from "./pages/landing-page/ProductDetail";
 
 function App() {
   return (
@@ -22,11 +25,13 @@ function App() {
           localStorage.getItem("token") ? (
             <Redirect to="/dashboard" />
           ) : (
-            <CorporateWebsite />
+            <LandingPage />
           )
         }
       />
-      <Route path="/softwares" component={LandingPage} />
+      {/* <Route exact path="/softwares" component={LandingPage} /> */}
+      <Route path="/softwares/:id" component={ProductDetail} />
+      <Route exact path="/about" component={CorporateWebsite} />
       <Route
         path="/dashboard"
         render={() =>
@@ -34,6 +39,7 @@ function App() {
         }
       />
       <Route path="/register" component={Register} />
+      <Route path="/complete-registration" component={CompleteRegister} />
       <Route path="/login" component={Login} />
 
       {/* <Route

@@ -6,7 +6,6 @@ import StepThree from "./StepThree";
 import StepTwo from "./StepTwo";
 import { ReactComponent as WriteIcon } from "../../../../img-assets/writing.svg";
 import { ReactComponent as BackArrow } from "../../../../img-assets/back-arrow.svg";
-import FlexWrap from "../../../../components/flex/FlexWrap";
 import MobileFlex from "../../../../components/flex/MobileFlex";
 import FlexItem from "../../../../components/flex/FlexItem";
 import { appColors } from "../../../../appTheme/appTheme";
@@ -130,7 +129,7 @@ const RegisterForm = () => {
   return (
     <FormWrapper>
       <div>
-        <WriteIcon />{" "}
+        <WriteIcon />
         <Header>
           {current_step !== 3 ? "Sign Up" : "Complete Registration"}
         </Header>
@@ -160,7 +159,7 @@ const RegisterForm = () => {
 
       {success && (
         <Span>
-          Registration successful, <Link to="/">Login</Link> to continue
+          Registration successful, <Link to="/login">Login</Link> to continue
         </Span>
       )}
       {error && <Error>{error}</Error>}

@@ -14,7 +14,7 @@ import CustomTextArea from "../../components/CustomTextArea";
 import AddImage from "../../img-assets/add-image.jpeg";
 import AppCards from "../../components/AppsCard";
 import SoftwareOptions from "../../components/SoftwareOptions";
-import api from "../../api/api";
+import api, { url_base } from "../../api/api";
 import BtnAdd from "../../components/button/BtnAdd";
 import styled from "styled-components";
 import { appFont } from "../../appTheme/appFont";
@@ -118,9 +118,16 @@ const AddSoftware = (props) => {
     { text: "Category3", value: "category3" },
   ];
 
+  const [digital_collateral, setCollateral] = useState([]);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
+  const onCloseModal = (data) => {
+    setOpen(false);
+    let all_collat = digital_collateral;
+    all_collat.push(data);
+    setCollateral(all_collat);
+    console.log(all_collat);
+  };
   const [err_msg_logo, setErrMsgLogo] = useState("");
   const [err_msg_video, setErrMsgVideo] = useState("");
   const [category, setCategory] = useState("");
@@ -142,6 +149,8 @@ const AddSoftware = (props) => {
   const profile_img_ref = useRef();
   const video_upload_ref = useRef();
   const images_upload_ref = useRef();
+
+  console.log(digital_collateral);
 
   const create_product = async () => {
     setLoadingAddProduct(true);
@@ -194,10 +203,10 @@ const AddSoftware = (props) => {
     let fileObj = new FormData();
     fileObj.append("file", newFile);
     fileObj.append("folder", newFile.type);
-    const fileResponse = await api.create("files/upload", fileObj);
+    const fileResponse = await api.upload("files/upload/temp", fileObj);
     if (fileResponse.status) {
       setLoadingProfileImg(false);
-      SetFileUrl(fileResponse.url);
+      SetFileUrl(url_base + fileResponse.url);
     } else {
       if (fileResponse) {
         setLoadingProfileImg(false);
@@ -214,10 +223,10 @@ const AddSoftware = (props) => {
     let fileObj = new FormData();
     fileObj.append("file", newFile);
     fileObj.append("folder", newFile.type);
-    const fileResponse = await api.create("files/upload", fileObj);
+    const fileResponse = await api.upload("files/upload/temp", fileObj);
     if (fileResponse.status) {
       setLoading(false);
-      SetVideoUrl(fileResponse.url);
+      SetVideoUrl(url_base + fileResponse.url);
       uploadProductAsset("video", newFile.name, fileResponse.url);
       toast.success("video upload successful");
     } else {
@@ -236,14 +245,14 @@ const AddSoftware = (props) => {
     let fileObj = new FormData();
     fileObj.append("file", newFile);
     fileObj.append("folder", newFile.type);
-    const fileResponse = await api.create("files/upload", fileObj);
+    const fileResponse = await api.upload("files/upload/temp", fileObj);
     if (fileResponse.status) {
       setLoadingImg(false);
-      let url = fileResponse.url;
+      let url = url_base + fileResponse.url;
       let current_images = uploaded_images;
       let updatedImages = current_images.concat(url);
       setUploadedImages(updatedImages);
-      uploadProductAsset("video", newFile.name, fileResponse.url);
+      uploadProductAsset("image", newFile.name, fileResponse.url);
     } else {
       if (fileResponse) {
         setLoadingImg(false);
@@ -255,7 +264,7 @@ const AddSoftware = (props) => {
   const uploadProductAsset = async (type, name, file) => {
     let payload = {
       product_id: product_id,
-      file: file,
+      file: url_base + file,
       category: category,
       type: type,
       name: name,
@@ -301,9 +310,10 @@ const AddSoftware = (props) => {
     const status = await api.create("specifications", payload);
     if (status.status) {
       SetProductId(status.data.id);
+      console.log("specifications", status.data);
       localStorage.setItem("product_id", status.data.id);
       toast.success("Product creation successful");
-      props.history.push("/dashboard/mysoftware");
+      //props.history.push("/dashboard/mysoftware");
       setStage(2);
     } else {
       if (status) {
@@ -316,7 +326,7 @@ const AddSoftware = (props) => {
     <>
       <ToastContainer />
       <Modal open={open} onClose={onCloseModal} center>
-        <AddDigitalCollateral triggerClose={onCloseModal} />
+        <AddDigitalCollateral close={onCloseModal} />
       </Modal>
       <Main>
         <MainDashboardContainer>
@@ -472,9 +482,13 @@ const AddSoftware = (props) => {
                       <WhitePlus />
                     </DigitalCollateralBox>
                   </div>
-                  <div className="four">
-                    <AppCards content={"Presentation"} />
-                  </div>
+
+                  {digital_collateral.length > 0 &&
+                    digital_collateral.map((item) => (
+                      <div className="four">
+                        <AppCards content={item} />
+                      </div>
+                    ))}
                 </div>
               </Gutter>
               <Gutter>
