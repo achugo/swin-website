@@ -28,18 +28,23 @@ const Wrapper = styled.div`
   padding: 4em 1em;
 
   .pad_top {
-    margin-top: 25px;
+    margin-top: 15px;
+  }
+
+  .pad_bottom {
+    padding-bottom: 45px;
   }
 `;
 
 const Heading = styled.h2`
-  font-family: ${appFont.MEDIUM};
-  margin-bottom: 2em;
+  font-family: ${appFont.REGULAR};
+  margin-bottom: 3em !important;
 `;
 
 const LabelHeading = styled.h3`
-  font-family: ${appFont.MEDIUM};
-  margin-bottom: 2em;
+  color: #434343;
+  font-family: ${appFont.REGULAR};
+  margin: 1em 0;
 `;
 
 const Section = styled.section`
@@ -48,7 +53,7 @@ const Section = styled.section`
 const AnalyzeSection = styled.section`
   margin: 0em 4em 0em 4em;
   position: relative;
-  padding: 3em;
+  padding-left: 3em;
   border-left: 1px dashed #00bbd5;
 
   svg {
@@ -61,22 +66,17 @@ const AnalyzeSection = styled.section`
 
 const SubHeading = styled.h4`
   font-family: ${appFont.REGULAR};
+  margin: 1em 0;
 `;
 
-const Adduser = styled.button`
-  margin-top: 1em;
-  background: #41a0ff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #0000001d;
-  border-radius: 5px;
-  outline: none;
-  color: white;
+const AdduserCaption = styled.span`
+  position: relative;
+  top: 20px;
+  color: black;
   border: none;
-  padding: 1em 2em;
-
-  &::focus {
-    outline: none;
-    border: none;
-  }
+  padding-top: 15px;
+  font-size: 20px;
+  font-family: ${appFont.MEDIUM};
 `;
 
 const SearchInput = styled.div`
@@ -88,7 +88,12 @@ const SearchInput = styled.div`
     background: #f5f5f5 0% 0% no-repeat padding-box !important;
     box-shadow: 0px 3px 6px #0000001d !important;
     border-radius: 5px !important;
-}
+    font-family: ${appFont.LIGHTPOPPING};
+    font-size: 17px;
+
+    &:placeholder {
+      font-family: ${appFont.LIGHTPOPPING};
+    }
   }
 `;
 
@@ -170,14 +175,15 @@ const AddAnalysis = (props) => {
   const [all_stages, setAllStages] = useState({});
   const [show_start, setShowStart] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [show_reviewBtn, setShowReviewBtn] = useState(true);
 
   const stages = [
-    { value: 1, label: "one" },
-    { value: 2, label: "two" },
-    { value: 3, label: "three" },
-    { value: 4, label: "four" },
-    { value: 5, label: "five" },
-    { value: 6, label: "six" },
+    { value: 1, label: "1" },
+    { value: 2, label: "2" },
+    { value: 3, label: "3" },
+    { value: 4, label: "4" },
+    { value: 5, label: "5" },
+    { value: 6, label: "6" },
   ];
 
   const department = [
@@ -193,17 +199,21 @@ const AddAnalysis = (props) => {
   const search_product = async (e) => {
     setInput(e.target.value);
 
-    let payload = {
-      name: e.target.value,
-    };
-    const status = await api.create("guest/search", payload);
-    if (status.status) {
-      setSearchResult(status.data);
-    } else {
-      if (status) {
-        console.log(status);
-        toast.error(status.message);
+    if (e.target.value.length > 2) {
+      let payload = {
+        name: e.target.value,
+      };
+      const status = await api.create("guest/search", payload);
+      if (status.status) {
+        setSearchResult(status.data);
+      } else {
+        if (status) {
+          console.log(status);
+          toast.error(status.message);
+        }
       }
+    } else {
+      setSearchResult(null);
     }
   };
 
@@ -264,6 +274,7 @@ const AddAnalysis = (props) => {
   const select_product = (data) => {
     setSearchResult(null);
     setProductId(data);
+    setInput(data.name);
   };
 
   const create_review = async () => {
@@ -278,6 +289,7 @@ const AddAnalysis = (props) => {
       toast("review created");
       setShowStages(true);
       setReviewId(status.data.id);
+      setShowReviewBtn(false);
       console.log(status);
       setLoading(false);
     } else {
@@ -382,8 +394,10 @@ const AddAnalysis = (props) => {
           </Section>
 
           <Section>
-            {total_stages && (
-              <Heading>{`${total_stages.length} Stages Review`}</Heading>
+            {total_stages.length > 0 && (
+              <Heading style={{ marginTop: "2em" }}>{`${total_stages.length} ${
+                total_stages.length === 1 ? "Stage" : "Stages"
+              } Review`}</Heading>
             )}
           </Section>
 
@@ -393,35 +407,39 @@ const AddAnalysis = (props) => {
                 total_stages.map((item, index) => {
                   return (
                     <AnalyzeSection>
-                      <SubHeading>Stage 1</SubHeading>
+                      <SubHeading>Stage {index + 1}</SubHeading>
                       <Select
                         options={department}
                         holder="Department"
                         getValue={(data) => fetchDepartment(index, data)}
                       />
                       <Arrow />
-                      <FlexWrap>
-                        <FlexItem flex="1">
-                          <Adduser>Add User</Adduser>
-                        </FlexItem>
-                        <FlexItem flex="6">
-                          <MultipleSelect
-                            index={index}
-                            group_selection={fetchSelected}
-                          />
-                        </FlexItem>
-                      </FlexWrap>
+                      <div className="pad_bottom">
+                        <FlexWrap>
+                          <FlexItem flex="1">
+                            <AdduserCaption>Add User</AdduserCaption>
+                          </FlexItem>
+                          <FlexItem flex="6">
+                            <MultipleSelect
+                              index={index}
+                              group_selection={fetchSelected}
+                            />
+                          </FlexItem>
+                        </FlexWrap>
+                      </div>
                     </AnalyzeSection>
                   );
                 })}
-              <div className="pad_top">
-                {!show_start && (
-                  <BtnAdd click={create_stages}>Add Stages</BtnAdd>
-                )}
-                {show_start && (
-                  <BtnAdd click={start_review}>Start Review</BtnAdd>
-                )}
-              </div>
+              <Section>
+                <div className="pad_top">
+                  {!show_start && (
+                    <BtnAdd click={create_stages}>Add Stages</BtnAdd>
+                  )}
+                  {show_start && (
+                    <BtnAdd click={start_review}>Start Review</BtnAdd>
+                  )}
+                </div>
+              </Section>
             </>
           )}
         </Wrapper>

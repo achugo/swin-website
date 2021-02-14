@@ -56,6 +56,21 @@ const CompanyButton = styled.button`
   }
 `;
 
+const CompanyProfilee = styled.div`
+  display: block;
+
+  span {
+    float: right;
+    color: #3f9aff;
+    font-family: ${appFont.ITALICS};
+    position: relative;
+    top: 15px;
+    text-decoration: underline;
+    right: 25px;
+    cursor: pointer;
+  }
+`;
+
 const EvaluateButton = styled.button`
   margin-left: 20px;
   min-width: 160px;
@@ -155,6 +170,13 @@ const AboutSoftware = (props) => {
                     <Evaluate />
                   </EvaluateButton>
                 </div>
+                <CompanyProfilee>
+                  <span
+                    onClick={() => props.history.push("/dashboard/company")}
+                  >
+                    Company Profile
+                  </span>
+                </CompanyProfilee>
               </div>
               <div className="thirteen wide column">
                 <Description>{props.data.tech_description}</Description>

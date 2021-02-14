@@ -20,7 +20,7 @@ import DynamicVideo from "../../components/video-carousel/DynamicVideoCarousel";
 import DynamicSoftwareOptions from "../../components/SoftwareOptions/DynamicOptions";
 import { appFont } from "../../appTheme/appFont";
 import { LoaderSpinner } from "../auth/register/form/LoginForm";
-import evaluate_url from "../../img-assets/eval.svg";
+import evaluate_url from "../../img-assets/eval.png";
 import Modal from "react-responsive-modal";
 import Evaluation from "../../components/modals/Evaluation";
 
@@ -30,9 +30,17 @@ const Wrapper = styled.div`
   .floating_icon {
     position: fixed;
     right: 10vw;
-    bottom: 10vh;
+    bottom: 12vh;
+    cursor: pointer;
     img {
       max-width: 120px;
+    }
+    span {
+      display: block;
+      font-size: 20px;
+      font-family: ${appFont.MEDIUM};
+      margin: 0px auto;
+      text-align: center;
     }
   }
 `;
@@ -144,8 +152,9 @@ const EvaluateProduct = (props) => {
           </>
         )}
 
-        <div className="floating_icon">
+        <div className="floating_icon" onClick={onOpenModal}>
           <img src={evaluate_url} alt="chat icon" />
+          <span>Evaluate</span>
         </div>
       </Wrapper>
     </Main>

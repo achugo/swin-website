@@ -44,10 +44,10 @@ const CompanyPage = () => {
       <Main>
         <Gutter>
           <section style={{ display: "flex", justifyContent: "flex-end" }}>
-            <EditButton onClick={onOpenModal}>
+            {/* <EditButton onClick={onOpenModal}>
               Edit Company
               <Icon name="edit" style={{ marginLeft: "0.5rem" }} />
-            </EditButton>
+            </EditButton> */}
           </section>
         </Gutter>
         <MainDashboardContainer>

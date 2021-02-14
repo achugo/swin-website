@@ -37,7 +37,7 @@ const Section = styled.section`
 const ProductContainer = styled.div`
   background: transparent;
   margin: 2em 0;
-  padding: 1em;
+  padding: 1em 0;
 
   & div {
     text-align: left;
@@ -152,30 +152,29 @@ const EvaluationSummary = () => {
             {loading && <LoaderSpinner />}
             {!loading && review_details && (
               <>
-                <ProductContainer>
-                  <FlexWrap>
-                    <FlexItem flex={1}>
-                      <Name>
-                        <Img src={product_url} alt="product img" />
-                      </Name>
-                    </FlexItem>
-                    <FlexItem flex={2}>
-                      <Stages>
-                        <h2>{review_details.name}</h2>
-                        {/* <span>
+                {review_details.product && (
+                  <ProductContainer>
+                    <FlexWrap>
+                      <FlexItem flex={1}></FlexItem>
+                      <FlexItem flex={2}>
+                        <Stages>
+                          <h2>{review_details.product.name}</h2>
+                          {/* <span>
                           Marketing analytics And consulting solutions{" "}
                         </span>
                         <h6>Ongoing</h6> */}
-                      </Stages>
-                    </FlexItem>
-                    <FlexItem flex={4}>
-                      <Status>
-                        <h1>{review_details.stages}</h1>
-                        <span>stages</span>
-                      </Status>
-                    </FlexItem>
-                  </FlexWrap>
-                </ProductContainer>
+                        </Stages>
+                      </FlexItem>
+                      <FlexItem flex={4}>
+                        <Status>
+                          <h1>{review_details.stages}</h1>
+                          <span>stages</span>
+                        </Status>
+                      </FlexItem>
+                    </FlexWrap>
+                  </ProductContainer>
+                )}
+
                 <div class="ui active progress" data-percent="74">
                   <div class="bar">
                     <div class="progress"></div>
@@ -205,9 +204,11 @@ const EvaluationSummary = () => {
                     {item.reviewers.map((data) => (
                       <Product>
                         <FlexWrap>
-                          <FlexItem flex={4}>Name</FlexItem>
-                          <FlexItem flex={2}>Role</FlexItem>
-                          <FlexItem flex={2}>Status</FlexItem>
+                          <FlexItem
+                            flex={4}
+                          >{`${data.user.first_name} ${data.user.last_name}`}</FlexItem>
+                          <FlexItem flex={2}>Sales Officer</FlexItem>
+                          <FlexItem flex={2}>{data.review}</FlexItem>
                           <FlexItem flex={2}>Date Completed</FlexItem>
                           <FlexItem flex={2}>
                             {data.ratings === null

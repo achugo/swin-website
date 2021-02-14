@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { appColors } from "../../appTheme/appTheme";
 import api from "../../api/api";
 import { toast } from "react-toastify";
+import { appFont } from "../../appTheme/appFont";
 
 const Wrapper = styled.div`
   background-color: ${appColors.WHITE};
@@ -11,6 +12,25 @@ const Wrapper = styled.div`
 
   .search-wrapper {
     border: none;
+
+    .chip {
+      color: #434343;
+      background: white;
+      border: 1px solid #434343;
+      border-radius: 25px;
+      padding: 0.5em 0.8em;
+
+      i {
+        font-size: 18px;
+      }
+
+      .optionContainer {
+        li {
+          font-size: 17px;
+          font-family: ${appFont.LIGHTPOPPING};
+        }
+      }
+    }
   }
 `;
 

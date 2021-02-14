@@ -13,10 +13,20 @@ import { appColors } from "../../appTheme/appTheme";
 import { LoaderSpinner } from "../auth/register/form/LoginForm";
 import { toast } from "react-toastify";
 import api from "../../api/api";
+import Modal from "react-responsive-modal";
+import RequestAccess from "../../components/modals/RequestAccess";
+import Evaluation from "../../components/modals/Evaluation";
 
 const Wrapper = styled.div`
   text-align: center;
   padding: 2em 1em;
+
+  .open {
+    cursor: pointer !important;
+  }
+  .restricted {
+    cursor: not-allowed !important;
+  }
 `;
 
 const Heading = styled.h5`
@@ -36,7 +46,6 @@ const Product = styled.div`
   border-radius: 10px;
   margin: 2em 0;
   padding: 2em 1em;
-  cursor: pointer;
 
   & div {
     text-align: left;
@@ -183,6 +192,9 @@ const CollateralContent = (props) => {
   const [loading, setLoading] = useState(false);
   const [collateral_data, setCollateralData] = useState([]);
   const [product_data, setProductData] = useState("");
+  const onOpenModal = () => setOpen(true);
+  const [open, setOpen] = useState(false);
+  const onCloseModal = () => setOpen(false);
 
   const match = useRouteMatch();
   useEffect(() => {
@@ -230,8 +242,17 @@ const CollateralContent = (props) => {
     let dx = new Date(data);
     return dx.toUTCString();
   };
+
+  const file_open = (data, request) => {
+    if (request) {
+      window.open(data);
+    }
+  };
   return (
     <Main>
+      <Modal open={open} onClose={onCloseModal} center>
+        <RequestAccess />
+      </Modal>
       <MiniNav>
         {product_data &&
           product_data.file_categories.map((item) => (
@@ -262,7 +283,12 @@ const CollateralContent = (props) => {
                 <>
                   {collateral_data.length > 0 &&
                     collateral_data.map((item) => (
-                      <Product onClick={() => window.open(item.file)}>
+                      <Product
+                        className={
+                          item.access === "restricted" ? "restricted" : "open"
+                        }
+                        onClick={() => file_open(item.file)}
+                      >
                         <FlexWrap>
                           <FlexItem flex={1}>
                             {/* <IconWrapper style={{ backgroundColor: "#31C7BE" }}>
@@ -295,7 +321,9 @@ const CollateralContent = (props) => {
                               </Span>
 
                               {item.access !== "open" && (
-                                <ReqButton>Request access</ReqButton>
+                                <ReqButton onClick={onOpenModal}>
+                                  Request access
+                                </ReqButton>
                               )}
                             </FlexDist>
                           </FlexItem>

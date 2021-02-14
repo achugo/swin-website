@@ -8,6 +8,9 @@ import CustomDropdown from "../dropdown/Dropdown";
 import { ReactComponent as Eval } from "../../img-assets/eval.svg";
 import { ReactComponent as IconEdit } from "../../img-assets/icon-edit.svg";
 import { ReactComponent as Functionality } from "../../img-assets/functionality.svg";
+import { ReactComponent as Support } from "../../img-assets/support.svg";
+import { ReactComponent as Ux } from "../../img-assets/ux.svg";
+import { ReactComponent as Fitness } from "../../img-assets/fitness.svg";
 import { ReactComponent as Percent } from "../../img-assets/percent.svg";
 import {
   LoaderSpinner,
@@ -61,7 +64,7 @@ const InputField = styled.input`
   box-sizing: border-box;
   width: 100%;
   padding: 1em 4em 1em 1em;
-  margin: 1.5em 0;
+  margin: 0.1em 0;
   font-size: 15px;
   font-family: ${appFont.LIGHTPOPPING};
   outline: none;
@@ -79,13 +82,23 @@ const InputField = styled.input`
 `;
 
 const Content = styled.div`
-  margin-top: 1.7em;
+  margin-top: 0.7em;
   svg {
     max-width: 25px;
   }
   span {
     position: relative;
     bottom: 7px;
+    font-family: ${appFont.LIGHTPOPPING};
+    padding-left: 20px;
+    font-size: 16px;
+  }
+
+  span.support {
+    position: relative;
+    display: inline-block;
+    bottom: 35px;
+    left: 20px;
     font-family: ${appFont.LIGHTPOPPING};
     padding-left: 20px;
     font-size: 16px;
@@ -152,7 +165,7 @@ export const BtnAdd = styled.button`
   }
 `;
 
-const Evaluation = ({ triggerClose }) => {
+const Evaluation = ({ triggerClose, history }) => {
   const [loading, setLoading] = useState(false);
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
@@ -174,6 +187,7 @@ const Evaluation = ({ triggerClose }) => {
     if (status.status) {
       setLoading(false);
       toast.success(status.message);
+      history.push("/dashboard/analyze");
       triggerClose();
     } else {
       setLoading(false);
@@ -221,14 +235,54 @@ const Evaluation = ({ triggerClose }) => {
           </div>
         </div>
 
+        <div className="ui two column grid">
+          <div className="seven wide column">
+            <Content>
+              <Ux />
+              <span>User Experience</span>
+            </Content>
+          </div>
+          <div className="nine wide column">
+            <WrapInput>
+              <InputField type="number" required placeholder="0" />
+              <Percent style={{ top: "4px" }} />
+            </WrapInput>
+          </div>
+        </div>
+        <div className="ui two column grid">
+          <div className="seven wide column">
+            <Content>
+              <Fitness />
+              <span className="fitness">Fitness for Purpose</span>
+            </Content>
+          </div>
+          <div className="nine wide column">
+            <WrapInput>
+              <InputField type="number" required placeholder="0" />
+              <Percent style={{ top: "4px" }} />
+            </WrapInput>
+          </div>
+        </div>
+
+        <div className="ui two column grid">
+          <div className="seven wide column">
+            <Content>
+              <Support />
+              <span className="support">Support and Customer Service</span>
+            </Content>
+          </div>
+          <div className="nine wide column">
+            <WrapInput>
+              <InputField type="number" required placeholder="0" />
+              <Percent style={{ top: "4px" }} />
+            </WrapInput>
+          </div>
+        </div>
+
         <div className="ui grid">
           <div className="sixteen wide column">
             <WrapInput>
-              <TextField
-                required
-                placeholder="Leave comment"
-                onChange={(e) => handleReviewChange(e)}
-              />
+              <TextField required placeholder="Leave comment" />
             </WrapInput>
           </div>
         </div>
