@@ -97,6 +97,11 @@ const Stages = styled.div`
     font-size: 18px;
     font-family: ${appFont.LIGHTPOPPING};
   }
+  h3.green {
+    color: #73af6e;
+    font-family: ${appFont.ITALICS};
+    font-weight: lighter;
+  }
 `;
 
 const Status = styled.div`
@@ -142,7 +147,12 @@ const EvaluationSummary = () => {
     }
   };
 
-  console.log("deets", review_details);
+  const formatDate = (data) => {
+    let format = new Date(data);
+    return format.toLocaleDateString();
+  };
+
+  //2021-02-14T17:07:45.000000Z
   return (
     <Main>
       <Wrapper>
@@ -155,14 +165,21 @@ const EvaluationSummary = () => {
                 {review_details.product && (
                   <ProductContainer>
                     <FlexWrap>
-                      <FlexItem flex={1}></FlexItem>
+                      <FlexItem flex={1}>
+                        <Name>
+                          <Img
+                            src={review_details.product.logo}
+                            alt="product img"
+                          />
+                        </Name>
+                      </FlexItem>
                       <FlexItem flex={2}>
                         <Stages>
                           <h2>{review_details.product.name}</h2>
-                          {/* <span>
-                          Marketing analytics And consulting solutions{" "}
-                        </span>
-                        <h6>Ongoing</h6> */}
+                          <span>
+                            Marketing analytics And consulting solutions
+                          </span>
+                          <h3 className="green">Ongoing</h3>
                         </Stages>
                       </FlexItem>
                       <FlexItem flex={4}>
@@ -208,8 +225,14 @@ const EvaluationSummary = () => {
                             flex={4}
                           >{`${data.user.first_name} ${data.user.last_name}`}</FlexItem>
                           <FlexItem flex={2}>Sales Officer</FlexItem>
-                          <FlexItem flex={2}>{data.review}</FlexItem>
-                          <FlexItem flex={2}>Date Completed</FlexItem>
+                          <FlexItem flex={2}>
+                            {data.review !== null ? "completed" : "pending"}
+                          </FlexItem>
+                          <FlexItem flex={2}>
+                            {data.review !== null
+                              ? formatDate(data.updated_at)
+                              : ""}
+                          </FlexItem>
                           <FlexItem flex={2}>
                             {data.ratings === null
                               ? "0%"

@@ -56,21 +56,21 @@ const CompanyPage = () => {
           <Gutter bottom={15}>
             <Description>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque ante leo, aliquam et felis sed, egestas posuere
-                augue. Etiam commodo est eget est tincidunt feugiat Lorem ipsum
-                dolor sit amet, consectetur adipiscing elit. Pellentesque ante
-                leo, aliquam et felis sed, egestas posuere augue. Etiam commodo
-                est eget est tincidunt feugiat
+                Linda Rosencrance Software is a set of instructions, data or
+                programs used to operate computers and execute specific tasks.
+                Opposite of hardware, which describes the physical aspects of a
+                computer, software is a generic term used to refer to
+                applications, scripts and programs that run on a device.
               </p>
 
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque ante leo, aliquam et felis sed, egestas posuere
-                augue. Etiam commodo est eget est tincidunt feugiat Lorem ipsum
-                dolor sit amet, consectetur adipiscing elit. Pellentesque ante
-                leo, aliquam et felis sed, egestas posuere augue. Etiam commodo
-                est eget est tincidunt feugiat
+                Software can be thought of as the variable part of a computer,
+                and hardware the invariable part. Software is often divided into
+                categories. Application software refers to user-downloaded
+                programs that fulfill a want or need. Examples of applications
+                include office suites, database programs, web browsers, word
+                processors, software development tools, image editors and
+                communication platforms.
               </p>
             </Description>
           </Gutter>

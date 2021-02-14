@@ -287,7 +287,7 @@ const CollateralContent = (props) => {
                         className={
                           item.access === "restricted" ? "restricted" : "open"
                         }
-                        onClick={() => file_open(item.file)}
+                        onClick={() => file_open(item.file, item.can_request)}
                       >
                         <FlexWrap>
                           <FlexItem flex={1}>

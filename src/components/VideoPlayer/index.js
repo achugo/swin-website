@@ -1,5 +1,5 @@
 import React from "react";
-import video1 from "../../video_assets/iPaySuite-Payroll-Solution.webm";
+import video1 from "../../video_assets/dummy.mp4";
 import poster from "../../img-assets/video_background.svg";
 import VideoBackground from "../StyledComponents/VideoBackground";
 import "./styles.css";

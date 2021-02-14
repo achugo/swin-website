@@ -5,7 +5,7 @@ import { Grid, Container } from "semantic-ui-react";
 import testingImg from "../../img-assets/website (1).svg";
 import styled from "styled-components";
 import bg_image from "../../img-assets/slick-bg.png";
-import video2 from "../../video_assets/iPaySuite_payroll_solution.mp4";
+import video2 from "../../video_assets/dummy.mp4";
 import ImageCarousel from "../../components/ImageCarousel";
 import VideoPlayer from "../../components/VideoPlayer";
 import SoftwareOptions from "../../components/SoftwareOptions";

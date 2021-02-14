@@ -282,7 +282,11 @@ const Evaluation = ({ triggerClose, history }) => {
         <div className="ui grid">
           <div className="sixteen wide column">
             <WrapInput>
-              <TextField required placeholder="Leave comment" />
+              <TextField
+                required
+                onChange={handleReviewChange}
+                placeholder="Leave comment"
+              />
             </WrapInput>
           </div>
         </div>
