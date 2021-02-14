@@ -151,6 +151,11 @@ const Notifications = (props) => {
     props.history.push(`/dashboard/product-evaluation/${data}`);
   };
 
+  const formatDate = (data) => {
+    let dx = new Date(data);
+    return dx.toLocaleDateString();
+  };
+
   console.log("notifications", notification_list);
   return (
     <Main>
@@ -178,25 +183,30 @@ const Notifications = (props) => {
                   >
                     <FlexWrap>
                       <FlexItem flex={1}>
-                        <IconWrapper style={{ backgroundColor: "#31C7BE" }}>
-                          <Lock />
+                        <IconWrapper style={{ backgroundColor: "#41A0FF" }}>
+                          <Analytics />
                         </IconWrapper>
                       </FlexItem>
                       <FlexItem flex={5}>
                         <NotifyContent>
-                          <h4>{notification.type.substr(18)}</h4>
+                          <h4>
+                            {/* {notification.type.substr(18)}{" "} */}
+                            {JSON.parse(notification.data)[0].details.action}
+                          </h4>
                           <span>
-                            Swin Solutions is requesting access to view your IND
-                            presentations
+                            {
+                              JSON.parse(notification.data)[0].details
+                                .mail_subject
+                            }
                           </span>
                         </NotifyContent>
                       </FlexItem>
                       <FlexItem flex={2}>
-                        <Date>99/90/23</Date>
-                        <ButtonContainer>
+                        {/* <Date>{formatDate(notification.created_at)}</Date> */}
+                        {/* <ButtonContainer>
                           <AcessButton>Give access</AcessButton>
                           <RejectButton>Don't give</RejectButton>
-                        </ButtonContainer>
+                        </ButtonContainer> */}
                       </FlexItem>
                     </FlexWrap>
                   </Product>

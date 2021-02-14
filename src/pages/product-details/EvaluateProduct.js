@@ -20,6 +20,22 @@ import DynamicVideo from "../../components/video-carousel/DynamicVideoCarousel";
 import DynamicSoftwareOptions from "../../components/SoftwareOptions/DynamicOptions";
 import { appFont } from "../../appTheme/appFont";
 import { LoaderSpinner } from "../auth/register/form/LoginForm";
+import evaluate_url from "../../img-assets/eval.svg";
+import Modal from "react-responsive-modal";
+import Evaluation from "../../components/modals/Evaluation";
+
+const Wrapper = styled.div`
+  position: relative;
+
+  .floating_icon {
+    position: fixed;
+    right: 10vw;
+    bottom: 10vh;
+    img {
+      max-width: 120px;
+    }
+  }
+`;
 
 const MiniNav = styled.div`
   padding: 0em 1rem;
@@ -48,6 +64,9 @@ const Center = styled.div`
 `;
 
 const EvaluateProduct = (props) => {
+  const onOpenModal = () => setOpen(true);
+  const [open, setOpen] = useState(false);
+  const onCloseModal = () => setOpen(false);
   const [product_data, setProductData] = useState("");
   const [loading, setLoading] = useState(false);
   const match = useRouteMatch();
@@ -73,48 +92,62 @@ const EvaluateProduct = (props) => {
   };
   return (
     <Main>
-      <ToastContainer />
-      {loading && (
-        <Center>
-          <LoaderSpinner />
-        </Center>
-      )}
-      {!loading && (
-        <>
-          <MiniNav>
-            {product_data &&
-              product_data.file_categories.map((item) => (
-                <span
-                  onClick={() =>
-                    props.history.push(
-                      `/dashboard/product/${match.params.id}/${item.category}`
-                    )
-                  }
-                >
-                  {item.category}
-                </span>
-              ))}
-          </MiniNav>
-          <MainDashboardContainer>
-            <AboutSoftware data={product_data} />
-            <Gutter>
-              <h3>Videos</h3>
-              <DynamicVideo data={product_data.assets} />
-            </Gutter>
-            <Gutter>
-              <h3>Images</h3>
-              <ImageCarousel data={product_data.assets} />
-            </Gutter>
-            <Gutter>
-              <h3>Digital Collateral</h3>
-              <DigitalCollateral collateral={product_data.file_categories} />
-            </Gutter>
-            <Gutter>
-              <DynamicSoftwareOptions options_={product_data.specifications} />
-            </Gutter>
-          </MainDashboardContainer>
-        </>
-      )}
+      <Modal open={open} onClose={onCloseModal} center>
+        <Evaluation triggerClose={onCloseModal} />
+      </Modal>
+      <Wrapper>
+        <ToastContainer />
+        {loading && (
+          <Center>
+            <LoaderSpinner />
+          </Center>
+        )}
+        {!loading && (
+          <>
+            <MiniNav>
+              {product_data &&
+                product_data.file_categories.map((item) => (
+                  <span
+                    onClick={() =>
+                      props.history.push(
+                        `/dashboard/product/${match.params.id}/${item.category}`
+                      )
+                    }
+                  >
+                    {item.category}
+                  </span>
+                ))}
+            </MiniNav>
+            <MainDashboardContainer>
+              <AboutSoftware data={product_data} />
+              <Gutter>
+                <h3>Videos</h3>
+                <DynamicVideo data={product_data.assets} />
+              </Gutter>
+              <Gutter>
+                <h3>Images</h3>
+                <ImageCarousel data={product_data.assets} />
+              </Gutter>
+              <Gutter>
+                <h3>Digital Collateral</h3>
+                <DigitalCollateral
+                  collateral={product_data.file_categories}
+                  id={match.params.id}
+                />
+              </Gutter>
+              <Gutter>
+                <DynamicSoftwareOptions
+                  options_={product_data.specifications}
+                />
+              </Gutter>
+            </MainDashboardContainer>
+          </>
+        )}
+
+        <div className="floating_icon">
+          <img src={evaluate_url} alt="chat icon" />
+        </div>
+      </Wrapper>
     </Main>
   );
 };

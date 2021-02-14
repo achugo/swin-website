@@ -48,6 +48,7 @@ const CompanyButton = styled.button`
     padding-right: 10px;
     font-family: ${appFont.MEDIUM};
     font-size: 13px;
+    bottom: 5px;
   }
   svg {
     max-width: 15px;
@@ -96,19 +97,13 @@ const CustomButton = () => {
 };
 const AboutSoftware = (props) => {
   const match = useRouteMatch();
-  const [open, setOpen] = useState(false);
+
   const [open_sales, setOpenSales] = useState(false);
-  const onOpenModal = () => setOpen(true);
-  const onCloseModal = () => setOpen(false);
   const onOpenSalesModal = () => setOpenSales(true);
   const onCloseSalesModal = () => setOpenSales(false);
 
   return (
     <Wrapper>
-      <Modal open={open} onClose={onCloseModal} center>
-        <Evaluation triggerClose={onCloseModal} />
-      </Modal>
-
       <Modal open={open_sales} onClose={onCloseSalesModal} center>
         <SalesModal triggerClose={onCloseSalesModal} />
       </Modal>
@@ -150,14 +145,15 @@ const AboutSoftware = (props) => {
                 >
                   <CompanyButton onClick={onOpenSalesModal}>
                     <span>Sales Manager</span>
-                    {/* <CompanyProfile /> */}
+                    <CompanyProfile />
                   </CompanyButton>
-                  {match.path === "/dashboard/product-evaluation/:id" && (
-                    <EvaluateButton onClick={onOpenModal}>
-                      <span>Analyze</span>
-                      <Evaluate />
-                    </EvaluateButton>
-                  )}
+
+                  <EvaluateButton
+                    onClick={() => props.history.push("/dashboard/analyze")}
+                  >
+                    <span>Evaluate</span>
+                    <Evaluate />
+                  </EvaluateButton>
                 </div>
               </div>
               <div className="thirteen wide column">

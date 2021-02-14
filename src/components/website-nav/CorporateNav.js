@@ -73,7 +73,7 @@ const CorporateNav = (props) => {
       <div className={`nav corporate__nav`}>
         <div className="nav__content">
           <DashboardSearch />
-          <SoftwareButton onClick={() => props.history.push("/softwares")}>
+          <SoftwareButton onClick={() => props.history.push("/dashboard")}>
             Softwares
           </SoftwareButton>
           <div

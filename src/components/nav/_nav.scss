@@ -380,7 +380,8 @@ $primary-color: #1187b3;
       padding: 0.5em 1em;
       outline: none;
       border: none;
-
+      position: relative;
+      top: 3px;
       span {
         color: white;
         position: relative;
@@ -400,7 +401,7 @@ $primary-color: #1187b3;
       span {
         color: white;
         position: relative;
-        bottom: 4px;
+        bottom: 3px;
       }
     }
 
@@ -703,6 +704,8 @@ $primary-color: #1187b3;
           margin-bottom: 5px;
         }
         .sign__up {
+          position: relative;
+
           background-color: #1187b3;
           color: white;
           outline: none;
@@ -768,11 +771,13 @@ $primary-color: #1187b3;
   .wrap__search {
     float: left !important;
     display: inline-block;
-    width: 70% !important;
+    width: 73% !important;
     bottom: 0 !important;
+    max-height: 42px;
 
     input {
       padding: 1.2em 1.5em;
+      max-height: 42px;
     }
 
     button {

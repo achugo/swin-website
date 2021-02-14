@@ -19,8 +19,8 @@
 }
 
 @font-face {
-  font-family: "SF Pro Bold";
-  src: url("../fonts/SFProDisplay-Bold.ttf");
+  font-family: "Poppins Bold";
+  src: url("../fonts/Poppins-Bold.ttf");
 }
 
 @font-face {
@@ -301,7 +301,7 @@
 }
 
 .dashboard__search .wrap__search input {
-  width: 70%;
+  width: 80%;
   padding: 0.8em 1.5em;
   border: none;
   border-radius: 10px 0px 0px 10px;
@@ -315,7 +315,7 @@
   padding: 0.8em 1.5em;
   outline: none;
   border: none;
-  background: transparent linear-gradient(108deg, #74e0ff 0%, #41a0ff 100%) 0% 0% no-repeat padding-box;
+  background-color: #00bbd5;
   font-family: "Poppins SemiBold";
   border-radius: 0px 10px 10px 0px;
   position: relative;
@@ -763,6 +763,8 @@ button:disabled {
   padding: 0.5em 1em;
   outline: none;
   border: none;
+  position: relative;
+  top: 3px;
 }
 
 .nav .f-right .sign-up span {
@@ -785,7 +787,7 @@ button:disabled {
 .nav .f-right .sign-in span {
   color: white;
   position: relative;
-  bottom: 4px;
+  bottom: 3px;
 }
 
 .nav .f-right span {
@@ -1134,6 +1136,7 @@ button:disabled {
     margin-bottom: 5px;
   }
   .nav .mobilenav .bottom__mobile__nav .sign__up {
+    position: relative;
     background-color: #1187b3;
     color: white;
     outline: none;
@@ -1193,12 +1196,14 @@ button:disabled {
 .user .wrap__search {
   float: left !important;
   display: inline-block;
-  width: 70% !important;
+  width: 73% !important;
   bottom: 0 !important;
+  max-height: 42px;
 }
 
 .user .wrap__search input {
   padding: 1.2em 1.5em;
+  max-height: 42px;
 }
 
 .user .wrap__search button {

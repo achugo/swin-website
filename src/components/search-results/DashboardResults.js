@@ -34,10 +34,11 @@ const HeaderSection = styled.div`
   margin: 2em 0;
 `;
 
-const Heading = styled.h3`
+const Heading = styled.h2`
   color: #070a13;
-  font-family: ${appFont.LIGHTPOPPING};
+  font-family: ${appFont.MEDIUM};
   display: inline;
+  padding-left: 7px;
 `;
 
 const Count = styled.span`
@@ -79,16 +80,18 @@ const Rating = styled.div`
     margin-right: 3px;
   }
 `;
-
 const ProductName = styled.h3`
   color: black;
-  font-family: ${appFont.BOLD};
+  font-family: ${appFont.MEDIUM};
   margin-bottom: 5px;
   margin-top: 15px;
 `;
 
 const Category = styled.span`
   position: relative;
+  margin-bottom: 10px;
+  display: block;
+  font-family: ${appFont.LIGHTPOPPING};
 `;
 
 const Center = styled.div`

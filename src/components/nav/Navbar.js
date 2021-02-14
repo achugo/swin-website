@@ -58,7 +58,7 @@ const Navigation = (props) => {
 
             <span className="pad__right0">
               <button onClick={() => goTo("/register")} className="sign-up">
-                <span>Sign UP</span>
+                <span>Sign Up</span>
                 <SignUpIcon />
               </button>
             </span>

@@ -19,8 +19,8 @@
 }
 
 @font-face {
-  font-family: "SF Pro Bold";
-  src: url("../fonts/SFProDisplay-Bold.ttf");
+  font-family: "Poppins Bold";
+  src: url("../fonts/Poppins-Bold.ttf");
 }
 @font-face {
   font-family: "Poppins Italics";
@@ -29,7 +29,8 @@
 
 $LIGHT-POPPING: "Poppins Light";
 $SEMIBOLD-POPPING: "Poppins SemiBold";
-$BOLD: "SF Pro Bold";
+$BOLD: "Poppins Bold";
 $REGULAR: "Poppins Regular";
-$LIGHT: "SF Pro Light";
+$LIGHT: "Poppins Light";
 $ITALICS: "Poppins Italics";
+$MEDIUM: "Poppins MEDIUM";

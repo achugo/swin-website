@@ -7,7 +7,7 @@
     bottom: 20px;
     width: 100%;
     input {
-      width: 70%;
+      width: 80%;
       padding: 0.8em 1.5em;
       border: none;
       border-radius: 10px 0px 0px 10px;
@@ -20,8 +20,7 @@
       padding: 0.8em 1.5em;
       outline: none;
       border: none;
-      background: transparent linear-gradient(108deg, #74e0ff 0%, #41a0ff 100%)
-        0% 0% no-repeat padding-box;
+      background-color: #00bbd5;
       font-family: $SEMIBOLD-POPPING;
       border-radius: 0px 10px 10px 0px;
       &:focus {

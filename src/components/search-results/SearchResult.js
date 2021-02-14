@@ -35,7 +35,7 @@ const HeaderSection = styled.div`
 
 const Heading = styled.h2`
   color: #070a13;
-  font-family: ${appFont.BOLD};
+  font-family: ${appFont.MEDIUM};
   display: inline;
   padding-left: 7px;
 `;
@@ -81,7 +81,7 @@ const Rating = styled.div`
 
 const ProductName = styled.h3`
   color: black;
-  font-family: ${appFont.BOLD};
+  font-family: ${appFont.MEDIUM};
   margin-bottom: 5px;
   margin-top: 15px;
 `;
@@ -90,6 +90,7 @@ const Category = styled.span`
   position: relative;
   margin-bottom: 10px;
   display: block;
+  font-family: ${appFont.LIGHTPOPPING};
 `;
 
 const Center = styled.div`
