@@ -22,14 +22,14 @@ const Product = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  height: 15px;
+  height: 100px;
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
 
   img {
-    max-width: 50px;
+    max-width: 70px;
   }
 
   svg {
@@ -55,7 +55,11 @@ const NotifyContent = styled.div`
 `;
 
 const WrapSearch = styled.div`
-  position: relative;
+  position: absolute;
+  top: 100px;
+  /* z-index: 990; */
+  width: 50vw;
+  z-index: 990009090909;
   max-height: 350px;
   overflow: auto;
   background-color: #fbfbfb;
@@ -66,9 +70,8 @@ const WrapSearch = styled.div`
 `;
 
 const DashboardSearch = (props) => {
-  const [search_result, setSearchResult] = useState(null);
+  const [search_result, setSearchResult] = useState([]);
   const [search_input, setInput] = useState("");
-
   const select_product = (data) => {
     props.history.push(`/dashboard/product/${data.id}`);
     setSearchResult(null);
@@ -77,21 +80,25 @@ const DashboardSearch = (props) => {
   const search_product = async (e) => {
     setInput(e.target.value);
 
-    let payload = {
-      name: e.target.value,
-    };
-    const status = await api.create("guest/search", payload);
-    if (status.status) {
-      setSearchResult(status.data);
-    } else {
-      if (status) {
-        console.log(status);
+    if (e.target.value.length > 1) {
+      let payload = {
+        name: e.target.value,
+      };
+      const status = await api.create("guest/search", payload);
+      if (status.status) {
+        setSearchResult(status.data);
+      } else {
+        if (status) {
+          console.log(status);
+        }
       }
+    } else {
+      setSearchResult([]);
     }
   };
   return (
     <div className="dashboard__search">
-      <div className="wrap__search">
+      <div className="wrap__search" style={{ zIndex: 90 }}>
         <input
           type="text"
           placeholder="search"
@@ -103,31 +110,31 @@ const DashboardSearch = (props) => {
           <SearchIcon />
           <span>Search</span>
         </button>
-        {search_result && (
-          <WrapSearch>
-            <WrapInput>
-              {search_result.map((item) => (
-                <Product onClick={() => select_product(item)}>
-                  <FlexWrap>
-                    <FlexItem flex={1}>
-                      <IconWrapper>
-                        <img src="logo" alt="product" />
-                      </IconWrapper>
-                    </FlexItem>
-                    <FlexItem flex={5}>
-                      <NotifyContent>
-                        <h4>{item.name}</h4>
-                        <span>description</span>
-                      </NotifyContent>
-                    </FlexItem>
-                    <FlexItem flex={2}></FlexItem>
-                  </FlexWrap>
-                </Product>
-              ))}
-            </WrapInput>
-          </WrapSearch>
-        )}
       </div>
+      {search_result.length > 0 && (
+        <WrapSearch>
+          <WrapInput>
+            {search_result.map((item) => (
+              <Product onClick={() => select_product(item)}>
+                <FlexWrap>
+                  <FlexItem flex={1}>
+                    <IconWrapper>
+                      <img src={item.logo} alt="product" />
+                    </IconWrapper>
+                  </FlexItem>
+                  <FlexItem flex={5}>
+                    <NotifyContent>
+                      <h4>{item.name}</h4>
+                      <span>description</span>
+                    </NotifyContent>
+                  </FlexItem>
+                  <FlexItem flex={2}></FlexItem>
+                </FlexWrap>
+              </Product>
+            ))}
+          </WrapInput>
+        </WrapSearch>
+      )}
     </div>
   );
 };

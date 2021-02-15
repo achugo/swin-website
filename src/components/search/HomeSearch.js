@@ -22,14 +22,14 @@ const Product = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  height: 15px;
+  height: 100;
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
 
   img {
-    max-width: 50px;
+    max-width: 70px;
   }
 
   svg {
@@ -66,7 +66,7 @@ const WrapSearch = styled.div`
 `;
 
 const HomeSearch = (props) => {
-  const [search_result, setSearchResult] = useState(null);
+  const [search_result, setSearchResult] = useState([]);
   const [search_input, setInput] = useState("");
 
   const select_product = (data) => {
@@ -103,7 +103,7 @@ const HomeSearch = (props) => {
           <SearchIcon />
           <span>Search</span>
         </button>
-        {search_result && (
+        {search_result.length > 0 && (
           <WrapSearch>
             <WrapInput>
               {search_result.map((item) => (
@@ -111,7 +111,7 @@ const HomeSearch = (props) => {
                   <FlexWrap>
                     <FlexItem flex={1}>
                       <IconWrapper>
-                        <img src="logo" alt="product" />
+                        <img src={item.logo} alt="product" />
                       </IconWrapper>
                     </FlexItem>
                     <FlexItem flex={5}>
