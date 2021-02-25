@@ -9,6 +9,7 @@ import { ReactComponent as Lock } from "../../img-assets/lock.svg";
 import { ReactComponent as Video } from "../../img-assets/video-collateral.svg";
 import { ReactComponent as Clock } from "../../img-assets/clock.svg";
 import product_url from "../../img-assets/dummy-img.png";
+import sap from "../../img-assets/sap.png";
 import { appColors } from "../../appTheme/appTheme";
 import { LoaderSpinner } from "../auth/register/form/LoginForm";
 import { toast } from "react-toastify";
@@ -16,6 +17,7 @@ import api from "../../api/api";
 import Modal from "react-responsive-modal";
 import RequestAccess from "../../components/modals/RequestAccess";
 import Evaluation from "../../components/modals/Evaluation";
+import BlogListing from "./BlogListing";
 
 const Wrapper = styled.div`
   text-align: center;
@@ -53,7 +55,8 @@ const Product = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  height: 130px;
+  height: 150px;
+  width: 85%;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -61,6 +64,9 @@ const IconWrapper = styled.div`
 
   svg {
     max-height: 25px;
+  }
+  img {
+    width: 100%;
   }
 `;
 
@@ -167,7 +173,7 @@ const MiniNav = styled.div`
   padding: 0em 4rem;
 
   span {
-    margin: 0px 2em;
+    margin: 0px 0.3em;
     position: relative;
     bottom: 14px;
     padding: 1em;
@@ -243,8 +249,8 @@ const CollateralContent = (props) => {
     return dx.toUTCString();
   };
 
-  const file_open = (data, request) => {
-    if (request) {
+  const file_open = (data, access) => {
+    if (access === "open") {
       window.open(data);
     }
   };
@@ -277,7 +283,7 @@ const CollateralContent = (props) => {
               <LoaderSpinner />
             </Center>
           )}
-          {!loading && (
+          {!loading && match.params.collateral !== "Blog" && (
             <>
               <Section>
                 <>
@@ -287,7 +293,7 @@ const CollateralContent = (props) => {
                         className={
                           item.access === "restricted" ? "restricted" : "open"
                         }
-                        onClick={() => file_open(item.file, item.can_request)}
+                        onClick={() => file_open(item.file, item.access)}
                       >
                         <FlexWrap>
                           <FlexItem flex={1}>
@@ -295,11 +301,25 @@ const CollateralContent = (props) => {
                             <Lock />
                           </IconWrapper> */}
                             {item.access === "open" && (
-                              <IconWrapper
-                                style={{ backgroundColor: "#00BBD5" }}
-                              >
-                                <Video />
-                              </IconWrapper>
+                              <>
+                                {item.type === "image/png" && (
+                                  <IconWrapper
+                                  // style={{ backgroundColor: "#00BBD5" }}
+                                  >
+                                    <img src={item.file} alt="preview" />
+                                  </IconWrapper>
+                                )}
+                                {item.type !== "image/png" && (
+                                  <IconWrapper
+                                    style={{
+                                      backgroundImage: `url(${sap})`,
+                                      backgroundSize: "cover",
+                                    }}
+                                  >
+                                    <Video />
+                                  </IconWrapper>
+                                )}
+                              </>
                             )}
                             {item.access === "restricted" && (
                               <IconWrapper
@@ -330,48 +350,11 @@ const CollateralContent = (props) => {
                         </FlexWrap>
                       </Product>
                     ))}
-
-                  {/* <Product>
-                    <FlexWrap>
-                      <FlexItem flex={1}>
-                        <IconWrapper style={{ backgroundColor: "#00BBD5" }}>
-                          <Tick />
-                        </IconWrapper>
-                      </FlexItem>
-                      <FlexItem flex={5}>
-                        <NotifyContent>
-                          <h4>Complete App Profile </h4>
-                          <span>
-                            Complete your profile to help buyers Make the choice
-                            to buy your app faster
-                          </span>
-                        </NotifyContent>
-                      </FlexItem>
-                    </FlexWrap>
-                  </Product>
-
-                  <Product>
-                    <FlexWrap>
-                      <FlexItem flex={1}>
-                        <IconWrapper style={{ backgroundColor: "#41A0FF" }}>
-                          <Analytics />
-                        </IconWrapper>
-                      </FlexItem>
-                      <FlexItem flex={5}>
-                        <NotifyContent>
-                          <h4>Ongoing Analysis </h4>
-                          <span>
-                            Your app is currently being analyzed by Swin
-                            Solutions
-                          </span>
-                        </NotifyContent>
-                      </FlexItem>
-                    </FlexWrap>
-                  </Product> */}
                 </>
               </Section>
             </>
           )}
+          {!loading && match.params.collateral === "Blog" && <BlogListing />}
         </>
       </Wrapper>
     </Main>

@@ -49,7 +49,7 @@ const MiniNav = styled.div`
   padding: 0em 1rem;
 
   span {
-    margin: 0px 2em;
+    margin: 0px 0.3em;
     position: relative;
     bottom: 14px;
     padding: 1em;

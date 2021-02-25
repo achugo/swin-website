@@ -140,11 +140,7 @@ const MySoftware = (props) => {
                 {software_list.length > 0 ? (
                   software_list.map((data) => {
                     return (
-                      <Product
-                        onClick={() =>
-                          props.history.push(`/dashboard/product/${data.id}`)
-                        }
-                      >
+                      <Product>
                         <FlexWrap>
                           <FlexItem flex={1}>
                             <IconWrapper>
@@ -152,15 +148,30 @@ const MySoftware = (props) => {
                             </IconWrapper>
                           </FlexItem>
                           <FlexItem flex={5}>
-                            <NotifyContent>
+                            <NotifyContent
+                              onClick={() =>
+                                props.history.push(
+                                  `/dashboard/product/${data.id}`
+                                )
+                              }
+                            >
                               <h4>{data.name}</h4>
-                              <span>{data.description}</span>
+                              <span>{`${data.description.substr(
+                                0,
+                                150
+                              )}...`}</span>
                             </NotifyContent>
                           </FlexItem>
                           <FlexItem flex={2}>
                             <ButtonContainer>
                               <IconWrapper>
-                                <EditIcon />
+                                <EditIcon
+                                  onClick={() =>
+                                    props.history.push(
+                                      `/dashboard/product-update/${data.id}`
+                                    )
+                                  }
+                                />
                                 <DeleteIcon />
                               </IconWrapper>
                             </ButtonContainer>

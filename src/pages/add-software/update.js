@@ -40,7 +40,7 @@ const Center = styled.div`
   justify-content: center;
 `;
 
-const SoftwareDetailsScreen = (props) => {
+const UpdateSoftware = (props) => {
   const [product_data, setProductData] = useState("");
   const match = useRouteMatch();
   const [loading, setLoading] = useState(false);
@@ -120,4 +120,4 @@ const SoftwareDetailsScreen = (props) => {
   );
 };
 
-export default withRouter(SoftwareDetailsScreen);
+export default withRouter(UpdateSoftware);

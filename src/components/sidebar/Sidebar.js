@@ -31,6 +31,9 @@ import CompanyUsers from "../../pages/company-users/Companyusers";
 import EvaluateProduct from "../../pages/product-details/EvaluateProduct";
 import CollateralContent from "../../pages/product-details/CollateralContent";
 import CorporateWebsite from "../../pages/corporate-website/CorporateWebsite";
+import BlogListing from "../../pages/product-details/BlogListing";
+import Blogpage from "../../pages/product-details/Blogpage";
+import update from "../../pages/add-software/update";
 
 const Sidebar = (props) => {
   const [active_link, setActiveLink] = useState(0);
@@ -123,6 +126,9 @@ const Sidebar = (props) => {
           path="/dashboard/product/:id"
           component={SoftwareDetails1}
         />
+        <Route exact path="/dashboard/product-update/:id" component={update} />
+        <Route exact path="/dashboard/blog" component={BlogListing} />
+        <Route exact path="/dashboard/post" component={Blogpage} />
         <Route
           path="/dashboard/product/:id/:collateral"
           component={CollateralContent}

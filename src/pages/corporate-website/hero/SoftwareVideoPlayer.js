@@ -1,6 +1,7 @@
 import React from "react";
 import video1 from "../../../video_assets/dummy.mp4";
 import poster from "../../../img-assets/video_background.svg";
+import play from "../../../img-assets/play.png";
 import indlogo from "../../../img-assets/indlogo.png";
 import VideoBackground from "../../../components/StyledComponents/VideoBackground";
 import styled from "styled-components";
@@ -71,6 +72,17 @@ const Bottomspan = styled.div`
   }
 `;
 
+const Center = styled.div`
+  display: flex;
+  height: 45vh;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100px;
+  }
+`;
+
 const SoftwareVideoPlayer = ({ video = video1, videoPoster = poster }) => {
   return (
     <Wrapper>
@@ -84,9 +96,10 @@ const SoftwareVideoPlayer = ({ video = video1, videoPoster = poster }) => {
           Top 1 in marketing
           <br />
         </Span>
-        <Div>
-          <i className="fa fa-play-circle-o play" aria-hidden="true"></i>
-        </Div>
+        <Center>
+          <img src={play} alt="play button" />
+          {/* <i className="fa fa-play-circle-o play" aria-hidden="true"></i> */}
+        </Center>
         <Bottomspan>
           <div className="logo_side">
             <img src={indlogo} alt="company logo" />

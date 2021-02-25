@@ -6,6 +6,7 @@ import FlexWrap from "../flex/FlexWrap";
 import product_image from "../../img-assets/dummy1.svg";
 import { ReactComponent as ActiveStar } from "../../img-assets/star-active.svg";
 import { ReactComponent as InActiveStar } from "../../img-assets/inactive-star.svg";
+import { ReactComponent as Like } from "../../img-assets/like-btn.svg";
 import { appColors } from "../../appTheme/appTheme";
 import bg_image from "../../img-assets/slick-bg.png";
 import Loader from "react-loader-spinner";
@@ -62,6 +63,7 @@ const SearchItem = styled.div`
 
 const ProductImage = styled.img`
   /* height: 170px; */
+  height: 170px;
   display: block;
   width: 100%;
 `;
@@ -69,6 +71,7 @@ const ProductImage = styled.img`
 const ProductDescription = styled.div`
   position: relative;
   padding: 0.7em 1.5em;
+  min-height: 143px;
 `;
 
 const Rating = styled.div`
@@ -76,6 +79,23 @@ const Rating = styled.div`
 
   svg {
     margin-right: 3px;
+  }
+`;
+
+const LikeSection = styled.div`
+  svg {
+    max-width: 17px;
+    position: relative;
+    top: 3px;
+  }
+  span {
+    display: inline-block;
+    padding-left: 7px;
+    position: relative;
+    bottom: 2px;
+    font-size: 12px;
+    color: #070a13;
+    font-family: ${appFont.REGULAR};
   }
 `;
 
@@ -129,7 +149,7 @@ const SearchResult = (props) => {
     const status = await api.get(`guest/products/`);
     if (status.status) {
       setLoading(false);
-      setProducts(status.data);
+      setProducts(status);
     } else {
       if (status) {
         setLoading(false);
@@ -158,23 +178,34 @@ const SearchResult = (props) => {
             <StyledResults>
               <div class="ui grid five column grid">
                 {products &&
-                  products.length > 0 &&
-                  products.splice(0, 5).map((item) => (
+                  products.data.length > 0 &&
+                  products.data.slice(0, 5).map((item) => (
                     <div className="column">
                       <SearchItem
                         onClick={() =>
                           props.history.push(`/softwares/${item.id}`)
                         }
                       >
-                        <ProductImage src={product_image} alt="product image" />
+                        <ProductImage src={item.logo} alt="product image" />
                         <ProductDescription>
-                          <Rating>
-                            <ActiveStar />
-                            <ActiveStar />
-                            <ActiveStar />
-                            <ActiveStar />
-                            <InActiveStar />
-                          </Rating>
+                          <FlexWrap>
+                            <FlexItem flex={4}>
+                              <Rating>
+                                <ActiveStar />
+                                <ActiveStar />
+                                <ActiveStar />
+                                <ActiveStar />
+                                <InActiveStar />
+                              </Rating>
+                            </FlexItem>
+                            <FlexItem item={1}>
+                              <LikeSection>
+                                <Like />
+                                <span>978</span>
+                              </LikeSection>
+                            </FlexItem>
+                          </FlexWrap>
+
                           <ProductName>{item.name}</ProductName>
                           <Category>{item.category}</Category>
                         </ProductDescription>
@@ -187,32 +218,43 @@ const SearchResult = (props) => {
 
           <Wrapper>
             <HeaderSection>
-              <Heading>New in your field</Heading>
+              <Heading>Newly Added Fields</Heading>
               <SeeMore>See More</SeeMore>
               {/* <Count>53 Softwares</Count> */}
             </HeaderSection>
             <StyledResults>
               <div class="ui grid five column grid">
                 {products &&
-                  products.length > 0 &&
-                  products.splice(0, 5).map((item) => (
+                  products.data.length > 0 &&
+                  products.data.slice(5, 10).map((item) => (
                     <div className="column">
                       <SearchItem
                         onClick={() =>
                           props.history.push(`/softwares/${item.id}`)
                         }
                       >
-                        <ProductImage src={product_image} alt="product image" />
+                        <ProductImage src={item.logo} alt="product image" />
                         <ProductDescription>
-                          <Rating>
-                            <ActiveStar />
-                            <ActiveStar />
-                            <ActiveStar />
-                            <ActiveStar />
-                            <InActiveStar />
-                          </Rating>
+                          <FlexWrap>
+                            <FlexItem flex={4}>
+                              <Rating>
+                                <ActiveStar />
+                                <ActiveStar />
+                                <ActiveStar />
+                                <ActiveStar />
+                                <InActiveStar />
+                              </Rating>
+                            </FlexItem>
+                            <FlexItem item={1}>
+                              <LikeSection>
+                                <Like />
+                                <span>978</span>
+                              </LikeSection>
+                            </FlexItem>
+                          </FlexWrap>
+
                           <ProductName>{item.name}</ProductName>
-                          <Category>{item.tech_description}</Category>
+                          <Category>{item.category}</Category>
                         </ProductDescription>
                       </SearchItem>
                     </div>

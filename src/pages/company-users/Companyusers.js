@@ -124,6 +124,8 @@ const CompanyUsers = () => {
     }
   };
 
+  console.log("user data", user_data);
+
   function handlePageClick({ selected: selectedPage }) {
     setCurrentPage(selectedPage);
   }

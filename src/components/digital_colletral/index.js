@@ -1,11 +1,13 @@
 import React from "react";
 import demo from "../../img-assets/demo.svg";
-import blog from "../../img-assets/blogs.svg";
 import presentation from "../../img-assets/presentations.svg";
 import webinars from "../../img-assets/webinar.svg";
-import podcast from "../../img-assets/podcast-collateral.svg";
+import podcast from "../../img-assets/podcast.svg";
 import tutorials from "../../img-assets/tutorials.svg";
+import new_ from "../../img-assets/whats_new.svg";
 import brochure from "../../img-assets/brochure.svg";
+import blog from "../../img-assets/Blog.svg";
+import references from "../../img-assets/references.svg";
 import "./style.css";
 import styled from "styled-components";
 import { useRouteMatch, withRouter } from "react-router-dom";
@@ -24,8 +26,8 @@ const DigitalCollateral = ({ collateral, id, history }) => {
     if (data === "Demo") {
       return demo;
     }
-    if (data === "Blog") {
-      return blog;
+    if (data === "Whats' New") {
+      return new_;
     }
     if (data === "Presentations") {
       return presentation;
@@ -42,13 +44,19 @@ const DigitalCollateral = ({ collateral, id, history }) => {
     if (data === "Banners/Fliers") {
       return brochure;
     }
+    if (data === "Blog") {
+      return blog;
+    }
+    if (data === "References") {
+      return references;
+    }
   };
 
   return (
-    <div className="ui stackable grid">
+    <div className="ui four column grid stackable">
       {collateral &&
         collateral.map((item) => (
-          <div className="four wide column">
+          <div className="column">
             <CollateralCard
               onClick={() =>
                 history.push(

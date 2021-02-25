@@ -74,7 +74,7 @@ const DashboardSearch = (props) => {
   const [search_input, setInput] = useState("");
   const select_product = (data) => {
     props.history.push(`/dashboard/product/${data.id}`);
-    setSearchResult(null);
+    setSearchResult([]);
   };
 
   const search_product = async (e) => {
@@ -82,7 +82,7 @@ const DashboardSearch = (props) => {
 
     if (e.target.value.length > 1) {
       let payload = {
-        name: e.target.value,
+        category: e.target.value,
       };
       const status = await api.create("guest/search", payload);
       if (status.status) {

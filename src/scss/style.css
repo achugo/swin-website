@@ -56,6 +56,10 @@
   border: none;
 }
 
+.right_align {
+  text-align: right !important;
+}
+
 .corporate__nav {
   height: 100px;
   padding-top: 1.5em;

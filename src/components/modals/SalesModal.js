@@ -164,6 +164,10 @@ const SalesModal = ({ triggerClose }) => {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
 
+  const [user_role, setUserRole] = useState(null);
+  const country = ["Nigeria", "South Africa", "Ghana"];
+  const continent = ["Africa", "Europe", "Asia"];
+
   const match = useRouteMatch();
 
   const review_product = async (e) => {
@@ -192,8 +196,8 @@ const SalesModal = ({ triggerClose }) => {
     setReview(e.target.value);
   };
 
-  const handleRatingChange = (e) => {
-    setRating(e.target.value);
+  const fetchSelectValue = (data) => {
+    setUserRole(data);
   };
 
   return (
@@ -203,6 +207,22 @@ const SalesModal = ({ triggerClose }) => {
         <span>Sales Manager</span>
         {/* <IconEdit className="edit" /> */}
       </Heading>
+
+      <WrapInput>
+        <Select
+          holder="Select Region"
+          options={continent}
+          getValue={fetchSelectValue}
+        />
+      </WrapInput>
+
+      <WrapInput style={{ marginTop: "2em", marginBottom: "2em" }}>
+        <Select
+          holder="Select Country"
+          options={country}
+          getValue={fetchSelectValue}
+        />
+      </WrapInput>
 
       <Details>
         <div className="ui grid">
@@ -214,7 +234,7 @@ const SalesModal = ({ triggerClose }) => {
           <div className="twelve wide column">
             <Content>
               <h5>Elizabeth Channing</h5>
-              <span>Nigeria</span>
+              {user_role && <span>{user_role.value}</span>}
 
               <div className="pad_top">
                 <div>

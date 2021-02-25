@@ -67,7 +67,7 @@ const Product = styled.div`
   box-shadow: 0px 3px 20px #0000001c;
   border-radius: 10px;
   margin: 2em 0;
-  padding: 0.5em 1em;
+  padding: 1em 1em;
 
   & div {
     text-align: left;
@@ -212,10 +212,10 @@ const Analyze = (props) => {
                         )
                       }
                     >
-                      <Img src={product_url} alt="product img" />
+                      <Img src={item.product.logo} alt="product img" />
                       <Desc>
-                        <h3>{item.name}</h3>
-                        <span>Marketing Analytics</span>
+                        <h3>{item.product.name}</h3>
+                        <span>Oil and Gas</span>
                       </Desc>
                     </Name>
                   </FlexItem>

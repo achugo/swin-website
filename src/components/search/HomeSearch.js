@@ -71,14 +71,14 @@ const HomeSearch = (props) => {
 
   const select_product = (data) => {
     props.history.push(`/softwares/${data.id}`);
-    setSearchResult(null);
+    setSearchResult([]);
   };
 
   const search_product = async (e) => {
     setInput(e.target.value);
 
     let payload = {
-      name: e.target.value,
+      category: e.target.value,
     };
     const status = await api.create("guest/search", payload);
     if (status.status) {

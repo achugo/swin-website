@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { appFont } from "../../appTheme/appFont";
 import FlexItem from "../flex/FlexItem";
 import FlexWrap from "../flex/FlexWrap";
-import product_image from "../../img-assets/product-image.png";
+import { ReactComponent as Like } from "../../img-assets/like-btn.svg";
 import { ReactComponent as ActiveStar } from "../../img-assets/star-active.svg";
 import { ReactComponent as InActiveStar } from "../../img-assets/inactive-star.svg";
 import { appColors } from "../../appTheme/appTheme";
@@ -71,6 +71,41 @@ const ProductImage = styled.img`
 const ProductDescription = styled.div`
   position: relative;
   padding: 0.7em 1.5em;
+  min-height: 143px;
+`;
+
+const LikeSection = styled.div`
+  svg {
+    max-width: 17px;
+    position: relative;
+    top: 3px;
+  }
+  span {
+    display: inline-block;
+    padding-left: 7px;
+    position: relative;
+    bottom: 2px;
+    font-size: 12px;
+    color: #070a13;
+    font-family: ${appFont.REGULAR};
+  }
+`;
+
+const SeeMore = styled.button`
+  background-color: #3f9aff !important;
+  color: white !important;
+  font-size: 17px;
+  border-radius: 10px;
+  font-family: ${appFont.MEDIUM};
+  padding: 0.5em 2.2em;
+  outline: none;
+  float: right;
+  border: none;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
 `;
 
 const Rating = styled.div`
@@ -80,7 +115,7 @@ const Rating = styled.div`
     margin-right: 3px;
   }
 `;
-const ProductName = styled.h3`
+const ProductName = styled.h4`
   color: black;
   font-family: ${appFont.MEDIUM};
   margin-bottom: 5px;
@@ -132,40 +167,99 @@ const DashboardResults = (props) => {
         </Center>
       )}
       {!loading && (
-        <Wrapper>
-          <HeaderSection>
-            <Heading>See Results for "Tech Solutions"</Heading>
-            <Count>53 Softwares</Count>
-          </HeaderSection>
-          <StyledResults>
-            <div class="ui grid five column grid">
-              {products &&
-                products.length > 0 &&
-                products.map((item) => (
-                  <div className="column">
-                    <SearchItem
-                      onClick={() =>
-                        props.history.push(`/dashboard/product/${item.id}`)
-                      }
-                    >
-                      <ProductImage src={item.logo} alt="product image" />
-                      <ProductDescription>
-                        <Rating>
-                          <ActiveStar />
-                          <ActiveStar />
-                          <ActiveStar />
-                          <ActiveStar />
-                          <InActiveStar />
-                        </Rating>
-                        <ProductName>{item.name}</ProductName>
-                        <Category>{item.category}</Category>
-                      </ProductDescription>
-                    </SearchItem>
-                  </div>
-                ))}
-            </div>
-          </StyledResults>
-        </Wrapper>
+        <>
+          <Wrapper>
+            <HeaderSection>
+              <Heading>Suggested for you</Heading>
+              <SeeMore>See More</SeeMore>
+            </HeaderSection>
+            <StyledResults>
+              <div class="ui grid five column grid stackable">
+                {products &&
+                  products.length > 0 &&
+                  products.slice(0, 5).map((item) => (
+                    <div className="column">
+                      <SearchItem
+                        onClick={() =>
+                          props.history.push(`/dashboard/product/${item.id}`)
+                        }
+                      >
+                        <ProductImage src={item.logo} alt="product image" />
+                        <ProductDescription>
+                          <FlexWrap>
+                            <FlexItem flex={4}>
+                              <Rating>
+                                <ActiveStar />
+                                <ActiveStar />
+                                <ActiveStar />
+                                <ActiveStar />
+                                <InActiveStar />
+                              </Rating>
+                            </FlexItem>
+                            <FlexItem item={1}>
+                              <LikeSection>
+                                <Like />
+                                <span>978</span>
+                              </LikeSection>
+                            </FlexItem>
+                          </FlexWrap>
+
+                          <ProductName>{item.name}</ProductName>
+                          <Category>{item.category}</Category>
+                        </ProductDescription>
+                      </SearchItem>
+                    </div>
+                  ))}
+              </div>
+            </StyledResults>
+          </Wrapper>
+
+          <Wrapper>
+            <HeaderSection>
+              <Heading>Newly Added Fields</Heading>
+              <SeeMore>See More</SeeMore>
+            </HeaderSection>
+            <StyledResults>
+              <div class="ui grid five column grid stackable">
+                {products &&
+                  products.length > 0 &&
+                  products.slice(5, 10).map((item) => (
+                    <div className="column">
+                      <SearchItem
+                        onClick={() =>
+                          props.history.push(`/dashboard/product/${item.id}`)
+                        }
+                      >
+                        <ProductImage src={item.logo} alt="product image" />
+                        <ProductDescription>
+                          <FlexWrap>
+                            <FlexItem flex={4}>
+                              <Rating>
+                                <ActiveStar />
+                                <ActiveStar />
+                                <ActiveStar />
+                                <ActiveStar />
+                                <InActiveStar />
+                              </Rating>
+                            </FlexItem>
+                            <FlexItem item={1}>
+                              <LikeSection>
+                                <Like />
+                                <span>978</span>
+                              </LikeSection>
+                            </FlexItem>
+                          </FlexWrap>
+
+                          <ProductName>{item.name}</ProductName>
+                          <Category>{item.category}</Category>
+                        </ProductDescription>
+                      </SearchItem>
+                    </div>
+                  ))}
+              </div>
+            </StyledResults>
+          </Wrapper>
+        </>
       )}
     </Container>
   );

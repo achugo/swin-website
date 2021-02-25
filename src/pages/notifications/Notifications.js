@@ -146,9 +146,14 @@ const Notifications = (props) => {
     }
   };
 
-  const goTo = (data) => {
-    console.log("data", data);
-    props.history.push(`/dashboard/product-evaluation/${data}`);
+  const goTo = (data, type) => {
+    console.log("data", data, type);
+    if (type === "Check Product") {
+      props.history.push(`/dashboard/product-evaluation/${data}`);
+    }
+    if (type === "Review") {
+      props.history.push(`/dashboard/analyze`);
+    }
   };
 
   const formatDate = (data) => {
@@ -177,7 +182,8 @@ const Notifications = (props) => {
                         JSON.parse(notification.data)[0].details.link.substring(
                           JSON.parse(notification.data)[0].details.link.length -
                             36
-                        )
+                        ),
+                        JSON.parse(notification.data)[0].details.action
                       )
                     }
                   >

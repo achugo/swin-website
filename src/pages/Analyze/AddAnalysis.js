@@ -187,8 +187,10 @@ const AddAnalysis = (props) => {
   ];
 
   const department = [
-    { value: "Sales", label: "Sales" },
-    { value: "Admin", label: "Admin" },
+    { value: "End User", label: "End User" },
+    { value: "IT", label: "IT" },
+    { value: "Finance", label: "Finance" },
+    { value: "Management", label: "Mangement" },
   ];
 
   const fetchStages = (data) => {

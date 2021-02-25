@@ -30,6 +30,7 @@ const HeroVedeoPlayer = ({ video = video1, videoPoster = poster }) => {
         {/* <i className="fa fa-play-circle-o play" aria-hidden="true"></i> */}
       </Center>
     </VideoBackground>
+    // <VideoBackground video={video1} videoPoster={videoPoster} />
   );
 };
 export default HeroVedeoPlayer;

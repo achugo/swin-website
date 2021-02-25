@@ -173,30 +173,68 @@ const AddDigitalCollateral = (props) => {
     { value: "Webinars", label: "Webinars" },
     { value: "Podcast", label: "Podcast" },
     { value: "Tutorials", label: "Tutorials" },
-    { value: "Blog", label: "Tutorials" },
+    { value: "Blog", label: "Blogs" },
     { value: "Whats' New", label: "What's New" },
+    { value: "References", label: "References" },
   ];
 
   const add_collateral = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const payload = {
-      product_id: localStorage.getItem("product_id"),
-      file: url_base + file_url,
-      category: selected_category.value,
-      type: file_type,
-      title: title,
-      description: description,
-      access: access_type,
-    };
-    const status = await api.create("files", payload);
-    if (status.status) {
-      setLoading(false);
-      toast("Digital Collateral added");
-      props.close(selected_category.value);
+    if (selected_category.value === "Blog") {
+      const payload = {
+        product_id: localStorage.getItem("product_id"),
+        title: title,
+        post: description,
+        file: url_base + file_url,
+      };
+      const status = await api.create("posts", payload);
+      if (status.status) {
+        setLoading(false);
+        toast("Blog Post  added");
+        props.close(selected_category.value);
+      } else {
+        setLoading(false);
+        setError(status.message);
+      }
+
+      const payload_ = {
+        product_id: localStorage.getItem("product_id"),
+        file: url_base + file_url,
+        category: selected_category.value,
+        type: file_type,
+        title: title,
+        description: description,
+        access: access_type,
+      };
+      const status_ = await api.create("files", payload_);
+      if (status_.status) {
+        setLoading(false);
+        toast("Digital Collateral added");
+        props.close(selected_category.value);
+      } else {
+        setLoading(false);
+        setError(status.message);
+      }
     } else {
-      setLoading(false);
-      setError(status.message);
+      const payload = {
+        product_id: localStorage.getItem("product_id"),
+        file: url_base + file_url,
+        category: selected_category.value,
+        type: file_type,
+        title: title,
+        description: description,
+        access: access_type,
+      };
+      const status = await api.create("files", payload);
+      if (status.status) {
+        setLoading(false);
+        toast("Digital Collateral added");
+        props.close(selected_category.value);
+      } else {
+        setLoading(false);
+        setError(status.message);
+      }
     }
   };
 

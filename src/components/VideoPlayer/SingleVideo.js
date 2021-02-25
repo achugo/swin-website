@@ -1,5 +1,5 @@
 import React from "react";
-import poster from "../../img-assets/video-poster.png";
+import poster from "../../img-assets/pipepro_poster.png";
 import play from "../../img-assets/play.png";
 import VideoBackground from "../StyledComponents/VideoBackground";
 import "./styles.css";
@@ -25,7 +25,7 @@ const SingleVideo = ({ url, videoPoster = poster }) => {
         you
       </h4> */}
       <Center>
-        <img src={play} alt="play button" />
+        {/* <img src={play} alt="play button" /> */}
         {/* <i className="fa fa-play-circle-o play" aria-hidden="true"></i> */}
       </Center>
     </VideoBackground>
