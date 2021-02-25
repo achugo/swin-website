@@ -3,6 +3,7 @@ import testingImage from "../../img-assets/product-image.png";
 import { Button, Rating } from "semantic-ui-react";
 import Description from "../StyledComponents/DescriptionParagraph";
 import { ReactComponent as InActiveStar } from "../../img-assets/inactive-star.svg";
+import { ReactComponent as Likey } from "../../img-assets/like.svg";
 import { ReactComponent as ActiveStar } from "../../img-assets/star-active.svg";
 import { ReactComponent as CompanyProfile } from "../../img-assets/company-profile.svg";
 import { ReactComponent as Like } from "../../img-assets/like-btn.svg";
@@ -18,6 +19,7 @@ import FlexWrap from "../flex/FlexWrap";
 import RecommendSoftware from "../modals/Recommend";
 
 const Wrapper = styled.div`
+  padding-top: 40px;
   h3.heading {
     font-family: ${appFont.REGULAR};
   }
@@ -126,6 +128,34 @@ const Recommend = styled.button`
     padding-right: 10px;
     font-family: ${appFont.MEDIUM};
     font-size: 13px;
+  }
+`;
+
+const LikeButton = styled.button`
+  margin-left: 25px;
+  position: relative;
+
+  left: 20px;
+  margin-bottom: 30px;
+  background: transparent linear-gradient(107deg, #74e0ff 0%, #41a0ff 100%) 0%
+    0% no-repeat padding-box;
+  padding: 0.2em 0.8em;
+  border: none;
+  min-width: 160px;
+  border-radius: 5px;
+  span {
+    color: white;
+    position: relative;
+    padding-left: 10px;
+    font-family: ${appFont.MEDIUM};
+    font-size: 15px;
+    bottom: 7px;
+  }
+
+  svg {
+    max-width: 15px;
+    position: relative;
+    top: 3px;
   }
 `;
 
@@ -258,6 +288,10 @@ const AboutSoftware = (props) => {
               </div>
               <div className="six wide column ">
                 <section className="right_align">
+                  <LikeButton>
+                    <Likey />
+                    <span>Like</span>
+                  </LikeButton>
                   <div style={{ margin: "0.5rem 0" }}>
                     <Ratings>
                       <span style={{ marginRight: "1rem" }}>3.5</span>
