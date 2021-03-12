@@ -9,9 +9,9 @@ axios.defaults.headers.common = {
 };
 
 const base_url =
-  "https://fierce-shore-33740.herokuapp.com/http://swinserver-001-site1.ctempurl.com/api/";
+  "https://fierce-shore-33740.herokuapp.com/https://api.swinhub.com/api/";
 
-export const url_base = "http://swinserver-001-site1.ctempurl.com/";
+export const url_base = "https://api.swinhub.com/";
 
 const create = (url, newObject) => {
   return axios
