@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { appFont } from "../../appTheme/appFont";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,7 +9,10 @@ import { ReactComponent as ProfileIcon } from "../../img-assets/avatar-profile.s
 import { ReactComponent as IconEdit } from "../../img-assets/icon-edit.svg";
 import { ReactComponent as PhoneIcon } from "../../img-assets/phone-icon.svg";
 import { ReactComponent as MailIcon } from "../../img-assets/email.svg";
-import { WrapInput } from "../../pages/auth/register/form/LoginForm";
+import {
+  LoaderSpinner,
+  WrapInput,
+} from "../../pages/auth/register/form/LoginForm";
 import api from "../../api/api";
 import Select from "../dropdown/Select";
 
@@ -99,38 +102,82 @@ export const BtnAdd = styled.button`
   }
 `;
 
-const SelectRegion = ({ triggerClose }) => {
+const AddSalesManager = ({ triggerClose }) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [email, setEmail] = useState("");
+  const [users, setUsers] = useState([]);
+  const [user_payload, setUserPayload] = useState({});
+  const [user_region, setUserRegion] = useState("");
+  const [user_country, setUserCountry] = useState("");
+
   const [user_role, setUserRole] = useState(null);
 
   const continent = ["Africa", "Europe", "Asia"];
   const country = ["Nigeria", "South Africa", "Ghana"];
 
-  const update_profile = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const payload = [
-      {
-        email: email,
-        roles: [user_role.value],
-      },
-    ];
-    const status = await api.create("users", payload);
+  useEffect(() => {
+    list_users();
+  }, []);
+
+  const list_users = async (e) => {
+    const status = await api.get("users");
     if (status.status) {
-      setLoading(false);
-      toast.success("Invite sent out to new user");
-      triggerClose();
+      let elem = formatUsers(status.data);
+      setUsers(elem);
+      // triggerClose();
     } else {
       setLoading(false);
-      toast.error(status.message);
     }
   };
 
-  const fetchSelectValue = (data) => {
-    setUserRole(data);
+  const add_sales_mgr = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const payload = {
+      user_id: user_payload,
+      country: user_country,
+      region: user_region,
+    };
+    const status = await api.create("sales/add", payload);
+    if (status.status) {
+      toast("Sales manager added");
+      setLoading(false);
+    } else {
+      toast(status.data.message);
+    }
   };
+
+  const formatUsers = (list) => {
+    let instant_array = [];
+    let usr = [];
+    for (let i = 0; i < list.length; i++) {
+      if (!usr.includes(list[i].id)) {
+        instant_array.push({
+          text: list[i].first_name + " " + list[i].last_name,
+          value: list[i].id,
+          //text: list[i].name,
+        });
+        usr.push(list[i].name);
+      }
+    }
+    return instant_array;
+  };
+
+  const fetchSelectValueRegion = (data) => {
+    setUserRegion(data.value);
+    console.log(data);
+  };
+
+  const fetchSelectValueCountry = (data) => {
+    setUserCountry(data.value);
+    console.log(data);
+  };
+
+  const fetchSelectValueUser = (data) => {
+    setUserPayload(data);
+  };
+
+  console.log("userrrr", users);
 
   return (
     <Wrapper>
@@ -140,22 +187,33 @@ const SelectRegion = ({ triggerClose }) => {
         <IconEdit />
       </Heading>
 
-      <form onSubmit={update_profile}>
-        <WrapInput>
+      <form onSubmit={add_sales_mgr}>
+        <WrapInput style={{ marginBottom: 20 }}>
           <Select
             holder="Select Region"
             options={continent}
-            getValue={fetchSelectValue}
+            getValue={fetchSelectValueRegion}
           />
         </WrapInput>
 
-        <WrapInput>
+        <WrapInput style={{ marginBottom: 20 }}>
           <Select
             holder="Select Country"
             options={country}
-            getValue={fetchSelectValue}
+            getValue={fetchSelectValueCountry}
           />
         </WrapInput>
+
+        <WrapInput style={{ marginBottom: 20 }}>
+          {users && (
+            <CustomDropdown
+              holder="Add Managers"
+              options={users}
+              getCode={fetchSelectValueUser}
+            />
+          )}
+        </WrapInput>
+        {loading && <LoaderSpinner />}
 
         <AddButton>Enter</AddButton>
       </form>
@@ -163,4 +221,4 @@ const SelectRegion = ({ triggerClose }) => {
   );
 };
 
-export default SelectRegion;
+export default AddSalesManager;

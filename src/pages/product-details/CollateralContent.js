@@ -212,7 +212,7 @@ const CollateralContent = (props) => {
     get_collateral_data();
   }, [match.params.collateral]);
 
-  console.log("colat", collateral_data);
+  console.log("colat", match);
 
   const get_product_data = async () => {
     const status = await api.get(`products/${match.params.id}`);

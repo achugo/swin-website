@@ -14,6 +14,8 @@ import auto from "../../img-assets/auto-analyze.png";
 import v8 from "../../img-assets/v8.png";
 import sap from "../../img-assets/sap_int.png";
 import simple from "../../img-assets/simple_work.png";
+import { LoaderSpinner } from "../auth/register/form/LoginForm";
+import api from "../../api/api";
 
 const Wrapper = styled.div`
   text-align: center;
@@ -124,81 +126,146 @@ min-height: 430px;
 `;
 
 const BlogListing = (props) => {
+  const [loading, setLoading] = useState(false);
+  const [blog_list, setBlogLists] = useState(null);
+  const match = useRouteMatch();
+
+  useEffect(() => {
+    get_blog_posts();
+  }, []);
+
+  const get_blog_posts = async () => {
+    setLoading(true);
+    const payload = {
+      product_id: match.params.id,
+    };
+    const status = await api.get(`posts`, payload);
+
+    if (status.status) {
+      setLoading(false);
+      setBlogLists(status.data);
+    } else {
+      setLoading(false);
+      if (status) {
+        console.log("error");
+      }
+    }
+  };
   return (
     <>
-      <Section>
-        <>
-          <div className="ui three column grid stackable">
-            <div className="column">
-              <Box onClick={() => props.history.push("/dashboard/post")}>
-                <img src={product_url} alt="product url" />
-                <h2>The PipePRO story </h2>
-                <span>
-                  On investigation, the “terms and conditions” may include
-                  “Offer only applies to residents of Alaska”, and so a listener
-                  in New York can’t actually get a half-price widget at all.
-                </span>
-              </Box>
-            </div>
-            <div className="column">
-              <Box>
-                <img src={simple} alt="product url" />
-                <h2>Simple Work Flows for PipePRO</h2>
-                <span>
-                  On investigation, the “terms and conditions” may include
-                  “Offer only applies to residents of Alaska”, and so a listener
-                  in New York can’t actually get a half-price widget at all.
-                </span>
-              </Box>
-            </div>
-            <div className="column">
-              <Box>
-                <img src={auto} alt="product url" />
-                <h2>Running Auto-Analyze </h2>
-                <span>
-                  On investigation, the “terms and conditions” may include
-                  “Offer only applies to residents of Alaska”, and so a listener
-                  in New York can’t actually get a half-price widget at all.
-                </span>
-              </Box>
-            </div>
+      {!loading && (
+        <Section>
+          <>
+            <div className="ui three column grid stackable">
+              {blog_list &&
+                blog_list.map((item) => (
+                  <div className="column">
+                    <Box
+                      onClick={() =>
+                        props.history.push(
+                          `/dashboard/product/${match.params.id}/post/${item.id}`
+                        )
+                      }
+                    >
+                      <img src={product_url} alt="product url" />
+                      <h2>The PipePRO story </h2>
+                      <span>
+                        On investigation, the “terms and conditions” may include
+                        “Offer only applies to residents of Alaska”, and so a
+                        listener in New York can’t actually get a half-price
+                        widget at all.
+                      </span>
+                    </Box>
+                  </div>
+                ))}
+              <div className="column">
+                <Box
+                  onClick={() =>
+                    props.history.push(
+                      `/dashboard/product/${match.params.id}/post/pipepro-story`
+                    )
+                  }
+                >
+                  <img src={product_url} alt="product url" />
+                  <h2>The PipePRO story </h2>
+                  <span>
+                    On investigation, the “terms and conditions” may include
+                    “Offer only applies to residents of Alaska”, and so a
+                    listener in New York can’t actually get a half-price widget
+                    at all.
+                  </span>
+                </Box>
+              </div>
+              <div className="column">
+                <Box>
+                  <img src={simple} alt="product url" />
+                  <h2>Simple Work Flows for PipePRO</h2>
+                  <span>
+                    On investigation, the “terms and conditions” may include
+                    “Offer only applies to residents of Alaska”, and so a
+                    listener in New York can’t actually get a half-price widget
+                    at all.
+                  </span>
+                </Box>
+              </div>
+              <div className="column">
+                <Box>
+                  <img src={auto} alt="product url" />
+                  <h2>Running Auto-Analyze </h2>
+                  <span>
+                    On investigation, the “terms and conditions” may include
+                    “Offer only applies to residents of Alaska”, and so a
+                    listener in New York can’t actually get a half-price widget
+                    at all.
+                  </span>
+                </Box>
+              </div>
 
-            <div className="column">
-              <Box>
-                <img src={define} alt="product url" />
-                <h2>Defining Data Points </h2>
-                <span>
-                  On investigation, the “terms and conditions” may include
-                  “Offer only applies to residents of Alaska”, and so a listener
-                  in New York can’t actually get a half-price widget at all.
-                </span>
-              </Box>
+              <div className="column">
+                <Box>
+                  <img src={define} alt="product url" />
+                  <h2>Defining Data Points </h2>
+                  <span>
+                    On investigation, the “terms and conditions” may include
+                    “Offer only applies to residents of Alaska”, and so a
+                    listener in New York can’t actually get a half-price widget
+                    at all.
+                  </span>
+                </Box>
+              </div>
+              <div className="column">
+                <Box>
+                  <img src={sap} alt="product url" />
+                  <h2>SAP Integration </h2>
+                  <span>
+                    On investigation, the “terms and conditions” may include
+                    “Offer only applies to residents of Alaska”, and so a
+                    listener in New York can’t actually get a half-price widget
+                    at all.
+                  </span>
+                </Box>
+              </div>
+              <div className="column">
+                <Box>
+                  <img src={v8} alt="product url" />
+                  <h2>PipePRO V8.4</h2>
+                  <span>
+                    On investigation, the “terms and conditions” may include
+                    “Offer only applies to residents of Alaska”, and so a
+                    listener in New York can’t actually get a half-price widget
+                    at all.
+                  </span>
+                </Box>
+              </div>
             </div>
-            <div className="column">
-              <Box>
-                <img src={sap} alt="product url" />
-                <h2>SAP Integration </h2>
-                <span>
-                  On investigation, the “terms and conditions” may include
-                  “Offer only applies to residents of Alaska”, and so a listener
-                  in New York can’t actually get a half-price widget at all.
-                </span>
-              </Box>
-            </div>
-            <div className="column">
-              <Box>
-                <img src={v8} alt="product url" />
-                <h2>PipePRO V8.4</h2>
-                <span>
-                  On investigation, the “terms and conditions” may include
-                  “Offer only applies to residents of Alaska”, and so a listener
-                  in New York can’t actually get a half-price widget at all.
-                </span>
-              </Box>
-            </div>
-          </div>
-        </>
-      </Section>
+          </>
+        </Section>
+      )}
+      {loading && (
+        <Section>
+          <LoaderSpinner />
+        </Section>
+      )}
     </>
   );
 };

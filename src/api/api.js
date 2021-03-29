@@ -3,7 +3,7 @@ import axios from "axios";
 const token = localStorage.getItem("token");
 
 axios.defaults.headers.common = {
-  Authorization: `Bearer ${(token && token) || ""}`,
+  Authorization: `Bearer ${token || ""}`,
   "Content-Type": "application/json",
   Accept: "application/json",
 };
@@ -23,7 +23,7 @@ const create = (url, newObject) => {
       if (err.response) {
         return err.response.data;
       } else {
-        alert(err.message);
+        throw new Error(err.response.data.message);
       }
       //throw new Error(err.response.data.message);
     });
@@ -70,8 +70,11 @@ const get = (url, newObject) => {
     .catch((err) => {
       if (err.response) {
         return err.response.data;
+      } else if (err.request) {
+        return err.request;
       } else {
-        alert(err.message);
+        console.log(err);
+        //throw new Error(err.message);
       }
       //throw new Error(err.response.data.message);
     });

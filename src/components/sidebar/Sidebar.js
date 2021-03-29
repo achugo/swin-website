@@ -48,7 +48,7 @@ const Sidebar = (props) => {
     { name: "My software", url: "/dashboard/mysoftware" },
     { name: "Analyze", url: "/dashboard/analyze" },
     { name: "Nofitication", url: "/dashboard/notifications" },
-    { name: "Swin", url: "/about" },
+    // { name: "Swin", url: "/about" },
   ];
 
   return (
@@ -109,7 +109,7 @@ const Sidebar = (props) => {
 
                   {index === 3 && <>{index === 3 && <Notification />}</>}
 
-                  {index === 4 && <>{index === 4 && <Aboutus />}</>}
+                  {/* {index === 4 && <>{index === 4 && <Aboutus />}</>} */}
 
                   <span>{item.name}</span>
                 </div>
@@ -128,7 +128,11 @@ const Sidebar = (props) => {
         />
         <Route exact path="/dashboard/product-update/:id" component={update} />
         <Route exact path="/dashboard/blog" component={BlogListing} />
-        <Route exact path="/dashboard/post" component={Blogpage} />
+        <Route
+          exact
+          path="/dashboard/product/:id/post/:post"
+          component={Blogpage}
+        />
         <Route
           path="/dashboard/product/:id/:collateral"
           component={CollateralContent}

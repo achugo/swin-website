@@ -37,7 +37,7 @@ const CompanyName = styled.span`
   font-family: ${appFont.LIGHTPOPPING};
 `;
 
-const ReviewCard = () => {
+const ReviewCard = (props) => {
   return (
     <ReviewContainer>
       <div className="ui grid">
@@ -66,10 +66,17 @@ const ReviewCard = () => {
         <div className="one wide column"></div>
         <div className="thirteen wide column">
           <Description>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu
-            risus ut lorem elementum consectetur. Suspendisse laoreet eget felis
-            in interdum. Quisque neque sapien, eleifend id facilisis id,
-            ultrices viverra eros. Proin a neque in lectus ultrices egestas.
+            {props.comment ? (
+              props.comment
+            ) : (
+              <span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
+                eu risus ut lorem elementum consectetur. Suspendisse laoreet
+                eget felis in interdum. Quisque neque sapien, eleifend id
+                facilisis id, ultrices viverra eros. Proin a neque in lectus
+                ultrices egestas.
+              </span>
+            )}
           </Description>
         </div>
         <div className="two wide column"></div>

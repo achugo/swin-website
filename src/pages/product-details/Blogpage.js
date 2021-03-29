@@ -16,12 +16,13 @@ import sap from "../../img-assets/sap_int.png";
 import simple from "../../img-assets/simple_work.png";
 import { appColors } from "../../appTheme/appTheme";
 import { LoaderSpinner, WrapInput } from "../auth/register/form/LoginForm";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import api from "../../api/api";
 import Modal from "react-responsive-modal";
 import RequestAccess from "../../components/modals/RequestAccess";
 import ReviewMainContainer from "../../components/ReviewMainContainer";
 import ReviewCard from "../../components/ReviewCard";
+import { BtnAdd } from "../../components/modals/SalesModal";
 
 const Wrapper = styled.div`
   text-align: center;
@@ -242,7 +243,10 @@ const BlogPage = (props) => {
   const [loading, setLoading] = useState(false);
   const [collateral_data, setCollateralData] = useState([]);
   const [product_data, setProductData] = useState("");
+  const [comment_data, setCommentData] = useState(null);
   const onOpenModal = () => setOpen(true);
+  const [post_data, setPostData] = useState(null);
+  const [comment, setComment] = useState("");
   const [open, setOpen] = useState(false);
   const onCloseModal = () => setOpen(false);
   const [show_comment, setShowComment] = useState(false);
@@ -250,14 +254,17 @@ const BlogPage = (props) => {
   const match = useRouteMatch();
   useEffect(() => {
     get_product_data();
-    get_collateral_data();
+    get_comments();
+    get_post();
   }, []);
 
   useEffect(() => {
     get_collateral_data();
   }, [match.params.collateral]);
 
-  console.log("colat", collateral_data);
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  };
 
   const get_product_data = async () => {
     const status = await api.get(`products/${match.params.id}`);
@@ -274,13 +281,63 @@ const BlogPage = (props) => {
     setLoading(true);
     let payload = {
       product_id: match.params.id,
-      category: match.params.collateral,
+      category: "Blog",
     };
     const status = await api.get(`files`, payload);
     if (status.status) {
       setLoading(false);
 
       setCollateralData(status.data);
+    } else {
+      setLoading(false);
+      if (status) {
+        toast.error(status.message);
+      }
+    }
+  };
+
+  const post_comment = async (e) => {
+    e.preventDefault();
+    const payload = {
+      post_id: match.params.post,
+      comment: comment,
+      file: "null",
+    };
+    const status = await api.create(`comments`, payload);
+    if (status.status) {
+      toast("comments added");
+      get_comments();
+    } else {
+      setLoading(false);
+      if (status) {
+        toast.error(status.message);
+      }
+    }
+  };
+
+  const get_comments = async () => {
+    setLoading(true);
+    const payload = {
+      post_id: match.params.post,
+    };
+    const status = await api.get(`comments`, payload);
+    if (status.status) {
+      setLoading(false);
+      setCommentData(status.data);
+    } else {
+      setLoading(false);
+      if (status) {
+        toast.error(status.message);
+      }
+    }
+  };
+
+  const get_post = async () => {
+    setLoading(true);
+    const status = await api.get(`posts/${match.params.post}`);
+    if (status.status) {
+      setLoading(false);
+      setPostData(status.data);
     } else {
       setLoading(false);
       if (status) {
@@ -300,6 +357,7 @@ const BlogPage = (props) => {
 
   return (
     <Main>
+      <ToastContainer />
       <Modal open={open} onClose={onCloseModal} center>
         <RequestAccess />
       </Modal>
@@ -401,16 +459,31 @@ const BlogPage = (props) => {
                         </AddComment>
                         {show_comment && (
                           <WrapInput>
-                            <TextField required placeholder="Write a review" />
+                            <form onSubmit={post_comment}>
+                              <TextField
+                                onChange={handleCommentChange}
+                                required
+                                placeholder="Write a review"
+                              />
+                              <BtnAdd
+                                style={{ float: "none", textAlign: "right" }}
+                              >
+                                Post
+                              </BtnAdd>
+                            </form>
                           </WrapInput>
                         )}
 
                         <ReviewHeading>Reviews</ReviewHeading>
                       </AlignLeft>
 
-                      <WrapComment>
-                        <ReviewCard />
-                      </WrapComment>
+                      {comment_data &&
+                        comment_data.map((item) => (
+                          <WrapComment>
+                            <ReviewCard comment={item.comment} />
+                          </WrapComment>
+                        ))}
+
                       <WrapComment>
                         <ReviewCard />
                       </WrapComment>
