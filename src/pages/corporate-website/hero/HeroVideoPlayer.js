@@ -1,53 +1,42 @@
 import React from "react";
 import video1 from "../../../video_assets/dummy.mp4";
-import poster from "../../../img-assets/video_background.svg";
+
 import VideoBackground from "../../../components/StyledComponents/VideoBackground";
 import styled from "styled-components";
+import play from "../../../img-assets/play.png";
 import { appFont } from "../../../appTheme/appFont";
+import { appColors } from "../../../appTheme/appTheme";
 
 const Wrapper = styled.div`
   padding: 4em 10vw;
   position: relative;
-
-  h1 {
-    font-family: ${appFont.MEDIUM};
-    font-size: 2.5rem;
-    span {
-      color: #bff1ff;
-    }
-  }
-`;
-
-const Div = styled.div`
-  position: absolute;
-  bottom: 44%;
-  right: 0vw;
-  width: 100%;
 `;
 
 const Span = styled.span`
-  color: white;
+  color: ${appColors.DARKHEADER};
   font-family: ${appFont.LIGHTPOPPING};
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
-const HeroVideoPlayer = ({ video = video1, videoPoster = poster }) => {
+const Center = styled.div`
+  display: flex;
+  height: 45vh;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100px;
+  }
+`;
+
+const HeroVideoPlayer = ({ video = video1, videoPoster }) => {
   return (
     <VideoBackground video={video1} videoPoster={videoPoster}>
       <Wrapper>
-        <h1 className="watch text-white">
-          The content you <br />
-          need, for the <br />
-          <span>Software</span> you seek you
-        </h1>
-        <Span>
-          With a free Swinhub listing, you have access to <br /> the Vendor
-          Portal that helps you reach the <br />
-          right software buyers right when they are <br />
-          looking for the kind of products you offer.
-        </Span>
-        <Div>
-          <i className="fa fa-play-circle-o play" aria-hidden="true"></i>
-        </Div>
+        <Center></Center>
       </Wrapper>
     </VideoBackground>
   );

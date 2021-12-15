@@ -24,6 +24,7 @@ const MiddleSection = styled.div`
 
   a {
     color: white;
+    line-height: 1.7;
     font-family: ${appFont.LIGHTPOPPING};
     display: block;
   }
@@ -44,19 +45,51 @@ const Footer = () => {
       </TopSection>
       <MiddleSection>
         <FlexWrap>
-          <FlexItem item={1}>
+          <FlexItem flex={1}>
             <Header>Contact</Header>
-            <Link to="/">Office Locations</Link>
+            <Link to="/">Email Us 1.543.234.5678</Link>
             <Link to="/">Office Locations</Link>
             <Header>Contact</Header>
-            <Link to="/">Office Locations</Link>
-            <Link to="/">Office Locations</Link>
+            <Link to="/">Help Center FAQs</Link>
+            <Link to="/">System Status</Link>
           </FlexItem>
 
-          <FlexItem item={1}></FlexItem>
-          <FlexItem item={1}></FlexItem>
-          <FlexItem item={1}></FlexItem>
-          <FlexItem item={1}></FlexItem>
+          <FlexItem flex={1}>
+            <Header>For Buyers</Header>
+            <Link to="/">Why SWiN</Link>
+            <Link to="/"> Software Qualification Tool</Link>
+            <Link to="/"> Software Performance Tool</Link>
+            <Link to="/">Software Comparison Tool</Link>
+            <Link to="/">Pricing Security</Link>
+          </FlexItem>
+
+          <FlexItem flex={1}>
+            <Header>For Vendors</Header>
+            <Link to="/"> Become a Vendor</Link>
+            <Link to="/">Claim a Listing </Link>
+            <Link to="/">Advertise with Us </Link>
+            <Link to="/">Vendor Login </Link>
+            <Link to="/">Vendor FAQs </Link>
+            <Link to="/">Vendor Policy</Link>
+          </FlexItem>
+
+          <FlexItem flex={1}>
+            <Header>Company</Header>
+            <Link to="/"> About SWiN Team</Link>
+            <Link to="/"> Blog Careers Customers Investors</Link>
+            <Link to="/"> Software Performance Tool</Link>
+            <Link to="/">Software Comparison Tool</Link>
+            <Link to="/">Pricing Security</Link>
+          </FlexItem>
+
+          <FlexItem flex={1}>
+            <Header>Policies</Header>
+            <Link to="/"> Privacy Policy </Link>
+            <Link to="/"> Terms of Use</Link>
+            <Link to="/"> Disclosure Policy Cookies</Link>
+            <Link to="/"> Do Not Sell My Personal</Link>
+            <Link to="/"> Information Disclosure Policy </Link>
+          </FlexItem>
         </FlexWrap>
       </MiddleSection>
     </Wrapper>

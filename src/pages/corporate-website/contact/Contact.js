@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { appFont } from "../../../appTheme/appFont";
 import FlexItem from "../../../components/flex/FlexItem";
@@ -6,6 +6,7 @@ import FlexWrap from "../../../components/flex/FlexWrap";
 import { ReactComponent as Globe } from "../../../img-assets/globe-icon.svg";
 import { ReactComponent as Phone } from "../../../img-assets/phone-icon.svg";
 import { ReactComponent as Mail } from "../../../img-assets/mail-icon.svg";
+import emailjs from "emailjs-com";
 import { ReactComponent as Address } from "../../../img-assets/address-icon.svg";
 
 const Wrapper = styled.div`
@@ -94,6 +95,42 @@ const Value = styled.span`
 `;
 
 const Contact = () => {
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState("");
+
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const contact_msg = async (e) => {
+    alert("ho");
+    e.preventDefault();
+    setLoading("sending message...");
+
+    let templateParams = {
+      from_name: "eachugo@gmail.com",
+      to_name: "eachugo@gmail.com",
+      subject: "NEW CONTACT EMAIL",
+      message: `Contact details ${message}`,
+      // message: overview,
+      // services: `Contact details ${engagement} ${onboarding} ${offline}, ${software} ${awareness} ${traffic}`,
+    };
+    emailjs
+      .send(
+        "service_cn1f2gk",
+        "template_bkn7u4i",
+        templateParams,
+        "user_9TMD4sKyaJKnKsRjLBiqH"
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          setLoading("Message sent");
+        } else {
+          setLoading("Error sending message");
+        }
+      });
+  };
+
   return (
     <Wrapper id="contact">
       <TopSection>
@@ -101,8 +138,14 @@ const Contact = () => {
         <FlexWrap>
           <FlexItem flex={1}>
             <TopLeft>
-              <Textarea />
-              <Button>Send</Button>
+              <form onSubmit={contact_msg}>
+                <Textarea
+                  placeholder="Leave a comment..."
+                  onChange={handleMessageChange}
+                />
+                <Button>Send</Button>
+              </form>
+              {loading && <span>{loading}</span>}
             </TopLeft>
           </FlexItem>
           <FlexItem flex={1}>
@@ -113,7 +156,7 @@ const Contact = () => {
                 </ImgSection>
                 <Content>
                   <Label>Website</Label>
-                  <Value>swin.com</Value>
+                  <Value>swinhub.com</Value>
                 </Content>
               </div>
               <div>
@@ -122,25 +165,7 @@ const Contact = () => {
                 </ImgSection>
                 <Content>
                   <Label>Email</Label>
-                  <Value>achugo@gmail.com</Value>
-                </Content>
-              </div>
-              <div>
-                <ImgSection>
-                  <Address />
-                </ImgSection>
-                <Content>
-                  <Label>Address</Label>
-                  <Value>Lagos, Nigeria</Value>
-                </Content>
-              </div>
-              <div>
-                <ImgSection>
-                  <Phone />
-                </ImgSection>
-                <Content>
-                  <Label>Phone</Label>
-                  <Value>09090909090</Value>
+                  <Value>info@swinhub.com </Value>
                 </Content>
               </div>
             </TopRight>

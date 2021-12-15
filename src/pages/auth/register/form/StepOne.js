@@ -69,7 +69,7 @@ const StepOne = () => {
   );
   const [select_enduser, setSelectEndUser] = useState(
     localStorage.getItem("reg_payload") &&
-      JSON.parse(localStorage.getItem("reg_payload")).user_type == "end_user"
+      JSON.parse(localStorage.getItem("reg_payload")).user_type == "user"
       ? true
       : false
   );
@@ -85,10 +85,7 @@ const StepOne = () => {
   const onSelectEndUser = () => {
     setSelectVendor(false);
     setSelectEndUser(true);
-    localStorage.setItem(
-      "reg_payload",
-      JSON.stringify({ user_type: "end_user" })
-    );
+    localStorage.setItem("reg_payload", JSON.stringify({ user_type: "user" }));
   };
 
   return (

@@ -1,8 +1,8 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import onyeka from "../../../img-assets/onyeka.png";
-import ayobami from "../../../img-assets/ayobami.png";
+import onyeka from "../../../img-assets/onyeka.jpg";
+import ayobami from "../../../img-assets/ayobami.jpeg";
 import manny from "../../../img-assets/manny.png";
 import styled from "styled-components";
 import { appFont } from "../../../appTheme/appFont";
@@ -40,7 +40,7 @@ const Card = styled.div`
 const Image = styled.img`
   display: block;
   margin: 0px auto;
-  max-width: 170px;
+  max-width: 210px;
   border-radius: 50%;
   overflow: hidden;
 `;
@@ -78,7 +78,7 @@ const TeamCarousel = () => {
             max: 3000,
             min: 1024,
           },
-          items: 3,
+          items: 2,
         },
         mobile: {
           breakpoint: {
@@ -110,11 +110,11 @@ const TeamCarousel = () => {
         <Name>Ayeni Ayobami</Name>
         <Title>(Co-founder/CTO)</Title>
       </Card>
-      <Card>
+      {/* <Card>
         <Image src={manny} alt="manny" />
         <Name>Emmanuel Anozie</Name>
         <Title>(Co-founder/President)</Title>
-      </Card>
+      </Card> */}
     </Carousel>
   );
 };

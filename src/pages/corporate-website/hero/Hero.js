@@ -6,10 +6,10 @@ const HeroWrapper = styled.div`
   margin-top: 110px;
 `;
 
-const HeroVideo = () => {
+const HeroVideo = ({ video }) => {
   return (
     <HeroWrapper>
-      <HeroVideoPlayer />
+      <HeroVideoPlayer videoPoster={video} />
     </HeroWrapper>
   );
 };

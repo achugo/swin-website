@@ -90,8 +90,8 @@ const WhoWeAre = () => {
             <TopLeft>
               <TopHeading>Who we are</TopHeading>
               <Description>
-                SWiN is a technology start- <br />
-                up aiming to take Software <br /> ‘End User - Vendor’ <br />{" "}
+                SWiN is a technology start-up <br />
+                aiming to take Software <br /> ‘End User - Vendor’ <br />{" "}
                 engagement to the next level.
               </Description>
             </TopLeft>
@@ -111,13 +111,11 @@ const WhoWeAre = () => {
           <FlexItem flex={1}>
             <Span>
               Our goal is simple - ensure end users have ‘Anytime Access’ to the
-              information and content they require to help make better informed
-              procurement choices, while also supporting vendors in increasing
-              their product visibility, especially during challenging periods of
-              cost reductions and forced travel restrictions - as is currently
-              being experienced. Put differently, we’re looking to move the ‘End
-              user - Product content’ interaction part of the procurement
-              process, online.
+              information and content they require, to help make better informed
+              procurement decisions, while helping vendors improve customer
+              engagement and reduce cost of sale. Put differently, we’re looking
+              to move the ‘End user - Product content’ interaction part of the
+              software procurement process, online.
             </Span>
           </FlexItem>
         </FlexWrap>

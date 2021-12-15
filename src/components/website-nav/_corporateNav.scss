@@ -6,8 +6,27 @@
 
   .nav__content {
     margin: 0px auto !important;
+    height: 85px;
     display: flex;
     justify-content: space-between;
+
+    svg {
+      max-width: 150px;
+      position: relative;
+      bottom: 20px;
+
+      @media screen and (max-width: 768px) {
+        bottom: 5px;
+        max-width: 100px;
+      }
+    }
+
+    button {
+      @media screen and (max-width: 768px) {
+        top: 10px;
+        position: relative;
+      }
+    }
 
     .dashboard__search {
       width: 70vw;

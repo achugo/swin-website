@@ -1,14 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-const VideoBackgroundContainer = styled.a`
+const VideoBackgroundContainer = styled.div`
   display: block;
   width: 100%;
-  height: 50vh;
+  height: 55vh;
   background: url("${({ videoPoster }) => videoPoster} ");
   background-repeat: no-repeat;
   background-size: cover;
   padding: 1.2rem;
-  borderradius: 1rem;
 `;
 
 const VideoBackground = ({ children, videoPoster, video, height }) => {

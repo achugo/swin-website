@@ -69,12 +69,33 @@
 
 .corporate__nav .nav__content {
   margin: 0px auto !important;
+  height: 85px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.corporate__nav .nav__content svg {
+  max-width: 150px;
+  position: relative;
+  bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .corporate__nav .nav__content svg {
+    bottom: 5px;
+    max-width: 100px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .corporate__nav .nav__content button {
+    top: 10px;
+    position: relative;
+  }
 }
 
 .corporate__nav .nav__content .dashboard__search {

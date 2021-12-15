@@ -1,12 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 // import "./Nav.scss";
-import { ReactComponent as Software } from "../../img-assets/mysoftwares.svg";
+import { ReactComponent as SwinLogo } from "../../img-assets/white-logo.svg";
 
 import { withRouter, Link, useRouteMatch } from "react-router-dom";
 import DashboardSearch from "../search/DashboardSearch";
 import styled from "styled-components";
 import { appFont } from "../../appTheme/appFont";
+import Modal from "react-responsive-modal";
+import RequestDemoModal from "../modals/RequestDemo";
 
 const SoftwareButton = styled.button`
   background: transparent linear-gradient(104deg, #3f9aff 0%, #42a2ff 100%) 0%
@@ -21,6 +23,7 @@ const SoftwareButton = styled.button`
 const CorporateNav = (props) => {
   const [open, setopen] = useState(false);
   const [show_nav, setshow_nav] = useState(false);
+  const [open_demo, setDemo] = useState(false);
 
   const match = useRouteMatch();
   console.log(match);
@@ -68,15 +71,30 @@ const CorporateNav = (props) => {
     }
   }, [scrollState]);
 
+  const onCloseDemoModal = () => {
+    setDemo(false);
+  };
+
+  const onOpenDemoModal = () => {
+    setDemo(true);
+  };
+
   return (
     <>
+      <Modal open={open_demo} onClose={onCloseDemoModal} center>
+        <RequestDemoModal
+          triggerClose={onCloseDemoModal}
+          close={onCloseDemoModal}
+        />
+      </Modal>
       <div className={`nav corporate__nav`}>
         <div className="nav__content">
-          <DashboardSearch />
-          <SoftwareButton onClick={() => props.history.push("/dashboard")}>
-            Softwares
+          {/* <DashboardSearch /> */}
+          <SwinLogo />
+          <SoftwareButton onClick={onOpenDemoModal}>
+            Request Demo
           </SoftwareButton>
-          <div
+          {/* <div
             id="nav-icon1"
             onClick={() => setshow_nav(!show_nav)}
             className={show_nav ? "open" : ""}
@@ -84,13 +102,8 @@ const CorporateNav = (props) => {
             <span></span>
             <span></span>
             <span></span>
-          </div>
+          </div> */}
           <div className={`mobilenav ${show_nav ? "open" : ""}`}>
-            {/* <input type="text" placeholder="What do you want learn?" /> */}
-            {/* <p onClick={() => goTo("edit")}>
-          <img src={edit} className="logo" alt="" />
-          Edit Profile
-        </p> */}
             <p onClick={() => goTo("/")}>About</p>
             <p onClick={() => goTo("/buy")}>Blog</p>
             <p onClick={() => goTo("/rent")}>FAQ</p>
@@ -101,9 +114,7 @@ const CorporateNav = (props) => {
         <div className="navigation__links">
           <AnchorLink href="#home">Home</AnchorLink>
           <AnchorLink href="#whoweare">Who we are</AnchorLink>
-          <AnchorLink href="#mission">Mission and vision</AnchorLink>
-          <AnchorLink href="#mission">Services</AnchorLink>
-          <AnchorLink href="#mission">Values</AnchorLink>
+          <AnchorLink href="#mission">Mission </AnchorLink>
           <AnchorLink href="#team">Team</AnchorLink>
           <AnchorLink href="#contact">Contact Us</AnchorLink>
         </div>
